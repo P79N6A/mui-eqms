@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+ 
+	<head>
+		<meta charset="utf-8">
+		<title>ECahrt 示例</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<style>
+			.chart {
+				height: 280px;
+				margin: 0px;
+				padding: 0px;
+			}
+			h5 {
+				margin-top: 30px;
+				font-weight: bold;
+			}
+			h5:first-child {
+				margin-top: 15px;
+			}
+		</style>
+		<script src="../js/mui.min.js"></script>
+	</head>
+ 
+	<body>
+		
+		<div class="mui-content">
+			<div class="mui-content-padded">
+		        <div class="clearfix">
+			        <h5 style="float: left; width: 25%;">科室：</h5>
+			        <select name="cboDept" id="cboDept"
+						class="form-control input-sm select2-container js-example-basic-single" style="float: left; width: 75%;">
+					</select>
+				</div>
+				<div class="clearfix">
+			        <div class="clearfix">
+				        <h5 style="float: left; width: 25%;">统计周期：</h5>
+				        <select name="cboperiod" id="cboperiod"
+							class="form-control input-sm select2-container js-example-basic-single" style="float: left; width: 75%;">
+						</select>
+					</div>
+					<div class="clearfix">
+				        <h5 style="float: left; width: 25%;">统计年份：</h5>
+				        <input type="text" name="inpyear" id="inpyear" style="float: left; width: 75%;"/>
+					</div>
+				</div>
+				<button name="btnview" id="btnview">查询</button>
+			</div>
+			<div class="mui-content-padded">
+				<h5>设备使用状态汇总</h5>
+				<div class="chart" id="barChart"></div>
+				
+			</div>
+		</div>
+		
+		<script src="../../../libs/echarts-all.js"></script>
+		<script>
+			var byId = function(id) {
+				return document.getElementById(id);
+			};
+			var barChart = echarts.init(byId('barChart'));
+						
+			mui.init();
+			mui.plusReady(function(){
+				queryDept();
+				getPeriod();
+			});
+			
+			var btnQuery = byId('btnview')
+			btnQuery.addEventListener('click', function () {
+				var cboDept = byId('cboDept')
+				var index = cboDept.selectedIndex; // 选中索引
+				var deptid = cboDept.options[index].value; // 选中值
+				var cboPeriod = document.getElementById('cboperiod');
+				index = cboPeriod.selectedIndex;
+				var period = cboPeriod.options[index].value;
+				var inpYear = byId('inpyear');
+				var year = inpYear.value;
+				qryEQOnRate(deptid, period, year)
+			});
+		</script>
+		<script>
+			var keshizidian;
+			function queryDept() {
+				var jgid = JSON.parse(localStorage.getItem("loginuserinfo")).user_info.id_jg; 
+				var url = localStorage.getItem("url")+ "/app/qryKs.do";
+				mui.ajax(url,{
+					data:{
+						value : jgid
+					},
+					dataType:'JSON',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:15000,//超时时间设置为10秒
+					beforeSend:function(){
+						
+					},
+					complete: function() {
+			   		},              
+					success:function(data){
+						keshizidian = JSON.parse(data);
+						var sel = document.getElementById('cboDept');
+						var op = '';
+						for(var i = 0; i < keshizidian.length; i++){
+							console.log(data[i]);
+							op += '<option value="'+keshizidian[i].value+'">'+keshizidian[i].text+'</option>';
+						}
+						sel.innerHTML = op;
+						console.log("queryDept--->>> "+ keshizidian);
+					},
+					error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+					}
+				});
+			}
+			
+			function getPeriod() {
+				var options = '';
+				options += '<option value="0">上半年</option>';
+				options += '<option value="1">下半年</option>';
+				options += '<option value="2">全年</option>';
+				var cboperiod = document.getElementById('cboperiod');
+				cboperiod.innerHTML = options
+			}
+			
+			function qryEQOnRate(deptid, period, year) {
+				var sessionId = JSON.parse(localStorage.getItem("loginuserinfo")).sessionId; 
+				var mask = mui.createMask();//遮罩层
+				//var url = "http://36.110.189.171:81/hpms/frame/login/loginService.do";
+				var url = localStorage.getItem("url")+"/statistics/qryEQOnRateBar.do";
+				mui.ajax(url,{
+					data:{
+						sessionid : sessionId,
+						ID_CUSTOM_KS : deptid,
+						period : period,
+						year : year
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:15000,//超时时间设置为10秒；
+					beforeSend:function(){
+						plus.nativeUI.showWaiting("加载中", {});
+						mask.show();//显示遮罩层
+					},
+					complete: function() {
+		        		plus.nativeUI.closeWaiting();
+		        		mask.close();//关闭遮罩层
+		   		 	},              
+					success:function(data){
+						plus.nativeUI.closeWaiting();
+		        		mask.close();//关闭遮罩层
+		        		if (data == null) return;
+		        		console.log(JSON.stringify(data));
+//		        		var optionBar = data.bar;
+//		        		console.log(JSON.stringify(optionBar));
+		        		var barChart = echarts.init(byId('barChart'));
+						barChart.setOption(data);
+					},
+					error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			}
+		</script>
+	</body>
+ 
+</html>

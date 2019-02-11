@@ -1,0 +1,33 @@
+body{
+	font-family:'microsoft yahei', Arial, Helvetica, sans-serif; 
+}
+.welcomebox{ 
+	background-color: #45afd9;
+}
+.welcomebox img{
+	 width: 100%;
+}
+.btn{
+	border:1px solid #fff; 
+	position: fixed;
+	bottom: 14%;
+	left: 50%;
+	margin-left: -72px;
+	padding:8px 15px;
+	border-radius: 20px;
+	font-size: 20px;
+	color: #f9f9f9;
+	letter-spacing: 1px;
+}
+.error{
+	text-align: center;
+	margin-top:20%
+}
+.error-num{
+	font-size: 50px;
+	color: #666;
+	margin: 10px 0px;
+}
+.error-tip{
+	color:#888;
+}

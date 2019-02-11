@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>个人中心</title>
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../bootstrap/fonts/font-awesome.css"/>
+		<link rel="stylesheet" href="../../plugins/layui/css/layui.css" />
+		<link rel="stylesheet" href="../../css/base.css"/>
+		<link rel="stylesheet" href="../../plugins/ScrollBar/style.min.css"/>
+	</head>
+	<body class="bg">
+		
+		<div class="container-fluid contain-box " >
+			<div id ="accountname"  class="row" >
+				<a class="login-infor-box clearfix">
+					<div class="left user-icon">
+						<img src="../../images/user-icon.png" />
+					</div>
+					<div class="left clearfix user-login">
+						<dl class="left" >
+							<dt id="userPhone">立即登录</dt>
+							<dd id="userIDCard" hidden="hidden">登录后可查看个人相关信息</dd>
+						</dl>
+						<i class="fa fa-angle-right right text-white"></i>
+					</div>
+				</a>
+			</div>
+			<div class="row login-infor-menu">
+				<ul id="persondata" class="bg-white" hidden="hidden">
+					<li id="changepassword" hidden="hidden"><a><img src="../../images/pwd-icon.png" />修改密码</a></li>
+					<li id="changephone" hidden="hidden"><a><img src="../../images/phone-icon.png" />修改手机号码</a></li>
+					<li id="addIdCard" hidden="hidden"><a><img src="../../images/phone-icon.png" />绑定身份证</a></li>
+					<li><a id="truename"><img src="../../images/pwd-icon.png" />姓名：</a></li>
+					<li><a id="bmname"><img src="../../images/phone-icon.png" />职务：</a></li>
+					<!--<li><a><img src="../../images/phone-icon.png" />证件号码：112012338899</a></li>-->
+
+				</ul>
+				<ul class="bg-white">
+					<!--<li><a><img src="../../images/advice-icon.png" />意见反馈</a></li>
+					<li><a><img src="../../images/help-icon.png" />帮助中心</a></li>
+					<li><a><img src="../../images/about-icon.png" />关于APP</a></li>-->
+				</ul>
+				<div id="logout" class="text-center no-border Esc-btn-box">
+					<a id="logtext" class="form-control layui-btn layui-btn-big bg-light-blue" >登录</a>
+				</div>
+			</div>
+		</div>
+		
+	<script src="../../js/jquery-2.2.3.min.js"></script>
+	<!--滚动条隐藏-->
+	<script src="../../plugins/ScrollBar/mousewheel.min.js"></script>
+	<script src="../../plugins/ScrollBar/scrollbar.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/immersed.js" ></script>
+	<!--<script type="text/javascript">
+		var H = $(window).height()-84;
+		$(".contain-box").css("height",H);
+		$('.contain-box').perfectScrollbar();
+	</script>-->
+	
+	<script type="text/javascript">
+		var userinfodata = localStorage.getItem("loginuserinfo");
+		var loginstatus = "0";
+		//console.log("logindata----->>>> "+userinfodata);
+		mui.plusReady(function () {
+			//var currentid = plus.webview.currentWebview().id;
+			//console.log("currentid----->>>> "+currentid);
+			
+			var a_logtext = document.getElementById("logtext");
+			if (userinfodata!=""&&userinfodata!=null&&userinfodata!=undefined&&userinfodata!="undefined") {
+				//loginstatus = JSON.parse(userinfodata).result.loginStatus;
+				
+			}else{
+				loginstatus = "2";
+			}
+			
+			if (loginstatus=="1") {
+				a_logtext.innerText = "退出";
+			}else{
+				a_logtext.innerText = "登陆";
+			}
+			
+			
+			if (userinfodata!="88888888"&&userinfodata!=""&&userinfodata!=undefined) {
+				if (userinfodata!="") {
+					var userinfo = JSON.parse(userinfodata).result;
+					var data = localStorage.getItem("loginuserinfo");
+					var userinfo = JSON.parse(data).user_info;
+					document.getElementById("userPhone").innerText = userinfo.user_name;
+					document.getElementById("logtext").innerText = "退出";
+					document.getElementById("persondata").hidden = false;
+					document.getElementById("truename").innerHTML = "姓名 ： "+userinfo.true_name;
+					document.getElementById("bmname").innerHTML = "部门 ： "+userinfo.name_bm;
+					
+					}
+				
+			}
+			var accountname = document.getElementById("accountname");
+			accountname.addEventListener('click',function () {
+				//console.log("登陆1");
+			if (loginstatus=="1") return;
+			//console.log("登陆2");
+				/*mui.openWindow({
+					url : "login.html",
+					id : "login.html",
+					extras : {
+						closepage : "10010",
+						openSource : "setting"
+					}
+				});*/
+			});
+			var a_changepassword = document.getElementById("changepassword");
+			a_changepassword.addEventListener('click',function () {
+				if (loginstatus=="1") {
+				mui.openWindow({
+					url : "changepassword.html",
+					id : "changepassword.html"
+				});
+				}else{
+					var btnArray = ['否', '是'];  
+		            mui.confirm('确认登录？', '登录提示', btnArray, function(e) {  
+		                if (e.index == 1) {  
+		                    mui.openWindow({
+							url : "login.html",
+							id : "login.html",
+							extras : {
+								closepage : "10010"
+							}
+						});
+		                } 
+		                });
+				}
+			});
+			
+			var a_changephone = document.getElementById("changephone");
+			a_changephone.addEventListener('click',function () {
+				if (loginstatus=="1") {
+				mui.openWindow({
+					url : "changephone.html",
+					id : "changephone.html"
+				});
+				}else{
+					var btnArray = ['否', '是'];  
+		            mui.confirm('确认登录？', '登录提示', btnArray, function(e) {  
+		                if (e.index == 1) {  
+		                    mui.openWindow({
+							url : "login.html",
+							id : "login.html",
+							extras : {
+								closepage : "10010"
+							}
+						});
+		                } 
+		                });
+				}
+			});
+			
+			var a_addIdCard = document.getElementById("addIdCard");
+			a_addIdCard.addEventListener('click',function () {
+				if (loginstatus=="1") {
+				mui.openWindow({
+					url : "addnewIdcard.html",
+					id : "addnewIdcard.html"
+				});
+				}else{
+					var btnArray = ['否', '是'];  
+		            mui.confirm('确认登录？', '登录提示', btnArray, function(e) {  
+		                if (e.index == 1) {  
+		                    mui.openWindow({
+							url : "login.html",
+							id : "login.html",
+							extras : {
+								closepage : "10010"
+							}
+						});
+		                } 
+		                });
+				}
+			});
+			var a_logout = document.getElementById("logout");
+			a_logout.addEventListener('click',function () {
+				switch (a_logtext.innerText){
+					case "登陆":
+						mui.openWindow({
+							url : "login.html",
+							id : "login.html",
+							extras : {
+								closepage : "10010"
+							}
+						});
+						break;
+					case "退出":
+					
+					/*if (userinfodata!="") {
+						var resultid = JSON.parse(userinfodata).result.id;*/
+						//logout(resultid);
+						loginout();
+						localStorage.setItem("loginStatus0","1");
+						localStorage.setItem("loginuserinfo","88888888");
+						document.getElementById("userPhone").innerText = "立即登陆";
+						document.getElementById("logtext").innerText = "登陆";
+						document.getElementById("persondata").hidden = true;
+						
+					//}
+						break;
+					default:
+						break;
+				}
+			
+				
+			});
+			
+		});
+		function logout (resultid) {
+			var mask = mui.createMask();//遮罩层localStorage.getItem("url")+
+				var url = "http://10.131.102.101:8080/dch/appSysActionApp/logoutApp.do";
+				mui.ajax(url,{
+				data:{
+					id : resultid
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+			        plus.nativeUI.closeWaiting();
+			        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				console.log(data);
+				plus.nativeUI.showWaiting("加载中", {});
+				mask.show();//显示遮罩层
+				var loginresult = JSON.parse(data);
+				var code = loginresult.code;
+				if ( code == "0") {
+					mui.toast(loginresult.msg);
+					loginstatus="0";
+					localStorage.setItem("loginuserinfo","");
+					document.getElementById("userPhone").innerText = "立即登陆";
+					document.getElementById("logtext").innerText = "登陆";
+				}
+				if (code != 0) {
+					mui.toast(loginresult.msg);
+				}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						plus.nativeUI.showWaiting("加载中", {});
+					 	mask.show();//显示遮罩层
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});		
+		}
+		window.addEventListener('closeback',function(event){
+			var data = localStorage.getItem("loginuserinfo");
+			var userinfo = JSON.parse(data).user_info;
+			document.getElementById("userPhone").innerText = userinfo.user_name;
+			document.getElementById("logtext").innerText = "退出";
+			document.getElementById("persondata").hidden = false;
+			document.getElementById("truename").innerHTML = "姓名 ： "+userinfo.true_name;
+			document.getElementById("bmname").innerHTML = "部门 ： "+userinfo.name_bm;
+			/*var ws = plus.webview.getWebviewById("login.html");
+			plus.webview.close(ws);*/
+			});
+		function loginout() {
+				var mask = mui.createMask();//遮罩层/frame/login/logOutService.do?sessionid=
+				//var url = "http://36.110.189.171:81/hpms/frame/login/loginService.do";
+				var sessionID = JSON.parse(localStorage.getItem("loginuserinfo")).sessionId;
+				var url = localStorage.getItem("url")+"/frame/login/logOutService.do";
+				mui.ajax(url,{
+					data:{
+					sessionid : sessionID
+				},
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+				console.log(JSON.stringify(data));
+				localStorage.setItem("loginuserinfo","88888888");
+				var code = data.msg_code;
+				if ( code == "0") {
+					mui.toast(data.msg);
+					console.log("loginResult：   "+data.msg);
+					localStorage.setItem("loginStatus0","0");
+					var mainid = plus.runtime.appid;
+					mui.openWindow({
+						url : "main.html",
+						id : mainid,
+						extras :{
+							closeLogin : "10086"
+						}
+					});
+					
+					var detailPage = plus.webview.getWebviewById("personal-center.html");
+				    mui.fire(detailPage,"closeback",{});
+				}
+				if (code != 0) {
+					mui.toast(data.msg);
+				}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			}
+	</script>
+	</body>
+</html>

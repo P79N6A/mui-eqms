@@ -1,0 +1,298 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<style>
+			.start-margin{
+				margin-top: 50px !important;
+				
+			}
+			.end-margin{
+				margin-top: 10px !important;
+				
+			}
+			.header-color{
+				color: "#6D97FF";
+			}
+			.mui-bar{
+				background-color: #6D97FF;
+			}
+			.mui-title{
+				color: #ffffff;
+			}
+			.mui-icon-left-nav{
+				color: #ffffff;
+			}
+		</style>
+	</head>
+		
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">设备盘点</h1>
+		</header>
+		<!--
+        	作者：lcs201010@163.com
+        	时间：2018-06-21
+        	描述：
+        	scane()
+        	nextscane()
+        	endinventory()
+        -->
+        <div class="start-margin">
+        	<div id="btn_startinventory" onclick="scane()">
+				<p style="text-indent: 0;">
+					<a id="a_startinventory" class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined" style="padding: 5px 20px; ">开始盘点</a>
+				</p>
+			</div>
+			<div id="btn_nextinventory" onclick="nextscane()">
+				<p style="text-indent: 0;">
+				<a class="mui-btn mui-btn-primary mui-btn-block mui-btn-outlined" style="padding: 5px 20px; ">继续盘点</a>
+				</p>
+			</div>
+				<!--<div id="pullrefresh" class="mui-content">-->
+			<div >
+				<!--数据列表-->
+				<ul class="mui-table-view mui-table-view-chevron">
+				</ul>
+			</div>
+			
+			<div id="btn_endinventory" onclick="endinventory()" >
+				<p style="text-indent: 0;">
+					<a class="end-margin mui-btn mui-btn-primary mui-btn-block mui-btn-outlined" style="padding: 5px 20px; ">结束盘点</a>
+				</p>
+			</div>
+        </div>
+		
+		
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<script>
+			document.getElementById('btn_startinventory').style.display='block';
+			document.getElementById('btn_nextinventory').style.display='none';
+			document.getElementById('btn_endinventory').style.display='none';
+			
+			var eqinventorysss,eqcufangzidian,keshipandianleixing,keshipandianid;
+			if(window.plus){
+				
+					}else{// 兼容老版本的plusready事件
+				document.addEventListener('plusready',function () {	
+					var self = plus.webview.currentWebview();
+					keshipandianleixing = self.pandainleixing;
+					keshipandianid = self.pandiankeshiid;
+					eqinventorysss = self.eqinventorySSS;
+					eqcufangzidian = self.eqcufangzidian;
+					
+				});
+			}
+				
+		</script>
+		<script>
+			 
+			 function nextscane() {
+			 	mui.openWindow({
+							url : "barcode_scan.html",
+							id : "barcode_scan.html",
+							extras : {}
+						});
+			 }	
+			function scane() {
+				requestStartInventory();
+				
+			}
+			
+			function scaned(t, r, f){
+				
+				console.log("科室ID      "+keshipandianid);
+				var jgId = JSON.parse(localStorage.getItem("loginuserinfo")).user_info.id_jg; 
+					mui.openWindow({
+					url : "enquirmentInventory.html",
+					id : "enquirmentInventory.html",
+					styles:{},
+					extras : {
+						result1:r,
+						eqinventorySSS : eqinventorysss,
+						eqcufangzidian : eqcufangzidian,
+						CheckJg : jgId,
+						checkBm : keshipandianid,
+						EqCheckType : keshipandianleixing
+					}
+				});
+			}
+			function requestStartInventory() {
+				var sessionId = JSON.parse(localStorage.getItem("loginuserinfo")).sessionId; 
+				var jgId = JSON.parse(localStorage.getItem("loginuserinfo")).user_info.id_jg; 
+				var mask = mui.createMask();//遮罩层
+				var url = localStorage.getItem("url")+ "/app/startEqCheck.do";
+				mui.ajax(url,{
+				data:{
+					sessionid : sessionId,
+					CheckJg : jgId,
+					checkBm : keshipandianid,
+					EqCheckType : keshipandianleixing
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+					console.log(" 开始盘点  "+data);
+					var code = JSON.parse(data).code;
+					if (code == 1) {
+						document.getElementById('btn_startinventory').style.display='none';
+						document.getElementById('btn_nextinventory').style.display='block';
+						document.getElementById('btn_endinventory').style.display='block';
+						
+						/*document.getElementById('btn_startinventory').classList.add('mui-hidden');
+						document.getElementById('btn_endinventory').classList.add('mui-visibility');
+						document.getElementById('btn_nextinventory').classList.add('mui-visibility');*/
+						mui.openWindow({
+							url : "barcode_scan.html",
+							id : "barcode_scan.html",
+							extras : {}
+						});
+					}
+					if (code == 0) {
+						mui.toast("失败");
+					}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+			}
+			function requestEndInventory () {
+				var sessionId = JSON.parse(localStorage.getItem("loginuserinfo")).sessionId; 
+				var jgId = JSON.parse(localStorage.getItem("loginuserinfo")).user_info.id_jg; 
+				var mask = mui.createMask();//遮罩层
+				var url = localStorage.getItem("url")+ "/app/endEqCheck.do";
+				mui.ajax(url,{
+				data:{
+					sessionid : sessionId,
+					CheckJg : jgId,
+					checkBm : keshipandianid,
+					EqCheckType : keshipandianleixing
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+					var code = JSON.parse(data).code;
+					if (code == 1) {
+						document.getElementById('btn_startinventory').style.display='block';
+						document.getElementById('btn_nextinventory').style.display='none';
+						document.getElementById('btn_endinventory').style.display='none';
+					}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+			}
+			function endinventory() {
+				requestEndInventory ();
+			}
+			function getEQList () {
+				var sessionId = JSON.parse(localStorage.getItem("loginuserinfo")).sessionId; 
+				var jgId = JSON.parse(localStorage.getItem("loginuserinfo")).user_info.id_jg; 
+				var mask = mui.createMask();//遮罩层
+				var url = localStorage.getItem("url")+ "/app/submitEqCheckList.do";
+				mui.ajax(url,{
+				data:{
+					sessionid : sessionId,
+					CheckJg : jgId,
+					checkBm : keshipandianid,
+					EqCheckType : keshipandianleixing
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+				console.log("提交返回查询结果---->>>>>"+data);
+				//var list = JSON.parse(data).result;
+				showNewsList(JSON.parse(data)); 
+				
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						//plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+			}
+			function showNewsList (list) {
+				var table = document.body.querySelector('.mui-table-view');
+				var cells = document.body.querySelectorAll('.mui-table-view-cell');
+				var listlength = list.length;
+				table.innerHTML = '';
+				for(var i = 0, len = listlength ; i < len; i++) {
+					var li = document.createElement('li');
+					li.className = 'mui-table-view-cell repairlistitem';
+					li.innerHTML = '<p class="">设备名称：<span>' + list[i].eqNamename + '</span>'
+									+'<span class="right repair-tag-status-red"><i class="fa"></i></span></p>'
+									+'<p>设备品牌：<span>'+list[i].eqBrandname +'</span><a hidden = "hidden" >'+list[i].idKsEqInfo+'</a></p>'
+									+'<p>设备序列号：<span>'+list[i].eqOrdername +'</span></p>'
+									+'<p>设备资产号：<span>'+list[i].eqAssetCodename +'</span></p>'
+									
+									;
+					table.appendChild(li);
+					
+				}
+				var as = document.getElementsByTagName('a');
+				var oli = document.getElementsByTagName("li");
+			    for(var i=0; i<oli.length; i++){
+			        (function(j){
+			            oli[j].onclick = function () {	
+			            //requestDetail (as[j].innerHTML);
+			             
+			        };
+			        })(i)
+				}
+			   
+			}
+			window.addEventListener('refreshInventoryEQ',function(event){
+ 				getEQList ();
+			});
+		</script>
+	</body>
+
+</html>

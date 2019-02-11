@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../../css/mui.css">
+	</head>
+	<body >
+		
+		<p id="barresult">结果：</p>
+	</body>
+	<script type="text/javascript" src="../../js/mui.js" ></script>
+	<script type="text/javascript">
+		mui.plusReady(function () {
+			var self = plus.webview.currentWebview();
+			var r = self.result0;
+			document.getElementById("barresult").innerText = "结果："+r;
+			console.log("qrcode result ： "+r);
+			var arr = new Array();
+			arr = r.split('id=');
+			//alert(arr[arr.length-1]);
+			 
+			mui.init({
+			swipeBack:true ,//启用右滑关闭功能
+		    subpages:[{
+		      url:r,
+		      id:'sacned',
+		      styles:{
+		      	top: '42px'
+		      }
+		    }]
+		  });
+		});
+		
+		
+	</script>
+</html>

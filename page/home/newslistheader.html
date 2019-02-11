@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>健康咨询</title>
+	
+		<link rel="stylesheet" href="../../plugins/ScrollBar/style.min.css"/>
+		<link rel="stylesheet" href="../../css/mui.css">
+		<link rel="stylesheet" href="../../css/base.css"/>
+	</head>
+	<body class="bg">
+		<header class="header clearfix mui-bar mui-bar-nav">
+			<i id="back" class=" fa fa-angle-left left" ></i>
+			<span class="left title-infor">健康资讯</span>
+		</header>
+		<script type="text/javascript" src="../../js/mui.min.js" ></script>
+		<script type="text/javascript">
+			mui.plusReady(function () {
+			var hospitalback = document.getElementById("back");
+			hospitalback.addEventListener('click',function () {
+				var ws = plus.webview.currentWebview();
+				plus.webview.close(ws);
+			});
+			var page = plus.webview.getWebviewById("disilness.html");
+			mui.fire(page,"getDisilnessdata",{});	
+			});
+			
+		</script>
+		<script type="text/javascript">
+		mui.init({
+		    subpages:[{
+		      url:"newslist.html",//下拉刷新内容页面地址
+		      id:"newslist.html",//内容页面标志
+		      styles:{
+		      		top:"46px",
+		      		bottom:"0px"
+		      }
+		    }]
+		});
+
+	</script>
+	</body>
+	
+	
+</html>

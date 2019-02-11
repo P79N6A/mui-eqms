@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+ 
+	<head>
+		<meta charset="utf-8">
+		<title>ECahrt 示例</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<!-- <link rel="stylesheet" type="text/css" href="../css/app.css" /> -->
+		<style>
+			.chart {
+				height: 280px;
+				margin: 0px;
+				padding: 0px;
+			}
+			h5 {
+				margin-top: 30px;
+				font-weight: bold;
+			}
+			h5:first-child {
+				margin-top: 15px;
+			}
+			.clear{
+				clear:both;
+			}
+			.clearfix:after{ 
+				content:".";
+				display:block;
+				clear:both; 
+				font-size:0; 
+				height:0; 
+				overflow:hidden;
+			}
+		</style>
+		<script src="../js/mui.min.js"></script>
+	</head>
+ 
+	<body>
+		<div class="mui-content">
+			<div class="mui-content-padded ">
+				<div class="clearfix">
+			        <h5 style="float: left; width: 25%;">科室：</h5>
+			        <select name="cboDept" id="cboDept"
+						class="form-control input-sm select2-container js-example-basic-single" style="float: left; width: 75%;">
+					</select>
+				</div>
+				<div class="clearfix">
+			        <h5 style="float: left; width: 25%;">开始日期：</h5>
+			        <input type="text" name="sdate" id="sdate" style="float: left; width: 45%;"/>
+			        <button id='pickSDateBtn' type="button" class="mui-btn" style="float: left; width: 30%;">选择开始日期</button>
+				</div>
+				<div class="clearfix">
+			        <h5 style="float: left; width:25%">结束日期：</h5>
+			        <input type="text" name="edate" id="edate" style="float: left; width: 45%;"/>
+			        <button id='pickEDateBtn' type="button" class="mui-btn" style="float: right; width: 30%;">选择结束日期</button>
+				</div>
+				<div class="clearfix">
+					<button name="btnview" id="btnview">查询</button>
+				</div>
+				
+			</div>
+			
+			<div class="mui-content-padded">
+				<h5>维修进程汇总</h5>
+				<div class="chart" id="barChart"></div>
+				
+				<h5>各种维修进程状态占比</h5>
+				<div class="chart" id="pieChart"></div>
+			</div>
+		</div>
+		
+		<script src="../../../libs/echarts-all.js"></script>
+		<script>
+			
+			var byId = function(id) {
+				return document.getElementById(id);
+			};
+			var barChart = echarts.init(byId('barChart'));
+			
+			var pieChart = echarts.init(byId('pieChart'));
+			
+			mui.init();
+			mui.plusReady(function(){
+				queryDept();
+			});
+			
+			var btnQuery = byId('btnview')
+			btnQuery.addEventListener('click', function () {
+				var cboDept = byId('cboDept');
+				var index = cboDept.selectedIndex; // 选中索引
+				var deptid = cboDept.options[index].value; // 选中值
+
+//				var deptid = cboDept.selected.value;
+				var inpSDate = byId('sdate');
+				var sdate = inpSDate.value;
+				var inpEDate = byId('edate');
+				var edate = inpEDate.value;
+				console.log("deptID："+ deptid);
+				console.log("sdate : " + sdate);
+				queryEqRepairSummery(deptid, sdate, edate);
+			});
+			
+			document.getElementById("pickSDateBtn").addEventListener('click', function() {
+			    var dDate = new Date();
+			    //设置当前日期（不设置默认当前日期）
+//			    dDate.setFullYear(2016, 7, 16);
+			    var minDate = new Date();
+			    //最小时间
+//			    minDate.setFullYear(2010, 0, 1);
+			    var maxDate = new Date();
+			    //最大时间
+//			    maxDate.setFullYear(2016, 11, 31);
+			    plus.nativeUI.pickDate(function(e) {
+			        var d = e.date;
+			        mui.toast('您选择的日期是:' + d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
+			        var inpSDate = byId('sdate');
+			        document.getElementById('sdate').setValue(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
+			    }, function(e) {
+			        mui.toast("您没有选择日期");
+			    }, {
+			        title: '请选择日期',
+			        date: dDate //,
+//			        minDate: minDate,
+//			        maxDate: maxDate
+			    });
+			});
+
+			
+		</script>
+		<script>
+			var keshizidian;
+			function queryDept() {
+//				var deptdict = localStorage.getItem("deptdict");
+//				var sel = document.getElementById('cboDept');
+//				var op = '';
+//				for(var i = 0; i < deptdict.length; i++){
+//					console.log(data[i]);
+//					op += '<option value="'+deptdict[i].value+'">'+deptdict[i].text+'</option>';
+//				}
+//				sel.innerHTML = op;
+
+				var jgid = JSON.parse(localStorage.getItem("loginuserinfo")).user_info.id_jg; 
+				var url = localStorage.getItem("url")+ "/app/qryKs.do";
+//				alert(url);
+				mui.ajax(url,{
+					data:{
+						value : jgid
+					},
+					dataType:'JSON',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:15000,//超时时间设置为10秒
+					beforeSend:function(){
+						
+					},
+					complete: function() {
+			   		},              
+					success:function(data){
+						keshizidian = JSON.parse(data);
+						var sel = document.getElementById('cboDept');
+						var op = '';
+						for(var i = 0; i < keshizidian.length; i++){
+							console.log(data[i]);
+							op += '<option value="'+keshizidian[i].value+'">'+keshizidian[i].text+'</option>';
+						}
+						sel.innerHTML = op;
+						console.log("queryDept--->>> "+ keshizidian);
+					},
+					error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+					}
+				});
+			}
+			
+			function queryEqRepairSummery(deptid, sdate, edate) {
+//				var jgid = JSON.parse(localStorage.getItem("loginuserinfo")).user_info.id_jg; 
+				var sessionId = JSON.parse(localStorage.getItem("loginuserinfo")).sessionId; 
+				var mask = mui.createMask();//遮罩层
+				//var url = "http://36.110.189.171:81/hpms/frame/login/loginService.do";
+				var url = localStorage.getItem("url")+"/statistics/qryEqRepairKsList.do";
+				mui.ajax(url,{
+					data:{
+						sessionid : sessionId,
+						ID_CUSTOM_KS : deptid,
+						sDate : sdate,
+						eDate : edate
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:15000,//超时时间设置为10秒；
+					beforeSend:function(){
+						plus.nativeUI.showWaiting("加载中", {});
+						mask.show();//显示遮罩层
+					},
+					complete: function() {
+		        		plus.nativeUI.closeWaiting();
+		        		mask.close();//关闭遮罩层
+		   		 	},              
+					success:function(data){
+						plus.nativeUI.closeWaiting();
+		        		mask.close();//关闭遮罩层
+		        		if (data == null) return;
+		        		console.log(JSON.stringify(data));
+		        		var optionBar = data.bar;
+		        		console.log(JSON.stringify(optionBar));
+		        		var barChart = echarts.init(byId('barChart'));
+						barChart.setOption(optionBar);
+						var optionPie = data.pie;
+						var pieChart = echarts.init(byId('pieChart'));
+						pieChart.setOption(optionPie);
+					},
+					error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			}
+		</script>
+		
+	</body>
+ 
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>设备报修</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link href="../../css/mui.picker.css" rel="stylesheet" />
+		<link href="../../css/mui.poppicker.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/mui.picker.min.css" />
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<style>
+			
+		</style>
+	</head>
+	<body >
+		<div class="mui-content">
+			<div class="mui-content-padded" style="margin: 5px;">
+				
+				<form id="eqinfo" class="mui-input-group">
+					<div class="mui-input-row">
+						<label>所属医院:</label>
+						<input id="hospitalname" readonly="readonly" type="text" class="mui-input .grey-input-color" placeholder="请选择所属医院">
+						<input id="hospitalnameid" readonly="readonly" type="text" hidden="hidden" name="custimer_hos_id" value="" class="mui-input .grey-input-color" placeholder="">
+						
+					</div>
+					<div class="mui-input-row">
+						<label>所属科室:</label>
+						<input id="eqks" readonly="readonly" type="text" class="mui-input .grey-input-color" placeholder="请选择所属科室">
+						<input id="eqksid" readonly="readonly" type="text" hidden="hidden" name="idCustomerKs" value="" class="mui-input .grey-input-color" placeholder="">
+						<input id="eqksinfoid" readonly="readonly" type="text" hidden="hidden" name="idKsinfo" value="" class="mui-input .grey-input-color" placeholder="">
+						
+					</div>
+					<div class="mui-input-row">
+						<label>设备名称:</label>
+						<input id="eqname" readonly="readonly" type="text" class="mui-input mui-input-clear" placeholder="请选择设备名称">
+						<input id="eqnameid" readonly="readonly" type="text" hidden="hidden" name="eqName" class="mui-input" placeholder="">
+					</div>
+					<div class="mui-input-row">
+						<label>设备品牌:</label>
+						<input id="eqpn" readonly="readonly" type="text" class="mui-input mui-input-clear" placeholder="请选择设备品牌">
+						<input id="eqpnid" readonly="readonly" type="text" hidden="hidden" name="eqBrand" class="mui-input" placeholder="">
+					</div>
+					<div class="mui-input-row">
+						<label>设备型号:</label>
+						<input id="eqnumber" readonly="readonly" type="text" class="mui-input mui-input-clear" placeholder="请选择设备型号">
+						<input id="eqnumberid" readonly="readonly" hidden="hidden" name="eqMode" type="text" class="mui-input" placeholder="">
+					</div>
+					<div class="mui-input-row">
+						<label>设备序列号:</label>
+						<input id="eqserialnumber" readonly="readonly" name="eqOrder" type="text" class="mui-input mui-input-clear" placeholder="请选择设备序列号">
+						
+					</div>
+					<div class="mui-input-row">
+						<label>设备资产号:</label>
+						<input id="eqassetnumber" readonly="readonly" type="text" name="eqAssetCode" class="mui-input mui-input-clear" placeholder="请选择设备资产号">
+					</div>
+					<div class="mui-input-row">
+						<label>预警时间:</label>
+						<input id="datatime1" readonly="readonly" type="text" class="databtn mui-input mui-input-clear" name="dtRepartWarn" placeholder="请选择预警时间">
+					</div>
+					<div class="mui-input-row">
+						<label>报修时间:</label>
+						<input id="datatime2" readonly="readonly" type="text" class="databtn mui-input mui-input-clear" name="tmRepart" placeholder="请选择报修时间">
+					</div>
+					<div class="mui-input-row">
+						<label>故障类型:</label>
+						<input id="mainquestype" readonly="readonly" type="text" class="mui-input" placeholder="请选择设备故障类型">
+						<input id="mainquestypeid" readonly="readonly" hidden="hidden" type="text" name="idQuesType" class="mui-input" placeholder="">
+					</div>
+					<div class="mui-input-row">
+						<label>报修类型:</label>
+						<input id="maintentancetype" readonly="readonly" type="text" class="mui-input" placeholder="请选择设备报修类型">
+						<input id="maintentancetypeid" readonly="readonly" hidden="hidden" type="text" name="repairType" class="mui-input" placeholder="">
+					</div>
+					<div class="mui-input-row">
+						<label>紧急级别:</label>
+						<input id="maintentancejibie" readonly="readonly" type="text" class="mui-input" placeholder="请选择紧急级别">
+						<input id="maintentancejibieid" readonly="readonly" hidden="hidden" type="text" name="level" class="mui-input" placeholder="">
+					</div>
+					<div class="mui-input-row">
+						<label>报修来源:</label>
+						<input id="maintentancesrc" readonly="readonly" type="text" class="mui-input" placeholder="请选择报修来源">
+						<input id="maintentancesrcid" readonly="readonly" hidden="hidden" type="text" name="repairSource" class="mui-input" placeholder="">
+					</div>
+					<div class="mui-input-row">
+						<label>报修方式:</label>
+						<input id="maintentanceway" type="text" class="mui-input-clear" placeholder="请选择报修方式">
+						<input id="maintentancewayid" readonly="readonly" hidden="hidden" type="text" name="repairMethod" class="mui-input" placeholder="">
+					</div>
+					<div class="mui-input-row">
+						<label>申请人:</label>
+						<input id="applytruename" type="text" name="reappName" class="mui-input-clear" placeholder="请输入报修申请人">
+					</div>
+				
+				<div class="mui-input-row" style="margin: 0px 0px;">
+					<label>故障描述:</label>
+				</div>
+				
+				<div class="mui-input-row" style="margin: 0px 0px;">
+					<textarea id="textarea" rows="5" name="repartInfo" placeholder="请输入设备故障描述"></textarea>
+				</div>
+				<!--<div class="mui-button-row">
+					<button type="submit" class="mui-btn mui-btn-primary" onclick="return false;" >确认</button>&nbsp;&nbsp;
+					<button type="button" class="mui-btn mui-btn-danger" onclick="return false;">取消</button>
+				</div>-->
+				</form>
+				<div class="mui-button-row">
+					<button type="button" class="mui-btn mui-btn-primary" onclick="commitData()" >确认</button>&nbsp;&nbsp;
+					<button type="button" class="mui-btn mui-btn-danger" onclick="canclData()">取消</button>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../js/mui.js" ></script>
+	<script type="text/javascript" src="../../js/datatime.js" ></script>
+	<script src="../../js/mui.picker.js"></script>
+	<script src="../../js/mui.poppicker.js"></script>
+	<script src="../../js/mui.dtpicker.js"></script>
+	<script type="text/javascript">
+		
+	</script>
+	<script type="text/javascript">
+		var keshizidian;var mingchengPicker,pingpaiPicker,xinghaoPicker;
+		mui.plusReady(function () {
+			var self = plus.webview.currentWebview();
+			var r = self.result1;
+			
+			var hosnmame =JSON.parse(localStorage.getItem("loginuserinfo")).user_info;
+			document.getElementById("hospitalname").value = hosnmame.name_jg;
+			document.getElementById("hospitalnameid").value = hosnmame.id_jg;
+			if(r==undefined||r==""||r==null||r=="null"||r=="undefined"){
+				console.log("ifrrrr---->>>> "+ r);
+				var userinfo = localStorage.getItem("loginuserinfo");
+				document.getElementById("applytruename").setAttribute('value',JSON.parse(userinfo).user_info.true_name);  
+				var arrinput = document.getElementsByTagName('input');
+				for (var i = 0; i < arrinput.length; i++) {
+					arrinput[i].removeAttribute('readonly');
+				}
+				
+				
+			}else{
+				console.log("elserrrr---->>>> "+ r);
+				var arr = new Array();
+				arr = r.split('id=');
+				getEnquirmentInfo (arr[arr.length-1]);
+			}
+			var eqtype = self.resulteqtype;
+			var eqlevels = self.resulteqlevels;
+			var eqsource = self.resulteqsource;
+			var eqmethod = self.resulteqmethod;
+			var keshizidian = self.eqkeshizidian;
+			var equestype  = self.equestype000;
+			//alert("$$$$"+equestype);
+			console.log("enquirmentmeqtype------>>>> "+keshizidian);
+			console.log("enquirmentmeqtype------>>>> "+equestype);
+			(function($, doc) {
+			$.init();
+			$.ready(function() {
+			
+				var keshiPicker = new $.PopPicker();
+				mingchengPicker = new $.PopPicker();
+				pingpaiPicker = new $.PopPicker();
+				xinghaoPicker = new $.PopPicker();
+				keshiPicker.setData(JSON.parse(keshizidian));
+				
+				if(r==undefined||r==""||r==null||r=="null"||r=="undefined"){
+					var loginstatusinfo = localStorage.getItem("loginuserinfo");
+					var usertinfo = JSON.parse(loginstatusinfo).user_info;
+					if(usertinfo.user_type == 0){
+						document.getElementById("eqks").setAttribute('value',usertinfo.name_bm);
+						document.getElementById("eqksid").setAttribute('value',usertinfo.id_bm);
+						document.getElementById("eqks").readOnly = true ;
+						document.getElementById("hospitalname").readOnly = true;
+						requestZiDianDate("/app/qrySb.do",usertinfo.id_bm);	
+					}else{
+					//科室名称
+					var maintentancekeshiButton = doc.getElementById('eqks');		
+					maintentancekeshiButton.addEventListener('tap', function(event) {
+						keshiPicker.show(function(items) {
+							maintentancekeshiButton.setAttribute('value',JSON.stringify(items[0].text).replace(new RegExp('"',"g"), ""))
+							document.getElementById("eqksid").setAttribute('value',JSON.stringify(items[0].value).replace(new RegExp('"',"g"), ""));
+							requestZiDianDate("/app/qrySb.do",JSON.stringify(items[0].value).replace(new RegExp('"',"g"), ""));	
+							document.getElementById("eqname").setAttribute('value','');
+							document.getElementById("eqnameid").setAttribute('value','');
+							document.getElementById("eqpn").setAttribute('value','');
+							document.getElementById("eqpnid").setAttribute('value','');
+							document.getElementById("eqnumber").setAttribute('value','');
+							document.getElementById("eqnumberid").setAttribute('value','');
+						});
+						}, false);	
+					}
+				//设备名称
+				var maintentancemingchengButton = doc.getElementById('eqname');		
+				maintentancemingchengButton.addEventListener('tap', function(event) {
+					mingchengPicker.show(function(items) {
+						maintentancemingchengButton.setAttribute('value',JSON.stringify(items[0].text).replace(new RegExp('"',"g"), ""))
+						document.getElementById("eqnameid").setAttribute('value',JSON.stringify(items[0].value).replace(new RegExp('"',"g"), ""));
+						requestZiDianDate("/app/qryPp.do",JSON.stringify(items[0].value).replace(new RegExp('"',"g"), ""));	
+						document.getElementById("eqpn").setAttribute('value','');
+						document.getElementById("eqpnid").setAttribute('value','');
+						document.getElementById("eqnumber").setAttribute('value','');
+						document.getElementById("eqnumberid").setAttribute('value','');
+					});
+					}, false);	
+				//设备品牌
+				
+				var maintentancepinpaiButton = doc.getElementById('eqpn');		
+				maintentancepinpaiButton.addEventListener('tap', function(event) {
+					pingpaiPicker.show(function(items) {
+						maintentancepinpaiButton.setAttribute('value',JSON.stringify(items[0].text).replace(new RegExp('"',"g"), ""))
+						document.getElementById("eqpnid").setAttribute('value',JSON.stringify(items[0].value).replace(new RegExp('"',"g"), ""));
+						requestZiDianDate("/app/qryXh.do",JSON.stringify(items[0].value).replace(new RegExp('"',"g"), ""));	
+						document.getElementById("eqnumber").setAttribute('value','');
+						document.getElementById("eqnumberid").setAttribute('value','');
+					});
+					}, false);	
+				//设备型号
+				
+				var maintentancenumberButton = doc.getElementById('eqnumber');		
+				maintentancenumberButton.addEventListener('tap', function(event) {
+					xinghaoPicker.show(function(items) {
+						maintentancenumberButton.setAttribute('value',JSON.stringify(items[0].text).replace(new RegExp('"',"g"), ""))
+						document.getElementById("eqnumberid").setAttribute('value',JSON.stringify(items[0].value).replace(new RegExp('"',"g"), ""));
+						
+					});
+					}, false);	
+				}
+				
+				var quesPicker = new $.PopPicker();
+				quesPicker.setData(JSON.parse(equestype));
+				var userPicker = new $.PopPicker();
+				userPicker.setData(JSON.parse(eqtype));
+				var userLevel = new $.PopPicker();
+				userLevel.setData(JSON.parse(eqlevels));		
+				var userRec = new $.PopPicker();
+				userRec.setData(JSON.parse(eqsource));		
+				var userMethod = new $.PopPicker();
+				userMethod.setData(JSON.parse(eqmethod));
+				var mainquestypeButton = doc.getElementById('mainquestype');
+					var mainquestypeButtonid = doc.getElementById('mainquestypeid');
+					mainquestypeButton.addEventListener('tap', function(event) {
+					quesPicker.show(function(items) {
+						mainquestypeButton.value = JSON.stringify(items[0].text).replace(new RegExp('"',"g"), ""); 
+						mainquestypeButtonid.setAttribute('value',JSON.stringify(items[0].value).replace(new RegExp('"',"g"), ""));
+							
+							//返回 false 可以阻止选择框的关闭
+							//return false; 
+						});
+					}, false);	
+					var maintentancetypeButton = doc.getElementById('maintentancetype');
+					var maintentancetypeButtonid = doc.getElementById('maintentancetypeid');
+					maintentancetypeButton.addEventListener('tap', function(event) {
+					userPicker.show(function(items) {
+						maintentancetypeButton.value = JSON.stringify(items[0].text).replace(new RegExp('"',"g"), ""); 
+						maintentancetypeButtonid.setAttribute('value',JSON.stringify(items[0].value).replace(new RegExp('"',"g"), ""));
+							
+							//返回 false 可以阻止选择框的关闭
+							//return false; 
+						});
+					}, false);	
+					var maintentancejibieButton = doc.getElementById('maintentancejibie');
+					var maintentancejibieButtonid = doc.getElementById('maintentancejibieid');
+					maintentancejibieButton.addEventListener('tap', function(event) {
+					userLevel.show(function(items) {
+						maintentancejibieButton.value = JSON.stringify(items[0].text).replace(new RegExp('"',"g"), "");
+						maintentancejibieButtonid.setAttribute('value',JSON.stringify(items[0].value).replace(new RegExp('"',"g"), "")); 
+
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);	
+					var maintentancesrcButton = doc.getElementById('maintentancesrc');
+					var maintentancesrcButtonid = doc.getElementById('maintentancesrcid')
+					maintentancesrcButton.addEventListener('tap', function(event) {
+					userRec.show(function(items) {
+						maintentancesrcButton.value = JSON.stringify(items[0].text).replace(new RegExp('"',"g"), ""); 
+						maintentancesrcButtonid.setAttribute('value',JSON.stringify(items[0].value).replace(new RegExp('"',"g"), "")); 
+
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);	
+					var maintentancewayButton = doc.getElementById('maintentanceway');
+					var maintentancewayButtonid = doc.getElementById('maintentancewayid')
+					maintentancewayButton.addEventListener('tap', function(event) {
+					userMethod.show(function(items) {
+						maintentancewayButton.value = JSON.stringify(items[0].text).replace(new RegExp('"',"g"), ""); 
+						maintentancewayButtonid.setAttribute('value',JSON.stringify(items[0].value).replace(new RegExp('"',"g"), "")); 
+
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);	
+				
+			});
+				var btns = $('.databtn');
+				btns.each(function(i, btn) {
+					var id = this.getAttribute('id');
+					var datatime = document.getElementById(id);
+					datatime.setAttribute('value',getNowDateTime());
+					btn.addEventListener('tap', function() {
+						var _self = this;
+						if(_self.picker) {
+							_self.picker.show(function (rs) {
+								_self.picker.dispose(); 
+								_self.picker = null;
+							});
+						} else {
+							var optionsJson = this.getAttribute('data-options') || '{}';
+							var options = JSON.parse(optionsJson);
+							var id = this.getAttribute('id');
+							/*
+							 * 首次显示时实例化组件
+							 * 示例为了简洁，将 options 放在了按钮的 dom 上
+							 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+							 */
+							_self.picker = new $.DtPicker(options);
+							_self.picker.show(function(rs) {
+								/*
+								 * rs.value 拼合后的 value
+								 * rs.text 拼合后的 text
+								 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+								 * rs.m 月，用法同年
+								 * rs.d 日，用法同年
+								 * rs.h 时，用法同年
+								 * rs.i 分（minutes 的第二个字母），用法同年
+								 */
+								var datatime = document.getElementById(id);
+								datatime.setAttribute('value',rs.value); 
+								/* 
+								 * 返回 false 可以阻止选择框的关闭
+								 * return false;
+								 */
+								/*
+								 * 释放组件资源，释放后将将不能再操作组件
+								 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+								 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+								 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+								 */
+								_self.picker.dispose();
+								_self.picker = null;
+							});
+						}
+						
+					}, false);
+				});
+		})(mui, document);
+		
+		});
+		function getEnquirmentInfo (eqid) {
+				var mask = mui.createMask();//遮罩层//http://10.131.103.128:8080/HEMS/app/qryRepairEqMsg.do?id=c86f1d75-c625-496b-a43d-90db536ced5b
+				var url = localStorage.getItem("url")+ "/app/qryRepairEqMsg.do?";
+				console.log("getEnquirmentInfo---->>>> "+url+"     eqid="+eqid);
+				mui.ajax(url,{
+				data:{
+					id:eqid
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){  
+				console.log("getEnquirmentInfo---->>>>> "+ data);
+				 plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+				var result = JSON.parse(data); 
+				showInfo(data);
+				
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+					 plus.nativeUI.closeWaiting();
+		             mask.close();//关闭遮罩层
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+			}
+		function showInfo (datainfo) { 
+			
+			document.getElementById("hospitalname").value = JSON.parse(datainfo).CUSTOMER_HOS;
+			document.getElementById("eqks").value = JSON.parse(datainfo).CUSTOMER_KS;
+			document.getElementById("eqname").value = JSON.parse(datainfo).EQ_NAME;
+			document.getElementById("eqpn").value = JSON.parse(datainfo).EQ_BRAND;
+			document.getElementById("eqnumber").value = JSON.parse(datainfo).EQ_MODEL;
+			document.getElementById("eqserialnumber").setAttribute('value', JSON.parse(datainfo).EQ_ORDER);
+			document.getElementById("eqassetnumber").setAttribute('value', JSON.parse(datainfo).EQ_ASSET_CODE);
+			var userinfo = localStorage.getItem("loginuserinfo");
+			document.getElementById("applytruename").setAttribute('value',JSON.parse(userinfo).user_info.true_name);  
+			document.getElementById("hospitalnameid").setAttribute('value',JSON.parse(datainfo).CUSTOMER_HOS_ID); 
+			document.getElementById("eqksid").setAttribute('value',JSON.parse(datainfo).CUSTOMER_KS_ID);
+			document.getElementById("eqksinfoid").setAttribute('value',JSON.parse(datainfo).KSEQ_INFO_ID);
+			document.getElementById("eqnameid").setAttribute('value', JSON.parse(datainfo).EQ_NAME_ID);
+			document.getElementById("eqpnid").setAttribute('value', JSON.parse(datainfo).EQ_BRAND_ID);
+			document.getElementById("eqnumberid").setAttribute('value', JSON.parse(datainfo).EQMODEL_INFO_ID);
+
+		}
+		
+		function canclData() {
+			mui.back();
+		}
+		
+		function commitData() {
+			var suoshukeshi = document.getElementById("eqks").value;
+			var jinjibie = document.getElementById("maintentancejibie").value;
+			var shenqingren = document.getElementById("applytruename").value;
+			if(suoshukeshi==''||suoshukeshi==null||suoshukeshi=="null"||suoshukeshi==undefined||suoshukeshi=='undefined'){
+				alert("请选择科室");
+				mui.toast("请选择科室");
+				return;
+			}else if(shenqingren==''||shenqingren==null||shenqingren=="null"||shenqingren==undefined||shenqingren=='undefined'){
+				alert("请输入申请人");
+				mui.toast("请输入申请人");
+				return;
+			}else if (jinjibie==''||jinjibie==null||jinjibie=="null"||jinjibie==undefined||jinjibie=='undefined') {
+				alert("请选择紧急级别");
+				mui.toast("请选择紧急级别");
+				return;
+			} else{
+			var arr = document.getElementsByTagName("input");
+			var paramsData = {};
+			for( var i = 0; i < arr.length; i++){ 
+				if (arr[i].getAttribute('name')!=null) {
+					paramsData[arr[i].getAttribute('name')] = arr[i].getAttribute('value');
+				}
+			}
+			
+			paramsData["eqOrder"] = document.getElementById("eqserialnumber").value;
+			paramsData["eqAssetCode"] = document.getElementById("eqassetnumber").value
+			paramsData["repartInfo"] = document.getElementById("textarea").value;
+			var userinfo = localStorage.getItem("loginuserinfo");
+			paramsData["sessionid"] = JSON.parse(userinfo).sessionId;
+			console.log(JSON.stringify(paramsData));
+			var mask = mui.createMask();//遮罩层//http://10.131.103.128:8080/HEMS/app/qryRepairEqMsg.do?id=c86f1d75-c625-496b-a43d-90db536ced5b
+				var url = localStorage.getItem("url")+ "/app/saveEqRepair.do?";
+				mui.ajax(url,{
+				data:paramsData,
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("正在保存", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){  
+				console.log("commit---->>>>> "+ data);
+				var status = JSON.parse(data).code; 
+				var msg = JSON.parse(data).msg;
+				switch (status){
+					case "0":
+						mui.toast(msg);
+						break;
+					case "1":
+						mui.toast(msg);
+						setTimeout(function () {
+							mui.back();
+						},1000);
+						
+						break;
+					case "2":
+						mui.toast(msg);
+						break;
+					default:
+						break;
+				}
+				
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+				}
+		}
+		
+		
+	</script>
+	<script>
+		/*
+		 
+		 * 科室 
+
+			http://10.131.103.128:8080/hemsApp/app/qryKs.do?value=机构id
+			
+			设备
+			http://10.131.103.128:8080/hemsApp/app/qrySb.do?value=科室value
+			 
+			品牌
+			http://10.131.103.128:8080/hemsApp/app/qryPp.do?value=设备value
+			型号 
+			http://10.131.103.128:8080/hemsApp/app/qryXh.do?value=品牌
+		 * 
+		 * */
+		var shebeimingcheng,shebeipingpai,shebeixinghao;
+		function requestZiDianDate (actionurl,actionvalue) {
+				var jgid = JSON.parse(localStorage.getItem("loginuserinfo")).user_info.id_jg; 
+				var mask = mui.createMask();
+				var url = localStorage.getItem("url")+ actionurl;
+				mui.ajax(url,{
+				data:{
+					value : actionvalue
+					
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				console.log("requestmentmaintanceDate--->>> "+ data);
+				switch (actionurl){
+					case "/app/qrySb.do":
+						shebeimingcheng = data;
+						mingchengPicker.setData(JSON.parse(shebeimingcheng));
+						break;
+					case "/app/qryPp.do":
+						shebeipingpai = data;
+						pingpaiPicker.setData(JSON.parse(shebeipingpai));
+						break;
+					case "/app/qryXh.do":
+						shebeixinghao = data;
+						xinghaoPicker.setData(JSON.parse(shebeixinghao));
+						break;
+					default:
+						break;
+				}	
+				
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						//plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+			}
+	</script>
+	
+</html>

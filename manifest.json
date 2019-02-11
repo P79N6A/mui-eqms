@@ -1,0 +1,1391 @@
+{
+    "@platforms" : [ "android", "iPhone", "iPad" ],
+    "id" : "H50D0BFC2", /*应用的标识，创建应用时自动生成，勿手动修改*/
+    "name" : "设备资产", /*应用名称，程序桌面图标名称*/
+    "version" : {
+        "name" : "v1.1.1", /*应用版本名称*/
+        "code" : ""
+    },
+    "description" : "", /*应用描述信息*/
+    "icons" : {
+        "72" : "icon.png"
+    },
+    "launch_path" : "page/home/main.html", /*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+    "developer" : {
+        "name" : "", /*开发者名称*/
+        "email" : "", /*开发者邮箱地址*/
+        "url" : ""
+    },
+    "permissions" : {
+        "Accelerometer" : {
+            "description" : "访问加速度感应器"
+        },
+        "Audio" : {
+            "description" : "访问麦克风"
+        },
+        "Messaging" : {
+            "description" : "短彩邮件插件"
+        },
+        "Cache" : {
+            "description" : "管理应用缓存"
+        },
+        "Camera" : {
+            "description" : "访问摄像头"
+        },
+        "Console" : {
+            "description" : "跟踪调试输出日志"
+        },
+        "Contacts" : {
+            "description" : "访问系统联系人信息"
+        },
+        "Device" : {
+            "description" : "访问设备信息"
+        },
+        "Downloader" : {
+            "description" : "文件下载管理"
+        },
+        "Events" : {
+            "description" : "应用扩展事件"
+        },
+        "File" : {
+            "description" : "访问本地文件系统"
+        },
+        "Gallery" : {
+            "description" : "访问系统相册"
+        },
+        "Geolocation" : {
+            "description" : "访问位置信息"
+        },
+        "Invocation" : {
+            "description" : "使用Native.js能力"
+        },
+        "Orientation" : {
+            "description" : "访问方向感应器"
+        },
+        "Proximity" : {
+            "description" : "访问距离感应器"
+        },
+        "Storage" : {
+            "description" : "管理应用本地数据"
+        },
+        "Uploader" : {
+            "description" : "管理文件上传任务"
+        },
+        "Runtime" : {
+            "description" : "访问运行期环境"
+        },
+        "XMLHttpRequest" : {
+            "description" : "跨域网络访问"
+        },
+        "Zip" : {
+            "description" : "文件压缩与解压缩"
+        },
+        "Barcode" : {
+            "description" : "管理二维码扫描插件"
+        },
+        "Maps" : {
+            "description" : "管理地图插件"
+        },
+        "Speech" : {
+            "description" : "管理语音识别插件"
+        },
+        "Webview" : {
+            "description" : "窗口管理"
+        },
+        "NativeUI" : {
+            "description" : "原生UI控件"
+        },
+        "Navigator" : {
+            "description" : "浏览器信息"
+        },
+        "NativeObj" : {
+            "description" : "原生对象"
+        },
+        "OAuth" : {},
+        "Payment" : {}
+    },
+    "plus" : {
+        "splashscreen" : {
+            "autoclose" : true, /*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+            "waiting" : true,
+            "delay" : "1000"
+        },
+        "error" : {
+            "url" : "page/404.html"
+        },
+        "popGesture" : "close", /*设置应用默认侧滑返回关闭Webview窗口，"none"为无侧滑返回功能，"hide"为侧滑隐藏Webview窗口。参考http://ask.dcloud.net.cn/article/102*/
+        "runmode" : "normal", /*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+        "signature" : "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==", /*可选，保���给应用签名，暂不使用*/
+        "distribute" : {
+            "plugins" : {
+                "payment" : {
+                    "weixin" : {
+                        "description" : "微信支付",
+                        "appid" : "H50D0BFC2"
+                    },
+                    "alipay" : {
+                        "description" : "阿里支付",
+                        "scheme" : ""
+                    }
+                },
+                "speech" : {
+                    "ifly" : {}
+                }
+            },
+            "apple" : {
+                "appid" : "", /*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+                "mobileprovision" : "", /*iOS应用打包配置文件*/
+                "password" : "", /*iOS应用打包个人证书导入密码*/
+                "p12" : "", /*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+                "devices" : "universal", /*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+                "frameworks" : []
+            },
+            "google" : {
+                "packagename" : "", /*Android应用包名，如io.dcloud.HelloH5*/
+                "keystore" : "", /*Android应用打包使用的密钥库文件*/
+                "password" : "", /*Android应用打包使用密钥库中证书的密码*/
+                "aliasname" : "", /*Android应用打包���用密钥库中证书的别名*/
+                "permissions" : [
+                    "<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
+                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
+                    "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+                    "<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
+                    "<uses-feature android:name=\"android.hardware.camera\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>",
+                    "<uses-permission android:name=\"android.permission.CAMERA\"/>"
+                ]
+            },
+            "orientation" : [ "portrait-primary", "landscape-primary" ], /*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+            "icons" : {
+                "ios" : {
+                    "prerendered" : true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
+                    "auto" : "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+                    "iphone" : {
+                        "normal" : "unpackage/res/icons/57x57.png", /*iPhone3/3GS程序图标，分辨率：57x57*/
+                        "retina" : "unpackage/res/icons/114x114.png", /*iPhone4程序图标，分辨率：114x114*/
+
+                        /*iPhone4S/5/6程序图标，分辨率：120x120*//*iPhone6 Plus程序图标，分辨率：180x180*/
+                        "spotlight-normal" : "unpackage/res/icons/29x29.png", /*iPhone3/3GS Spotlight搜索程序图标，分辨率：29x29*/
+                        "spotlight-retina" : "unpackage/res/icons/58x58.png", /*iPhone4 Spotlight搜索程序图标，分辨率：58x58*/
+
+                        /*iPhone4S/5/6 Spotlight搜索程序图标，分辨率：80x80*/
+                        "settings-normal" : "unpackage/res/icons/29x29.png", /*iPhone4设置页面程序图标，分辨率：29x29*/
+
+                        /*iPhone4S/5/6设置页面程序图标，分辨率：58x58*/
+                        "app@2x" : "images/gh-icon.png",
+                        "app@3x" : "images/gh-icon.png",
+                        "settings@3x" : "images/gh-icon.png",
+                        "settings@2x" : "images/gh-icon.png",
+                        "spotlight@2x" : "images/gh-icon.png",
+                        "spotlight@3x" : "images/gh-icon.png",
+                        "notification@3x" : "images/gh-icon.png",
+                        "notification@2x" : "images/gh-icon.png"
+                    },
+                    "ipad" : {
+                        "normal" : "unpackage/res/icons/72x72.png", /*iPad普通屏幕程序图标，分辨率：72x72*/
+                        "retina" : "unpackage/res/icons/144x144.png", /*iPad高分屏程序图标，分辨率：144x144*/
+
+                        /*iPad iOS7程序图标，分辨率：76x76*//*iPad iOS7高分屏程序图标，分辨率：152x152*/
+                        "spotlight-normal" : "unpackage/res/icons/50x50.png", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+                        "spotlight-retina" : "unpackage/res/icons/100x100.png", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+
+                        /*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*//*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*//*iPad设置页面程序图标，分辨率：29x29*/
+                        "app" : "images/gh-icon.png",
+                        "app@2x" : "images/gh-icon.png",
+                        "settings" : "images/gh-icon.png",
+                        "proapp@2x" : "images/gh-icon.png",
+                        "spotlight" : "images/gh-icon.png",
+                        "settings@2x" : "images/gh-icon.png",
+                        "spotlight@2x" : "images/gh-icon.png",
+                        "notification" : "images/gh-icon.png",
+                        "notification@2x" : "images/gh-icon.png"
+                    }
+                },
+                "android" : {
+                    "mdpi" : "images/gh-icon.png", /*普通屏程序图标，分辨率：48x48*/
+                    "ldpi" : "images/gh-icon.png", /*大屏程序图标，分辨率：48x48*/
+                    "hdpi" : "images/gh-icon.png", /*高分屏程序图标，分辨率：72x72*/
+                    "xhdpi" : "images/gh-icon.png", /*720P高分屏程序图标，分辨率：96x96*/
+                    "xxhdpi" : "images/gh-icon.png",
+                    "xxxhdpi" : "images/gh-icon.png"
+                }
+            },
+            "splashscreen" : {
+                "ios" : {
+                    "iphone" : {
+                        "default" : "", /*iPhone3启动图片选，分辨率：320x480*/
+                        "retina35" : "", /*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+                        "retina40" : "", /*4.0 英寸设备(iPhone5/iPhone5s)启动图片，分辨率：640x1136*/
+                        "retina47" : "", /*4.7 英寸设备(iPhone6)启动图片，分辨率：750x1334*/
+                        "retina55" : "", /*5.5 英寸设备(iPhone6 Plus)启动图片，分辨率：1242x2208*/
+                        "retina55l" : ""
+                    },
+                    "ipad" : {
+                        "portrait" : "", /*iPad竖屏启动图片，分辨率：768x1004*/
+                        "portrait-retina" : "", /*iPad高分屏竖屏图片，分辨率：1536x2008*/
+                        "landscape" : "", /*iPad横屏启动图片，分辨率：1024x748*/
+                        "landscape-retina" : "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+                        "portrait7" : "", /*iPad iOS7竖屏启动图��，分辨率：768x1024*/
+                        "portrait-retina7" : "", /*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+                        "landscape7" : "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+                        "landscape-retina7" : ""
+                    }
+                },
+                "android" : {
+                    "mdpi" : "", /*普通屏启动图片，分辨率：240x282*/
+                    "ldpi" : "", /*大屏启动图片，分辨率：320x442*/
+                    "hdpi" : "images/welcome.png", /*高分屏启动图片，分辨率：480x762*/
+                    "xhdpi" : "images/welcome.png", /*720P高分屏启动图片，分辨率：720x1242*/
+                    "xxhdpi" : "images/welcome.png"
+                }
+            }
+        },
+        "ads" : {
+            "rp" : false,
+            "splash" : false,
+            "push" : false,
+            "spot" : false
+        },
+        "adid" : ""
+    },
+    "dependencies" : {
+        "pages" : {
+            "page/index.html" : {
+                "resources" : [
+                    "bootstrap/fonts/font-awesome.css",
+                    "css/base.css",
+                    "images/jzzn-icon32.png",
+                    "bootstrap/css/bootstrap.min.css",
+                    "plugins/ScrollBar/style.min.css",
+                    "images/yydh-icon32.png",
+                    "plugins/layui/css/layui.css",
+                    "images/yy-icon32.png",
+                    "plugins/ScrollBar/scrollbar.min.js",
+                    "js/jquery-2.2.3.min.js",
+                    "plugins/owlcarousel/owl.theme.css",
+                    "plugins/layui/layui.js",
+                    "images/gh-icon.png",
+                    "images/03.png",
+                    "plugins/owlcarousel/owl.carousel.js",
+                    "images/01.png",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "images/jf-icon32.png",
+                    "images/jzjl-icon32.png",
+                    "images/02.png",
+                    "plugins/layui/lay/modules/layer.js",
+                    "plugins/owlcarousel/owl.carousel.css",
+                    "plugins/ScrollBar/mousewheel.min.js",
+                    "plugins/layui/css/modules/layer/default/layer.css",
+                    "page/news.html",
+                    "page/pay.html",
+                    "plugins/layui/css/modules/layer/default/icon.png",
+                    "page/personal-center.html"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/news.html" : {
+                "resources" : [ "page/personal-center.html", "page/index.html" ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/personal-center.html" : {
+                "resources" : [
+                    "page/news.html",
+                    "images/phone-icon.png",
+                    "images/about-icon.png",
+                    "images/help-icon.png",
+                    "images/advice-icon.png",
+                    "images/pwd-icon.png",
+                    "images/user-icon.png",
+                    "page/index.html",
+                    "bootstrap/fonts/font-awesome.css",
+                    "css/base.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "plugins/ScrollBar/style.min.css",
+                    "plugins/layui/css/layui.css",
+                    "plugins/ScrollBar/scrollbar.min.js",
+                    "js/jquery-2.2.3.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/ScrollBar/mousewheel.min.js",
+                    "js/common.js",
+                    "js/immersed.js"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/pay.html" : {
+                "resources" : [
+                    "page/index.html",
+                    "images/wx-icon.png",
+                    "images/qt-icon.png",
+                    "images/yhk-icon.png",
+                    "images/zfb-icon.png",
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css",
+                    "plugins/layui/lay/modules/layer.js",
+                    "js/jquery-2.2.3.min.js",
+                    "plugins/layui/css/modules/layer/default/layer.css",
+                    "plugins/layui/layui.js",
+                    "js/mui.js",
+                    "plugins/layui/css/modules/layer/default/icon.png",
+                    "plugins/ScrollBar/style.min.css",
+                    "plugins/ScrollBar/scrollbar.min.js",
+                    "plugins/ScrollBar/mousewheel.min.js"
+                ],
+                "refer" : [ "page/payment.html", "page/pay-way.html", "page/payway.html" ],
+                "priority" : 0
+            },
+            "page/payment.html" : {
+                "resources" : [ "css/common.css", "js/common.js", "js/mui.min.js", "js/immersed.js" ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/login.html" : {
+                "resources" : [
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css",
+                    "page/index.html",
+                    "js/mui.js",
+                    "js/app.js",
+                    "js/mui.min.js"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/pay-way.html" : {
+                "resources" : [
+                    "plugins/iCheck/minimal/_all.css",
+                    "plugins/iCheck/line/_all.css",
+                    "plugins/iCheck/flat/_all.css",
+                    "images/zfb-icon30.png",
+                    "plugins/iCheck/minimal/blue@2x.png",
+                    "plugins/iCheck/polaris/polaris.css",
+                    "plugins/iCheck/futurico/futurico.css",
+                    "plugins/iCheck/square/_all.css",
+                    "images/wx-icon30.png",
+                    "plugins/iCheck/all.css",
+                    "page/index.html"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/payway.html" : {
+                "resources" : [
+                    "bootstrap/fonts/font-awesome.css",
+                    "css/base.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "plugins/iCheck/minimal/_all.css",
+                    "plugins/iCheck/flat/_all.css",
+                    "images/zfb-icon30.png",
+                    "plugins/iCheck/minimal/blue@2x.png",
+                    "plugins/layui/css/layui.css",
+                    "js/jquery-2.2.3.min.js",
+                    "js/immersed.js",
+                    "js/common.js",
+                    "css/common.css",
+                    "js/mui.min.js",
+                    "plugins/iCheck/line/_all.css",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/iCheck/polaris/polaris.css",
+                    "plugins/iCheck/futurico/futurico.css",
+                    "plugins/iCheck/square/_all.css",
+                    "images/wx-icon30.png",
+                    "plugins/iCheck/all.css",
+                    "page/index.html"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/404.html" : {
+                "resources" : [
+                    "images/404.png",
+                    "bootstrap/fonts/fontawesome-webfont.ttf",
+                    "css/welcome.css"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/home/login.html" : {
+                "resources" : [
+                    "js/app.js",
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "js/mui.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css"
+                ],
+                "refer" : [
+                    "page/home/register.html",
+                    "page/home/index.html",
+                    "page/home/main.html",
+                    "page/home/forgetpassword.html"
+                ],
+                "priority" : 0
+            },
+            "page/home/register.html" : {
+                "resources" : [
+                    "js/app.js",
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "js/mui.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css"
+                ],
+                "refer" : [ "page/home/login.html" ],
+                "priority" : 0
+            },
+            "page/home/index.html" : {
+                "resources" : [
+                    "bootstrap/fonts/font-awesome.css",
+                    "css/base.css",
+                    "images/jzzn-icon32.png",
+                    "bootstrap/css/bootstrap.min.css",
+                    "plugins/ScrollBar/style.min.css",
+                    "images/yydh-icon32.png",
+                    "plugins/layui/css/layui.css",
+                    "images/yy-icon32.png",
+                    "plugins/ScrollBar/scrollbar.min.js",
+                    "js/jquery-2.2.3.min.js",
+                    "plugins/owlcarousel/owl.theme.css",
+                    "plugins/layui/layui.js",
+                    "images/gh-icon.png",
+                    "images/03.png",
+                    "plugins/owlcarousel/owl.carousel.js",
+                    "images/01.png",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "images/jf-icon32.png",
+                    "images/jzjl-icon32.png",
+                    "images/02.png",
+                    "plugins/layui/lay/modules/layer.js",
+                    "plugins/owlcarousel/owl.carousel.css",
+                    "plugins/ScrollBar/mousewheel.min.js",
+                    "plugins/layui/css/modules/layer/default/layer.css",
+                    "page/home/personal-center.html",
+                    "page/news/news.html",
+                    "page/home/pay.html",
+                    "js/mui.min.js",
+                    "images/healthitempng/103102.jpg",
+                    "images/healthitempng/103101.png",
+                    "images/保养.png"
+                ],
+                "refer" : [
+                    "page/hospitalinfo/hospital.html",
+                    "page/home/newsInfo.html",
+                    "page/home/disilness.html",
+                    "page/home/newslist.html",
+                    "page/home/lazyload-image.html",
+                    "page/home/disilnessheader.html",
+                    "page/home/newslistheader.html",
+                    "page/home/barcode_scan.html",
+                    "page/home/scaned.html",
+                    "page/home/enquirmentmaintentance.html",
+                    "page/home/login.html",
+                    "page/home/enquirmentrepair.html",
+                    "page/home/pullrefresh.html",
+                    "page/home/repairmentrepair.html",
+                    "page/home/enquirmentInventory.html",
+                    "page/home/repairmentsearchlist.html",
+                    "page/home/inventorymentmain.html",
+                    "page/home/inventorykeshilist.html"
+                ],
+                "priority" : 0
+            },
+            "page/home/personal-center.html" : {
+                "resources" : [
+                    "images/phone-icon.png",
+                    "js/common.js",
+                    "images/about-icon.png",
+                    "images/help-icon.png",
+                    "images/advice-icon.png",
+                    "images/pwd-icon.png",
+                    "js/immersed.js",
+                    "images/user-icon.png",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "bootstrap/fonts/font-awesome.css",
+                    "css/base.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "plugins/ScrollBar/style.min.css",
+                    "plugins/layui/css/layui.css",
+                    "plugins/ScrollBar/scrollbar.min.js",
+                    "js/jquery-2.2.3.min.js",
+                    "plugins/ScrollBar/mousewheel.min.js",
+                    "js/mui.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.ttf",
+                    "bootstrap/fonts/fontawesome-webfont.svg",
+                    "css/mui.min.css"
+                ],
+                "refer" : [
+                    "page/home/login.html",
+                    "page/home/changepassword.html",
+                    "page/home/changephone.html",
+                    "page/home/addnewIdcard.html"
+                ],
+                "priority" : 0
+            },
+            "page/news/news.html" : {
+                "resources" : [
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "plugins/ScrollBar/style.min.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css",
+                    "plugins/ScrollBar/scrollbar.min.js",
+                    "js/jquery-2.2.3.min.js",
+                    "plugins/ScrollBar/mousewheel.min.js"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/home/main.html" : {
+                "resources" : [
+                    "js/mui.min.js",
+                    "fonts/mui.ttf",
+                    "css/mui.min.css",
+                    "page/home/index.html",
+                    "page/home/pay.html",
+                    "page/home/personal-center.html",
+                    "css/mui.css",
+                    "css/mui-icons-extra.css",
+                    "page/home/tab-webview-subpage-about.html"
+                ],
+                "refer" : [
+                    "page/home/login.html",
+                    "page/pay/pay.html",
+                    "page/home/personalcenter.html",
+                    "page/home/tab-webview-subpage-contact.html",
+                    "page/home/tab-webview-subpage-chat.html",
+                    "page/home/statiseqmain.html",
+                    "page/home/statiseqmaint.html"
+                ],
+                "priority" : 0
+            },
+            "page/home/pay.html" : {
+                "resources" : [
+                    "js/mui.js",
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "plugins/ScrollBar/style.min.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css",
+                    "plugins/layui/lay/modules/layer.js",
+                    "plugins/ScrollBar/scrollbar.min.js",
+                    "js/jquery-2.2.3.min.js",
+                    "plugins/ScrollBar/mousewheel.min.js",
+                    "plugins/layui/css/modules/layer/default/layer.css",
+                    "plugins/layui/layui.js"
+                ],
+                "refer" : [
+                    "page/pay/payway.html",
+                    "page/home/login.html",
+                    "page/pay/payment.html"
+                ],
+                "priority" : 0
+            },
+            "page/hospitalinfo/hospital.html" : {
+                "resources" : [
+                    "images/ys-icon18.png",
+                    "images/ks-icon18.png",
+                    "images/yy-icon18.png",
+                    "page/hospitalinfo/hospital-introduction.html",
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "js/mui.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css",
+                    "images/yy-js.jpg",
+                    null
+                ],
+                "refer" : [ "page/hospitalinfo/department.html", "page/hospitalinfo/doctor.html" ],
+                "priority" : 0
+            },
+            "page/hospitalinfo/hospital-introduction.html" : {
+                "resources" : [ "images/yy-js.jpg", "page/hospitalinfo/hospital.html" ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/hospitalinfo/department.html" : {
+                "resources" : [
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "plugins/ScrollBar/style.min.css",
+                    "js/mui.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css",
+                    "plugins/ScrollBar/scrollbar.min.js",
+                    "js/jquery-2.2.3.min.js",
+                    "plugins/ScrollBar/mousewheel.min.js",
+                    "css/mui.min.css"
+                ],
+                "refer" : [ "page/hospitalinfo/doctor.html" ],
+                "priority" : 0
+            },
+            "page/hospitalinfo/doctor.html" : {
+                "resources" : [
+                    "images/yspic2.png",
+                    "plugins/owlcarousel/owl.theme.css",
+                    "plugins/owlcarousel/owl.carousel.css",
+                    "images/yspic.png",
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "js/mui.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css",
+                    "js/jquery-2.2.3.min.js",
+                    "plugins/ScrollBar/scrollbar.min.js",
+                    "plugins/ScrollBar/mousewheel.min.js",
+                    "plugins/ScrollBar/style.min.css",
+                    "js/mui.js",
+                    "bootstrap/fonts/fontawesome-webfont.ttf",
+                    "images/doctor/8.jpg",
+                    "images/doctor/7.jpg",
+                    "images/doctor/1.jpg",
+                    "images/doctor/3.jpg",
+                    "images/doctor/2.jpg",
+                    "images/doctor/4.jpg",
+                    "images/doctor/10.jpg",
+                    "images/doctor/9.jpg",
+                    "images/doctor/5.jpg",
+                    "images/doctor/6.jpg"
+                ],
+                "refer" : [ "page/hospitalinfo/doctor-information.html" ],
+                "priority" : 0
+            },
+            "page/home/newsInfo.html" : {
+                "resources" : [
+                    "images/ys-icon18.png",
+                    "images/yy-js.jpg",
+                    "images/ks-icon18.png",
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "js/mui.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css",
+                    "images/healthitempng/103102.jpg",
+                    "images/healthitempng/103101.png",
+                    "images/healthitempng/103103.jpg",
+                    "images/healthitempng/103104.jpg",
+                    "images/healthitempng/103100.gif",
+                    "images/healthitempng/103105.jpg"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/pay/payway.html" : {
+                "resources" : [
+                    "bootstrap/fonts/font-awesome.css",
+                    "css/base.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "plugins/iCheck/minimal/_all.css",
+                    "plugins/iCheck/flat/_all.css",
+                    "images/zfb-icon30.png",
+                    "plugins/iCheck/minimal/blue@2x.png",
+                    "plugins/layui/css/layui.css",
+                    "js/jquery-2.2.3.min.js",
+                    "js/immersed.js",
+                    "js/common.js",
+                    "css/common.css",
+                    "js/mui.min.js",
+                    "plugins/iCheck/line/_all.css",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/iCheck/polaris/polaris.css",
+                    "plugins/iCheck/futurico/futurico.css",
+                    "plugins/iCheck/square/_all.css",
+                    "images/wx-icon30.png",
+                    "plugins/iCheck/all.css"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/hospitalinfo/doctor-information.html" : {
+                "resources" : [
+                    "images/phone-icon.png",
+                    "js/common.js",
+                    "images/advice-icon.png",
+                    "images/pwd-icon.png",
+                    "js/immersed.js",
+                    "images/user-icon.png",
+                    "bootstrap/fonts/font-awesome.css",
+                    "css/base.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "plugins/ScrollBar/style.min.css",
+                    "plugins/layui/css/layui.css",
+                    "js/jquery-2.2.3.min.js",
+                    "plugins/ScrollBar/scrollbar.min.js",
+                    "js/mui.min.js",
+                    "plugins/ScrollBar/mousewheel.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "images/doctor/9.jpg",
+                    "images/doctor/5.jpg",
+                    "images/doctor/8.jpg",
+                    "images/doctor/2.jpg",
+                    "images/doctor/4.jpg",
+                    "images/doctor/3.jpg",
+                    "images/doctor/10.jpg",
+                    "images/doctor/7.jpg",
+                    "images/doctor/6.jpg"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/home/disilness.html" : {
+                "resources" : [
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "plugins/ScrollBar/style.min.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "js/mui.min.js",
+                    "plugins/layui/css/layui.css",
+                    "plugins/ScrollBar/scrollbar.min.js",
+                    "js/jquery-2.2.3.min.js",
+                    "plugins/ScrollBar/mousewheel.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "bootstrap/fonts/fontawesome-webfont.ttf",
+                    "css/mui.min.css",
+                    "fonts/mui.ttf",
+                    "js/mui.js"
+                ],
+                "refer" : [ "page/home/disilnessInfo.html" ],
+                "priority" : 0
+            },
+            "page/home/disilnessInfo.html" : {
+                "resources" : [
+                    "images/yy-js.jpg",
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "js/mui.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css",
+                    "bootstrap/fonts/fontawesome-webfont.ttf",
+                    "images/disilness/gm.png",
+                    "images/disilness/by.png",
+                    "images/disilness/cwb.png",
+                    "images/disilness/fx.jpg",
+                    "images/disilness/fy.jpg",
+                    "images/healthitempng/103100.gif"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/home/newslist.html" : {
+                "resources" : [
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "images/01.png",
+                    "plugins/ScrollBar/style.min.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "js/mui.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css",
+                    "plugins/ScrollBar/scrollbar.min.js",
+                    "js/jquery-2.2.3.min.js",
+                    "plugins/ScrollBar/mousewheel.min.js",
+                    "images/healthitempng/103101.png/",
+                    "images/healthitempng/103101.png",
+                    "images/healthitempng/103102.jpg",
+                    "images/healthitempng/103105.jpg",
+                    "images/healthitempng/103104.jpg",
+                    "images/healthitempng/103103.jpg",
+                    "bootstrap/fonts/fontawesome-webfont.ttf",
+                    "js/mui.lazyload.js",
+                    "js/mui.lazyload.img.js",
+                    "css/mui.min.css",
+                    "fonts/mui.ttf",
+                    "css/mui.css"
+                ],
+                "refer" : [ "page/home/newsInfo.html" ],
+                "priority" : 0
+            },
+            "page/home/changepassword.html" : {
+                "resources" : [
+                    "js/app.js",
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "js/mui.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css"
+                ],
+                "refer" : [ "page/home/login.html" ],
+                "priority" : 0
+            },
+            "page/home/changephone.html" : {
+                "resources" : [
+                    "js/app.js",
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "js/mui.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css"
+                ],
+                "refer" : [ "page/home/login.html" ],
+                "priority" : 0
+            },
+            "page/home/addnewIdcard.html" : {
+                "resources" : [
+                    "js/app.js",
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "js/mui.min.js",
+                    "plugins/layui/css/layui.css",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "page/home/addnewIdcard.html"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/home/forgetpassword.html" : {
+                "resources" : [
+                    "js/app.js",
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "js/mui.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/home/lazyload-image.html" : {
+                "resources" : [
+                    "js/mui.js",
+                    "fonts/mui.ttf",
+                    "css/mui.min.css",
+                    "css/app.css",
+                    "js/mui.lazyload.js",
+                    "js/mui.lazyload.img.js"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/home/disilnessheader.html" : {
+                "resources" : [
+                    "page/home/disilness.html",
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "plugins/ScrollBar/style.min.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "js/mui.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css",
+                    "plugins/ScrollBar/scrollbar.min.js",
+                    "js/jquery-2.2.3.min.js",
+                    "plugins/ScrollBar/mousewheel.min.js",
+                    "bootstrap/fonts/fontawesome-webfont.ttf"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/pay/payment.html" : {
+                "resources" : [ "js/common.js", "js/mui.min.js", "css/common.css", "js/immersed.js" ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/home/newslistheader.html" : {
+                "resources" : [
+                    "css/base.css",
+                    "bootstrap/fonts/font-awesome.css",
+                    "plugins/ScrollBar/style.min.css",
+                    "bootstrap/css/bootstrap.min.css",
+                    "bootstrap/fonts/fontawesome-webfont.woff",
+                    "plugins/layui/css/layui.css",
+                    "page/home/newslist.html",
+                    "js/mui.min.js",
+                    "css/mui.css",
+                    "fonts/mui.ttf"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/home/enquirmentmaintentance.html" : {
+                "resources" : [],
+                "refer" : [ "page/home/enquirmentmaintentance.html" ],
+                "priority" : 0
+            },
+            "page/home/repairmentrepair.html" : {
+                "resources" : [],
+                "refer" : [
+                    "page/home/enquirmentmaintentance.html",
+                    "page/home/repairdetail.html",
+                    "page/home/login.html"
+                ],
+                "priority" : 0
+            },
+            "page/home/repairmentsearchlist.html" : {
+                "resources" : [],
+                "refer" : [
+                    "page/home/enquirmentmaintentance.html",
+                    "page/home/repairdetail.html",
+                    "page/home/eqdetail.html",
+                    "page/home/eqmentmain.html",
+                    "page/home/enquirmentInventory.html",
+                    "page/home/eqdetail4.html",
+                    "page/home/login.html",
+                    "page/home/inventorykeshilist.html"
+                ],
+                "priority" : 0
+            },
+            "page/home/inventorymentmain.html" : {
+                "resources" : [
+                    "page/home/inventorymentrepair.html",
+                    "page/home/inventorymentrepair1.html"
+                ],
+                "refer" : [],
+                "priority" : 0
+            },
+            "page/home/inventorymentrepair.html" : {
+                "resources" : [],
+                "refer" : [ "page/home/repairdetail.html", "page/home/login.html" ],
+                "priority" : 0
+            },
+            "page/home/inventorymentrepair1.html" : {
+                "resources" : [],
+                "refer" : [ "page/home/repairdetail.html" ],
+                "priority" : 0
+            },
+            "page/home/eqmentmain.html" : {
+                "resources" : [
+                    "page/home/eqdetail.html",
+                    "page/home/eqdetailrepair.html",
+                    "page/home/eqmentmainrepair.html"
+                ],
+                "refer" : [
+                    "page/home/eqmentrepair.html",
+                    "page/home/eqmentrepair1.html",
+                    "page/home/eqinventory.html",
+                    "page/home/eqmentmainrepair1.html",
+                    "page/home/eqmentmainrepairxiangqing.html",
+                    "page/home/eqmentmaininventoryxiangqing.html"
+                ],
+                "priority" : 0
+            },
+            "page/home/eqmentrepair1.html" : {
+                "resources" : [],
+                "refer" : [ "page/home/repairdetail.html" ],
+                "priority" : 0
+            },
+            "page/home/eqmentrepair.html" : {
+                "resources" : [],
+                "refer" : [ "page/home/repairdetail.html" ],
+                "priority" : 0
+            },
+            "page/home/tab-webview-main.html" : {
+                "resources" : [ "page/home/pay.html" ],
+                "refer" : [ "page/home/personal-center.html", "page/home/index.html" ],
+                "priority" : 0
+            },
+            "page/home/statiseqmain.html" : {
+                "resources" : [
+                    "page/home/eqdetail.html",
+                    "page/home/eqdetail2.html",
+                    "page/home/eqdetail12.html",
+                    "page/home/echarts_demo.html",
+                    "page/home/statistics/echarts_demo.html"
+                ],
+                "refer" : [ "page/home/eqdetail3.html", "page/home/enquirmentInventory.html" ],
+                "priority" : 0
+            },
+            "page/home/statiseqmaint.html" : {
+                "resources" : [ "page/home/eqdetailrepair.html", "page/home/eqdetail.html" ],
+                "refer" : [ "page/home/eqinventory.html" ],
+                "priority" : 0
+            },
+            "page/home/eqmentmainrepair1.html" : {
+                "resources" : [],
+                "refer" : [ "page/home/repairdetail.html" ],
+                "priority" : 0
+            },
+            "page/home/eqmentmainrepairxiangqing.html" : {
+                "resources" : [],
+                "refer" : [ "page/home/login.html", "page/home/repairdetail.html" ],
+                "priority" : 0
+            },
+            "page/home/eqmentmaininventoryxiangqing.html" : {
+                "resources" : [],
+                "refer" : [ "page/home/repairdetail.html" ],
+                "priority" : 0
+            },
+            "page/home/inventorykeshilist.html" : {
+                "resources" : [],
+                "refer" : [
+                    "page/home/barcode_scan.html",
+                    "page/home/scaned.html",
+                    "page/home/enquirmentInventory.html",
+                    "page/home/inventorystart.html"
+                ],
+                "priority" : 0
+            },
+            "page/home/inventorystart.html" : {
+                "resources" : [],
+                "refer" : [ "page/home/barcode_scan.html", "page/home/enquirmentInventory.html" ],
+                "priority" : 0
+            }
+        },
+        "idle" : {
+            "resources" : [
+                "plugins/owlcarousel/assets/js/highlight/styles/arta.css",
+                "plugins/iCheck/flat/aero.png",
+                "bootstrap/fonts/glyphicons-halflings-regular.woff2",
+                "plugins/owlcarousel/assets/js/highlight/styles/atelier-dune.dark.css",
+                "plugins/owlcarousel/assets/js/highlight/CHANGES.md",
+                "plugins/layui/lay/modules/form.js",
+                "plugins/iCheck/polaris/polaris.png",
+                "bootstrap/fonts/FontAwesome.otf",
+                "plugins/owlcarousel/assets/js/foundation/foundation.orbit.js",
+                "plugins/iCheck/minimal/yellow@2x.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/atelier-dune.light.css",
+                "plugins/iCheck/square/blue.css",
+                "bootstrap/fonts/glyphicons-halflings-regular.ttf",
+                "plugins/iCheck/square/aero@2x.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/pojoaque.jpg",
+                "plugins/layui/font/iconfont.woff",
+                "plugins/layui/images/face/32.gif",
+                "plugins/iCheck/square/orange.css",
+                "plugins/iCheck/square/yellow@2x.png",
+                "plugins/layui/css/modules/layer/default/loading-0.gif",
+                "plugins/owlcarousel/assets/js/highlight/styles/solarized_dark.css",
+                "plugins/owlcarousel/assets/js/highlight/styles/rainbow.css",
+                "plugins/layui/images/face/31.gif",
+                "plugins/owlcarousel/assets/css/normalize.css",
+                "plugins/layui/images/face/11.gif",
+                "plugins/layui/images/face/12.gif",
+                "plugins/iCheck/flat/aero@2x.png",
+                "plugins/owlcarousel/assets/js/vendor/fastclick.js",
+                "plugins/layui/images/face/6.gif",
+                "plugins/layui/images/face/52.gif",
+                "plugins/iCheck/minimal/blue.png",
+                "plugins/iCheck/flat/orange.css",
+                "plugins/iCheck/flat/red.css",
+                "plugins/iCheck/square/green.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/foundation.css",
+                "plugins/layui/images/face/27.gif",
+                "plugins/layui/lay/modules/layedit.js",
+                "plugins/iCheck/square/grey.css",
+                "bootstrap/fonts/glyphicons-halflings-regular.eot",
+                "plugins/iCheck/line/pink.css",
+                "bootstrap/fonts/glyphicons-halflings-regular.svg",
+                "plugins/layui/images/face/71.gif",
+                "plugins/layui/images/face/49.gif",
+                "plugins/layui/images/face/4.gif",
+                "plugins/iCheck/minimal/minimal@2x.png",
+                "plugins/owlcarousel/assets/js/zepto.data.js",
+                "plugins/iCheck/square/yellow.png",
+                "plugins/iCheck/minimal/red.css",
+                "plugins/layui/images/face/60.gif",
+                "plugins/layui/images/face/18.gif",
+                "plugins/layui/images/face/33.gif",
+                "plugins/iCheck/flat/red@2x.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/vs.css",
+                "plugins/iCheck/square/square.css",
+                "plugins/layui/images/face/2.gif",
+                "plugins/layui/lay/lib/jquery.js",
+                "plugins/iCheck/flat/pink.css",
+                "plugins/iCheck/flat/green.css",
+                "plugins/owlcarousel/assets/js/highlight/styles/solarized_light.css",
+                "plugins/owlcarousel/assets/js/highlight/styles/school_book.png",
+                "plugins/iCheck/flat/flat.png",
+                "plugins/iCheck/minimal/pink.png",
+                "plugins/layui/images/face/51.gif",
+                "plugins/iCheck/line/red.css",
+                "plugins/owlcarousel/assets/js/highlight/styles/brown_papersq.png",
+                "plugins/layui/images/face/54.gif",
+                "plugins/owlcarousel/assets/js/foundation/foundation.abide.js",
+                "plugins/iCheck/futurico/futurico@2x.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/tomorrow-night-blue.css",
+                "plugins/iCheck/minimal/grey.css",
+                "plugins/owlcarousel/assets/js/highlight/styles/atelier-seaside.light.css",
+                "plugins/layui/images/face/39.gif",
+                "plugins/iCheck/minimal/grey@2x.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/tomorrow-night.css",
+                "plugins/iCheck/flat/flat@2x.png",
+                "plugins/iCheck/square/square@2x.png",
+                "plugins/iCheck/minimal/green@2x.png",
+                "plugins/layui/images/face/15.gif",
+                "plugins/owlcarousel/owl-video-play.png",
+                "plugins/iCheck/square/purple.png",
+                "plugins/iCheck/minimal/purple.png",
+                "plugins/layui/css/modules/laydate/laydate.css",
+                "plugins/owlcarousel/assets/js/highlight/styles/atelier-heath.light.css",
+                "plugins/owlcarousel/assets/js/highlight/styles/mono-blue.css",
+                "bootstrap/js/bootstrap.js",
+                "plugins/layui/images/face/26.gif",
+                "plugins/iCheck/square/aero.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/paraiso.dark.css",
+                "plugins/owlcarousel/assets/js/highlight/styles/ascetic.css",
+                "plugins/layui/font/iconfont.eot",
+                "plugins/owlcarousel/assets/js/foundation.min.js",
+                "plugins/layui/css/modules/code.css",
+                "images/jz-icon.png",
+                "bootstrap/css/bootstrap-theme.css",
+                "plugins/iCheck/line/line.css",
+                "plugins/layui/images/face/66.gif",
+                "plugins/iCheck/square/blue.png",
+                "plugins/iCheck/square/red.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/atelier-heath.dark.css",
+                "plugins/iCheck/line/line@2x.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/paraiso.light.css",
+                "plugins/layui/images/face/1.gif",
+                "plugins/layui/images/face/8.gif",
+                "bootstrap/fonts/ionicons.css",
+                "plugins/layui/images/face/40.gif",
+                "plugins/iCheck/minimal/yellow.css",
+                "plugins/iCheck/minimal/orange.png",
+                "plugins/layui/images/face/58.gif",
+                "plugins/iCheck/line/line.png",
+                "plugins/layui/images/face/46.gif",
+                "plugins/owlcarousel/assets/js/highlight/styles/monokai_sublime.css",
+                "plugins/iCheck/flat/red.png",
+                "plugins/iCheck/square/grey.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/school_book.css",
+                "plugins/layui/images/face/42.gif",
+                "plugins/owlcarousel/assets/js/foundation/foundation.clearing.js",
+                "plugins/owlcarousel/assets/js/highlight/styles/obsidian.css",
+                "plugins/layui/images/face/38.gif",
+                "plugins/iCheck/square/purple.css",
+                "plugins/owlcarousel/assets/js/highlight/styles/far.css",
+                "plugins/owlcarousel/assets/js/highlight/styles/xcode.css",
+                "plugins/iCheck/square/pink.css",
+                "bootstrap/fonts/fontawesome-webfont.eot",
+                "plugins/iCheck/minimal/blue.css",
+                "plugins/layui/lay/modules/laypage.js",
+                "plugins/iCheck/square/red.css",
+                "plugins/iCheck/line/green.css",
+                "plugins/layui/images/face/41.gif",
+                "plugins/iCheck/line/yellow.css",
+                "plugins/iCheck/minimal/green.png",
+                "plugins/layui/images/face/62.gif",
+                "plugins/layui/images/face/16.gif",
+                "plugins/owlcarousel/assets/js/highlight/highlight.pack.js",
+                "bootstrap/css/bootstrap.min.css.map",
+                "plugins/iCheck/flat/yellow.png",
+                "plugins/iCheck/line/grey.css",
+                "plugins/layui/images/face/47.gif",
+                "plugins/layui/css/modules/layer/default/loading-2.gif",
+                "plugins/owlcarousel/assets/js/highlight/styles/docco.css",
+                "plugins/iCheck/square/grey@2x.png",
+                "plugins/iCheck/flat/yellow@2x.png",
+                "plugins/layui/images/face/28.gif",
+                "plugins/iCheck/minimal/grey.png",
+                "bootstrap/css/bootstrap-theme.css.map",
+                "plugins/layui/images/face/13.gif",
+                "plugins/owlcarousel/assets/js/highlight/styles/atelier-lakeside.dark.css",
+                "plugins/iCheck/flat/blue.css",
+                "plugins/owlcarousel/assets/js/vendor/placeholder.js",
+                "plugins/iCheck/flat/grey@2x.png",
+                "plugins/iCheck/square/green@2x.png",
+                "plugins/owlcarousel/assets/js/vendor/jquery.js",
+                "plugins/owlcarousel/assets/js/highlight/styles/github.css",
+                "plugins/layui/lay/modules/flow.js",
+                "plugins/iCheck/flat/blue.png",
+                "images/jzjl-icon.png",
+                "plugins/iCheck/minimal/orange@2x.png",
+                "plugins/layui/lay/modules/util.js",
+                "plugins/layui/images/face/25.gif",
+                "plugins/iCheck/polaris/polaris@2x.png",
+                "plugins/layui/lay/modules/code.js",
+                "plugins/owlcarousel/assets/js/zepto.min.js",
+                "plugins/layui/images/face/50.gif",
+                "plugins/layui/lay/modules/laytpl.js",
+                "plugins/layui/images/face/30.gif",
+                "plugins/layui/images/face/44.gif",
+                "plugins/iCheck/flat/orange@2x.png",
+                "plugins/iCheck/square/red@2x.png",
+                "plugins/owlcarousel/assets/js/highlight/README.ru.md",
+                "plugins/layui/images/face/36.gif",
+                "plugins/iCheck/minimal/green.css",
+                "plugins/owlcarousel/assets/js/foundation/foundation.dropdown.js",
+                "plugins/iCheck/flat/pink.png",
+                "plugins/layui/images/face/35.gif",
+                "images/ys-icon.png",
+                "plugins/iCheck/futurico/futurico.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/tomorrow.css",
+                "plugins/owlcarousel/assets/js/vendor/jquery.cookie.js",
+                "plugins/layui/images/face/22.gif",
+                "plugins/iCheck/flat/yellow.css",
+                "plugins/layui/images/face/14.gif",
+                "plugins/iCheck/square/blue@2x.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/tomorrow-night-bright.css",
+                "plugins/layui/images/face/56.gif",
+                "plugins/iCheck/flat/flat.css",
+                "images/jf-icon.png",
+                "plugins/iCheck/flat/green@2x.png",
+                "plugins/layui/images/face/65.gif",
+                "plugins/owlcarousel/assets/js/foundation/foundation.topbar.js",
+                "images/jk-icon.png",
+                "plugins/iCheck/square/green.css",
+                "bootstrap/css/bootstrap-theme.min.css",
+                "plugins/iCheck/line/blue.css",
+                "plugins/owlcarousel/assets/js/devices.demo.js",
+                "plugins/iCheck/square/yellow.css",
+                "plugins/layui/images/face/68.gif",
+                "plugins/layui/images/face/7.gif",
+                "plugins/iCheck/flat/grey.css",
+                "plugins/owlcarousel/assets/js/highlight/styles/default.css",
+                "plugins/layui/images/face/59.gif",
+                "plugins/iCheck/square/pink.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/monokai.css",
+                "plugins/owlcarousel/assets/js/foundation/foundation.magellan.js",
+                "page/department.html",
+                "plugins/owlcarousel/assets/js/foundation/foundation.reveal.js",
+                "plugins/iCheck/minimal/purple.css",
+                "plugins/layui/images/face/45.gif",
+                "plugins/iCheck/minimal/minimal.css",
+                "plugins/owlcarousel/assets/js/highlight/styles/atelier-lakeside.light.css",
+                "plugins/owlcarousel/assets/js/foundation/foundation.equalizer.js",
+                "plugins/owlcarousel/assets/js/highlight/styles/atelier-forest.dark.css",
+                "bootstrap/css/bootstrap-theme.min.css.map",
+                "plugins/iCheck/square/orange@2x.png",
+                "plugins/iCheck/minimal/red@2x.png",
+                "plugins/layui/css/modules/layer/default/icon-ext.png",
+                "plugins/owlcarousel/assets/js/jquery.mousewheel.js",
+                "plugins/iCheck/flat/aero.css",
+                "images/gh-icon2.png",
+                "plugins/layui/images/face/53.gif",
+                "plugins/layui/images/face/5.gif",
+                "plugins/iCheck/minimal/pink.css",
+                "plugins/owlcarousel/assets/js/foundation/foundation.slider.js",
+                "plugins/owlcarousel/assets/js/highlight/styles/googlecode.css",
+                "plugins/layui/lay/modules/tree.js",
+                "images/ks-icon.png",
+                "plugins/iCheck/line/purple.css",
+                "plugins/iCheck/square/orange.png",
+                "plugins/iCheck/minimal/orange.css",
+                "plugins/owlcarousel/assets/js/foundation/foundation.alert.js",
+                "plugins/layui/lay/dest/layui.all.js",
+                "plugins/iCheck/flat/grey.png",
+                "plugins/layui/css/modules/layer/default/loading-1.gif",
+                "plugins/iCheck/line/orange.css",
+                "plugins/owlcarousel/assets/js/highlight/README.md",
+                "plugins/owlcarousel/assets/js/app.js",
+                "images/zj-icon.png",
+                "plugins/iCheck/minimal/aero.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/dark.css",
+                "plugins/iCheck/flat/purple.png",
+                "plugins/owlcarousel/assets/js/foundation/foundation.tab.js",
+                "plugins/owlcarousel/assets/js/highlight/styles/atelier-seaside.dark.css",
+                "plugins/owlcarousel/assets/css/foundation.css",
+                "plugins/iCheck/flat/orange.png",
+                "plugins/layui/images/face/10.gif",
+                "plugins/layui/images/face/63.gif",
+                "plugins/layui/images/face/55.gif",
+                "plugins/layui/lay/modules/element.js",
+                "plugins/layui/font/iconfont.ttf",
+                "plugins/owlcarousel/assets/css/demo.css",
+                "plugins/iCheck/minimal/minimal.png",
+                "plugins/iCheck/flat/blue@2x.png",
+                "plugins/layui/images/face/34.gif",
+                "plugins/layui/images/face/24.gif",
+                "bootstrap/fonts/glyphicons-halflings-regular.woff",
+                "plugins/layui/images/face/67.gif",
+                "bootstrap/css/bootstrap.css.map",
+                "plugins/owlcarousel/ajax-loader.gif",
+                "images/yy-icon.png",
+                "plugins/owlcarousel/assets/js/jquery-1.11.0.min.js",
+                "plugins/iCheck/flat/pink@2x.png",
+                "plugins/layui/css/modules/laydate/icon.png",
+                "plugins/layui/images/face/21.gif",
+                "plugins/iCheck/square/square.png",
+                "plugins/layui/lay/modules/upload.js",
+                "plugins/layui/images/face/70.gif",
+                "images/welcome1.png",
+                "plugins/iCheck/square/purple@2x.png",
+                "plugins/iCheck/icheck.min.js",
+                "page/doctor.html",
+                "plugins/owlcarousel/assets/js/foundation/foundation.tooltip.js",
+                "plugins/iCheck/minimal/aero@2x.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/pojoaque.css",
+                "plugins/layui/images/face/48.gif",
+                "page/hospital.html",
+                "bootstrap/css/bootstrap.css",
+                "plugins/layui/images/face/43.gif",
+                "plugins/owlcarousel/assets/js/foundation/foundation.joyride.js",
+                "plugins/layui/images/face/3.gif",
+                "plugins/layui/images/face/64.gif",
+                "plugins/iCheck/minimal/aero.css",
+                "plugins/owlcarousel/assets/css/animate.css",
+                "plugins/iCheck/icheck.js",
+                "plugins/owlcarousel/assets/js/highlight/styles/zenburn.css",
+                "plugins/layui/images/face/19.gif",
+                "plugins/iCheck/minimal/yellow.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/tomorrow-night-eighties.css",
+                "plugins/owlcarousel/assets/css/devices.css",
+                "plugins/owlcarousel/assets/js/highlight/styles/ir_black.css",
+                "plugins/iCheck/minimal/red.png",
+                "plugins/owlcarousel/assets/js/highlight/styles/idea.css",
+                "plugins/owlcarousel/assets/css/foundation.min.css",
+                "plugins/owlcarousel/assets/js/foundation/foundation.offcanvas.js",
+                "plugins/layui/images/face/17.gif",
+                "plugins/owlcarousel/assets/js/foundation/foundation.accordion.js",
+                "images/welcome.png",
+                "plugins/iCheck/flat/purple@2x.png",
+                "plugins/layui/images/face/20.gif",
+                "plugins/iCheck/flat/green.png",
+                "plugins/layui/images/face/37.gif",
+                "plugins/layui/images/face/23.gif",
+                "plugins/layui/font/iconfont.svg",
+                "plugins/layui/lay/modules/laydate.js",
+                "plugins/owlcarousel/assets/js/highlight/styles/magula.css",
+                "plugins/layui/images/face/9.gif",
+                "plugins/owlcarousel/assets/js/highlight/styles/sunburst.css",
+                "plugins/layui/images/face/69.gif",
+                "page/welcome.html",
+                "plugins/owlcarousel/assets/js/highlight/styles/railscasts.css",
+                "plugins/iCheck/square/pink@2x.png",
+                "plugins/layui/images/face/29.gif",
+                "plugins/iCheck/square/aero.css",
+                "bootstrap/js/bootstrap.min.js",
+                "images/more-icon.png",
+                "page/hospital-introduction.html",
+                "bootstrap/js/npm.js",
+                "plugins/owlcarousel/assets/js/foundation/foundation.js",
+                "plugins/iCheck/minimal/purple@2x.png",
+                "plugins/owlcarousel/assets/js/highlight/LICENSE",
+                "plugins/owlcarousel/assets/js/highlight/styles/atelier-forest.light.css",
+                "plugins/layui/images/face/57.gif",
+                "plugins/iCheck/minimal/pink@2x.png",
+                "plugins/iCheck/line/aero.css",
+                "plugins/layui/images/face/61.gif",
+                "plugins/owlcarousel/assets/js/vendor/modernizr.js",
+                "plugins/owlcarousel/assets/js/foundation/foundation.interchange.js",
+                "plugins/layui/images/face/0.gif",
+                "plugins/owlcarousel/assets/js/highlight/styles/brown_paper.css",
+                "plugins/iCheck/flat/purple.css"
+            ]
+        }
+    }
+}

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--<link rel="stylesheet" href="css/mui.min.css">-->
+		<link rel="stylesheet" href="css/mui.css">
+		<link rel="stylesheet" href="../../bootstrap/fonts/font-awesome.css"/>
+		<!--<link rel="stylesheet" href="../../css/base.css"/>-->
+		
+		<style type="text/css">
+			.mui-content>.mui-table-view:first-child {
+				margin-top: -1px;
+			}
+			.right{
+				float:right;
+			}
+			.mui-table-view{
+				background: #F4F4F4;
+				padding: 2px;
+				
+			}
+			.repairlistitem{
+				background: #ffffff !important;
+				margin-bottom: 5px;
+				border-radius: 5px;
+			}
+			.repairlistitem p{
+				color: #333 !important;
+				line-height: 25px;
+				font-size: 14px;
+				
+			}
+			.item-title{
+				font-size: 16px;
+				font-weight: bold;
+			}
+			.repair-tag-status-green{
+				color: #42bf0d;
+			}
+			.repair-tag-status-red{
+				color: #FF0000;
+			}
+			.margin-bottom-itme{
+				margin: 5px;
+				margin-top: 2px;
+				margin-bottom: -15px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--<header>
+			<div class="mui-input-row mui-search margin-bottom-itme">
+				<input id="searchcontent" type="search" class=" mui-input-clear" placeholder="">
+			</div>
+		</header>-->
+		<!--<p style="text-indent: 0;">
+					<a href="#middlePopover" >打开弹出菜单</a>
+				</p>
+-->
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content">
+			<!--数据列表-->
+			<ul class="mui-table-view mui-table-view-chevron">
+				<!--<li>123</li>-->
+			</ul>
+		</div>
+			<div id="middlePopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell"><a href="#" onclick="">按所属科室盘点</a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">按存放科室盘点</a>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+
+		</div>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var eqtype,eqlevels,eqsource,eqmethod,eqkeshizidian,eqinventorysss,eqcufangzidian;
+			mui.plusReady(function () {
+			var self = plus.webview.currentWebview();
+			eqtype = self.resulteqtype;
+			eqlevels = self.resulteqlevels;
+			eqsource = self.resulteqsource;
+			eqmethod = self.resulteqmethod;
+			eqkeshizidian = self.eqkeshizidian;
+			eqinventorysss = self.eqinventorySSS;
+			eqcufangzidian = self.eqcufangzidian;
+			
+			
+			});
+		</script>
+		<script>
+			var count = 1;
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						style:'circle',
+						callback: pulldownRefresh,
+						auto:true
+					}
+				}
+			});
+			
+			
+			function pullupRefresh() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().endPullup(); //参数为true代表没有更多数据了。
+					console.log("count--->>> "+ count);
+					requestDownMoreDate(count);
+					
+				}, 2000);
+			}
+
+			function addData() {
+				//document.getElementById("searchcontent").value = '';
+				count = 1;
+				requestDownMoreDate(1);
+			
+			}
+			
+			function showData (list) {
+				var table = document.body.querySelector('.mui-table-view');
+				var cells = document.body.querySelectorAll('.mui-table-view-cell');
+				var listlength = list.length;
+				table.innerHTML = '';
+				for(var i = 0, len = listlength ; i < len; i++) {
+					var li = document.createElement('li');
+					li.className = 'mui-table-view-cell repairlistitem';
+					li.innerHTML = '<p class="">科室名称：<span >' + list[i].text + '</span>'
+									+'<span class="right repair-tag-status-red"><i class="fa"></i><a  hidden = "hidden" >'+list[i].value+'</a></span></p>'
+									
+									;
+									/*li.innerHTML = '<p class=""><a href="#middlePopover">科室名称：<span >' + list[i].text + '</a></span>'
+									+'<span class="right repair-tag-status-red"><i class="fa"></i><i  hidden = "hidden" >'+list[i].value+'</i></span></p>'
+									
+									;*/
+					table.appendChild(li);
+					
+				}
+				var as = document.getElementsByTagName('a');
+				var oli = document.getElementsByTagName("li");
+			    for(var i=0; i<oli.length; i++){
+			        (function(j){
+			            oli[j].onclick = function () {	
+			            //requestDetail (as[j].innerHTML);
+			            //alert(as[j].innerHTML);
+			            clickItem (as[j].innerHTML);
+			        };
+			        })(i)
+				}
+			   
+			}
+				// 点击自定义按钮回调函数
+			function clickItem(asid){
+				var btnArray = [{title:"按所属科室盘点"},{title:"按存放科室盘点"}];
+				plus.nativeUI.actionSheet( {
+					cancel:"取消",
+					buttons:btnArray
+				}, function(e){
+					var index = e.index;
+					switch (index){
+						case 0:
+							//取消
+							//mui.toast(index+"   "+asid);
+							break;
+						case 1:
+							//所属科室盘点
+							mui.openWindow({
+							url : "inventorystart.html",
+							id : "inventorystart.html",
+							extras : {
+								pandainleixing : "1",
+								pandiankeshiid : asid,
+								eqinventorySSS : eqinventorysss,
+								eqcufangzidian  : eqcufangzidian
+							}
+							});
+							break;
+						case 2:
+							//存放科室盘点
+							mui.openWindow({
+							url : "inventorystart.html",
+							id : "inventorystart.html",
+							extras : {
+								pandainleixing : "0",
+								pandiankeshiid : asid,
+								eqinventorySSS : eqinventorysss,
+								eqcufangzidian : eqcufangzidian
+							}
+							});
+							break;
+					}
+					
+				} );
+			}
+		var qr;
+		function scaned(t, r, f){
+					qr = r;
+					mui.openWindow({
+					url : "scaned.html",
+					id : "scaned",
+					styles:{
+		      			 titleNView: { // 窗口的标题栏控件
+		      			 //homeButton:true,
+		      			  autoBackButton:true,
+					      titleText:"设备信息",                // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+					      titleColor:"#ffffff",             // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+					      titleSize:"17px",                 // 字体大小,默认17px
+					      backgroundColor:"#6D97FF", 		// 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					      buttons:[{text:'＋',float:'right',fontSize:'22px',onclick:clickButton}],
+					      progress:{                        // 标题栏控件的进度条样式
+					        color:"#999999",                // 进度条颜色,默认值为"#00FF00"  
+					        height:"2px"                    // 进度条高度,默认值为"2px"         
+					      },
+					      splitLine:{                       // 标题栏控件的底部分割线，类似borderBottom
+					        color:"#CCCCCC",                // 分割线颜色,默认值为"#CCCCCC"  
+					        height:"0px"                    // 分割线高度,默认值为"2px"
+					      }
+					    }
+					  
+		      	},
+					extras : {
+						result0:r
+					}
+				});
+			}
+			
+			function equipmentInventorySSS () {
+			mui.openWindow({
+					url : "enquirmentInventory.html",
+					id : "enquirmentInventory.html",
+					styles:{
+		      			 titleNView: { // 窗口的标题栏控件
+		      			 //homeButton:true,
+		      			  autoBackButton:true,
+					      titleText:"设备盘点",              // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+					      titleColor:"#ffffff",             // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+					      titleSize:"17px",                 // 字体大小,默认17px
+					      backgroundColor:"#6D97FF", 		// 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					     
+					      progress:{                        // 标题栏控件的进度条样式
+					        color:"#999999",                // 进度条颜色,默认值为"#00FF00"  
+					        height:"2px"                    // 进度条高度,默认值为"2px"         
+					      },
+					      splitLine:{                       // 标题栏控件的底部分割线，类似borderBottom
+					        color:"#CCCCCC",                // 分割线颜色,默认值为"#CCCCCC"  
+					        height:"0px"                    // 分割线高度,默认值为"2px"
+					      }
+					    }
+					  
+		      	},
+					extras : {
+						result1 : qr
+					}
+				});
+			
+		}
+			function showDataUp (list) {
+				var table = document.body.querySelector('.mui-table-view');
+				var cells = document.body.querySelectorAll('.mui-table-view-cell');
+				var listlength = list.length;
+				for(var i = 0, len = listlength ; i < len; i++) {
+					var li = document.createElement('li');
+					li.className = 'mui-table-view-cell repairlistitem';
+					li.innerHTML = '<p class="" >设备名称：<span>' + list[i].EQ_NAME + '</span>'
+									+'<span class="right repair-tag-status-red"><i class="fa"></i></span></p>'
+									+'<p>设备品牌：<span>'+list[i].EQ_BRAND +'</span><a hidden = "hidden" >'+list[i].KSEQ_INFO_ID+'</a></p>'
+									+'<p>设备型号：<span>'+list[i].EQ_MODEL +'</span></p>'
+									+'<p>设备序列号：<span>'+list[i].EQ_ORDER +'</span></p>'
+									+'<p>设备资产号：<span>'+list[i].EQ_ASSET_CODE +'</span></p>'
+									+'<p>科室：<span>'+list[i].CUSTOMER_KS +'</span></p>'
+									;
+					
+					table.appendChild(li);
+					
+				}
+				 var as = document.getElementsByTagName('a');
+				var oli = document.getElementsByTagName("li");
+			    for(var i=0; i<oli.length; i++){
+			        (function(j){
+			            oli[j].onclick = function () {
+			           // requestDetail (as[j].innerHTML);
+			            alert(as[j].innerHTML)
+			        };
+			        })(i)
+				}
+			    var table = document.body.querySelectorAll("right");
+			    for (var i = 0; i < table.length; i++) {
+			    	
+			    }
+			}
+			var urls;
+			function requestDetail (repairid) {
+				var rooturl = localStorage.getItem("url");
+				urls = repairid;
+				console.log(repairid);
+				//urls = rooturl+"/app/qryEqInfoById.do?id="+repairid;///app/qryEqInfoById.do?id=
+				mui.openWindow({
+					url : "eqmentmain.html",//repairdetail
+					id : "eqmentmain.html",
+					styles:{
+		      			 titleNView: { // 窗口的标题栏控件
+		      			 //homeButton:true,
+		      			  autoBackButton:true,
+					      titleText:"设备详情",              // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+					      titleColor:"#ffffff",             // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+					      titleSize:"17px",                 // 字体大小,默认17px
+					      backgroundColor:"#6D97FF", 		// 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					       buttons:[{text:'更多',float:'right',fontSize:'16px',onclick:clickButton}],
+					      progress:{                        // 标题栏控件的进度条样式
+					        color:"#999999",                // 进度条颜色,默认值为"#00FF00"  
+					        height:"2px"                    // 进度条高度,默认值为"2px"         
+					      },
+					      splitLine:{                       // 标题栏控件的底部分割线，类似borderBottom
+					        color:"#CCCCCC",                // 分割线颜色,默认值为"#CCCCCC"  
+					        height:"0px"                    // 分割线高度,默认值为"2px"
+					      }
+					    }
+					  
+		      	},
+					extras : {
+						repairdetailr: urls
+						
+						
+					}
+				});	
+			}
+			// 点击自定义按钮回调函数
+		function clickButton(){
+			var btnArray = [{title:"报修"},{title:"盘点"}];
+			//var btnArray = [{title:"报修"}];
+			plus.nativeUI.actionSheet( {
+				//title:"操作",
+				cancel:"取消",
+				buttons:btnArray
+			}, function(e){
+				var index = e.index;
+				switch (index){
+					case 0:
+						//mui.toast(index);
+						break;
+					case 1:
+						equipmentMaintenance();//设备报修				
+						break;
+					case 2:
+						equipmentInventorySSS();//设备盘点	
+						break;
+				}
+				
+			} );
+		}
+		function equipmentMaintenance () {
+			mui.openWindow({
+					url : "enquirmentmaintentance.html",
+					id : "enquirmentmaintentance.html",
+					styles:{
+		      			 titleNView: { // 窗口的标题栏控件
+		      			 //homeButton:true,
+		      			  autoBackButton:true,
+					      titleText:"设备报修",                // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+					      titleColor:"#ffffff",             // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+					      titleSize:"17px",                 // 字体大小,默认17px
+					      backgroundColor:"#6D97FF", 		// 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					     
+					      progress:{                        // 标题栏控件的进度条样式
+					        color:"#999999",                // 进度条颜色,默认值为"#00FF00"  
+					        height:"2px"                    // 进度条高度,默认值为"2px"         
+					      },
+					      splitLine:{                       // 标题栏控件的底部分割线，类似borderBottom
+					        color:"#CCCCCC",                // 分割线颜色,默认值为"#CCCCCC"  
+					        height:"0px"                    // 分割线高度,默认值为"2px"
+					      }
+					    }
+					  
+		      	},
+					extras : {
+						result1 : urls,
+						resulteqtype : eqtype,//var eqtype,eqlevels,eqrepairsource,eqpepairmethod;
+						resulteqlevels : eqlevels,
+						resulteqsource : eqsource,
+						resulteqmethod : eqmethod,
+						eqkeshizidian : eqkeshizidian
+						
+					}
+				});
+		}
+		/*function equipmentInventorySSS () {
+			mui.openWindow({
+					url : "enquirmentInventory.html",
+					id : "enquirmentInventory.html",
+					styles:{
+		      			 titleNView: { // 窗口的标题栏控件
+		      			 //homeButton:true,
+		      			  autoBackButton:true,
+					      titleText:"设备盘点",                // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+					      titleColor:"#ffffff",             // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+					      titleSize:"17px",                 // 字体大小,默认17px
+					      backgroundColor:"#6D97FF", 		// 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					     
+					      progress:{                        // 标题栏控件的进度条样式
+					        color:"#999999",                // 进度条颜色,默认值为"#00FF00"  
+					        height:"2px"                    // 进度条高度,默认值为"2px"         
+					      },
+					      splitLine:{                       // 标题栏控件的底部分割线，类似borderBottom
+					        color:"#CCCCCC",                // 分割线颜色,默认值为"#CCCCCC"  
+					        height:"0px"                    // 分割线高度,默认值为"2px"
+					      } 
+					    }
+					  
+		      	},
+					extras : {
+						result1 : urls,
+						resulteqtype : eqtype,//var eqtype,eqlevels,eqrepairsource,eqpepairmethod;
+						resulteqlevels : eqlevels,
+						resulteqsource : eqsource,
+						resulteqmethod : eqmethod,
+						eqinventorySSS : eqinventorysss,
+						eqkeshizidian : eqkeshizidian,
+						eqcufangzidian :eqcufangzidian
+						
+						
+					}
+				});
+		}*/
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					addData();
+					mui('#pullrefresh').pullRefresh().endPulldown();
+				}, 1500);
+			}
+			function requestDownMoreDate (rtype) {
+				//var searchinput = document.getElementById("searchcontent").value;
+				//console.log("searchinput------>>>> "+searchinput);
+				var sessionId = JSON.parse(localStorage.getItem("loginuserinfo")).sessionId; 
+				var hoscode2 = JSON.parse(localStorage.getItem("loginuserinfo")).user_info.id_jg;
+				var mask = mui.createMask();//遮罩层
+				var url = localStorage.getItem("url")+ "/frame/dd/qryDBAdd.do";
+				console.log("url------>>>> "+url+"      hoscode2="+hoscode2);
+				//http://10.131.103.128:8080/hemsApp/frame/dd/qryDBAdd.do?code=DD_HOS_KS&code2=9b672495-12b9-4775-8df6-95b2960c3031
+				mui.ajax(url,{
+				data:{
+					//sessionid : sessionId,
+					code : "DD_HOS_KS",
+					code2 : hoscode2
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				console.log("repairmentrepair--->>> "+ data);
+				var resultdatalist = JSON.parse(data).data;
+				showData (resultdatalist);
+			/*	if (JSON.parse(data).flag==0) {
+					openLoginPage();
+				}
+				if (JSON.parse(data).flag==1) {
+				var resultdatalist = JSON.parse(data).data;
+				showData (resultdatalist);
+				if (rtype==1) {
+					showData (resultdatalist);
+					count += 1;
+				} else{
+					if (resultdatalist.length <=0) {
+						count = rtype;
+						mui.toast("没有更多数据");
+					}else{
+						count += 1;
+						showDataUp (resultdatalist);
+					}
+					
+				}
+				}*/
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+			}
+				function requestSearchMoreDate (rtype) {
+				var searchinput = document.getElementById("search").getAttribute('value');
+				var sessionId = JSON.parse(localStorage.getItem("loginuserinfo")).sessionId; 
+				var mask = mui.createMask();//遮罩层
+				var url = localStorage.getItem("url")+ "/app/qryRepairEqMsgList.do";
+				mui.ajax(url,{
+				data:{
+					sessionid : sessionId,
+					next : rtype,
+					search : searchinput
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				console.log("repairmentrepair--->>> "+ data);
+				var resultdatalist = JSON.parse(data);
+				if (rtype==1) {
+					showData (resultdatalist);
+				} else{
+					if (resultdatalist.length <=0) {
+						count = rtype;
+						mui.toast("没有更多数据");
+					}else{
+						showDataUp (resultdatalist);
+					}
+					
+				}
+				
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+			}
+				//获取键盘搜索按钮事件
+		/*   document.getElementById("searchcontent").addEventListener("keypress",function(event) {
+
+		    if(event.keyCode == "13") {
+		        document.activeElement.blur();//收起虚拟键盘
+		        count = 1;
+		        requestDownMoreDate(count);//TODO 完成搜索事件
+		
+		    }
+		
+		});*/
+		function openLoginPage() {
+					mui.openWindow({
+							url : "login.html",
+							id : "login.html",
+							extras : {
+								closepage : "10011",
+								openSource : "",
+								tag : "repairmentserach"
+							}
+						});
+						
+			}
+		//添加newId自定义事件监听
+			window.addEventListener('refreshrepair',function(event){
+			 	addData();
+			});
+		</script>
+	</body>
+
+</html>

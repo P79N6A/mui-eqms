@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>主页面</title>
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../bootstrap/fonts/font-awesome.css"/>
+		<link rel="stylesheet" href="../../plugins/layui/css/layui.css" />
+		<link rel="stylesheet" href="../../css/base.css"/>
+		<link rel="stylesheet" href="../../plugins/owlcarousel/owl.carousel.css"/>
+		<link rel="stylesheet" href="../../plugins/owlcarousel/owl.theme.css" />
+		<link rel="stylesheet" href="../../plugins/ScrollBar/style.min.css"/>
+		
+	</head>
+	<body class="bg">
+		
+		<div class="container-fluid contain-box">
+			<div class="row">
+				<div class="owl-carousel">
+					<div class="article">
+						<img src="../../images/02.png" alt=""/>
+					</div>
+					<div class="article">
+						<img src="../../images/01.png" alt=""/>
+					</div>
+					<div class="article">
+						<img src="../../images/03.png" alt=""/>
+					</div>
+				</div>
+				
+				<div class="menu clearfix">
+					<a id="openhospital">
+					<!--<a id="openhospital" onclick="openHospital()" >-->
+						<dl>
+							<dt><img src="../../images/repair1.png" /></dt>
+							<dd>设备报修</dd>
+						</dl>
+					</a>
+					<a id="openpayment">
+					<!--<a id="openpayment" onclick="equipmentInventory()">-->
+						<dl>
+							<dt><img src="../../images/Inventory.png" /></dt>
+							<dd>设备盘点</dd>
+						</dl>
+					</a>
+					
+					<a id="openDiseas">
+					<!--<a id="openDiseas" onclick="openDiseas()">-->
+						<dl>
+							<dt><img src="../../images/broser.png" /></dt>
+							<dd>设备浏览</dd>
+						</dl>
+					</a>
+				
+				</div>
+				<div class="infor-box">
+					<div class="CodeScanner-box">
+						<img id="qrcode1" src="../../images/sm02.png"  alt="扫码图片" onclick="qrcode()"/>
+					</div>
+				</div>
+				<div class="infor-box" hidden="hidden">
+					<div class="infor-header">
+						<h4>消息</h4>
+					</div>
+					<ul id="healthNews" class="infor-list">
+						<!--<li onclick="openHealthNews()" class="item-box">
+							<a class="clearfix">
+								<div class="item-box-pic left">
+									<img src="../../images/healthitempng/103101.png" />
+								</div>
+								<div class="item-box-info left">
+									<h5>肺炎球菌，你不可不知的真相！</h5>
+									提到肺炎球菌，大家的第一反应一定会想到肺炎。的确，肺炎球菌是肺炎的元凶，但这并不意味着肺炎球菌仅仅能引起肺炎，也不能说明没有患上肺炎的人体内没有这种细菌存在。它的身上究竟有多少秘密？今天，我们就带大家全面了解肺炎球菌的真面目。
+								</div>
+							</a>
+						</li>
+						<li onclick="openHealthNews()" class="item-box">
+							<a class="clearfix">
+								<div class="item-box-pic left">
+									<img src="../../images/healthitempng/103102.jpg"/>
+								</div>
+								<div class="item-box-info left">
+									<h5>口臭？站立时头晕？小症状预示心脏病</h5>
+									大家都知道，血压、血脂、血糖、体重等能预测心血管病的风险。但其实，一些小的症状也与心脏健康息息相关。近期，美国《预防》杂志网站近日总结了可用来预测心脏病发作风险的3个信号。
+								</div>
+							</a>
+						</li>-->
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../js/jquery-2.2.3.min.js"></script>
+	<script type="text/javascript" src="../../js/mui.min.js" ></script>
+	<script type="text/javascript" src="../../js/common.js" ></script>
+	<!--滚动条隐藏-->
+	<script src="../../plugins/ScrollBar/mousewheel.min.js"></script>
+	<script src="../../plugins/ScrollBar/scrollbar.min.js"></script>
+	<script type="text/javascript">
+		var H = $(window).height();
+		$(".contain-box").css("height",H);
+		$('.contain-box').perfectScrollbar();
+	</script>
+	<script src="../../plugins/owlcarousel/owl.carousel.js"></script>
+	<script type="text/javascript">
+		$('.owl-carousel').owlCarousel({
+			loop:true,
+			margin:0,
+			/*merge:true,*/
+			/*nav:true,*/
+			responsive:{
+				0:{
+					items:1
+				},
+				678:{
+					items:1
+				},
+				1000:{
+					items:1
+				}
+			}
+		});
+	</script>
+	<script src="../../plugins/layui/layui.js"></script>
+	<script type="text/javascript">
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+	</script>
+	<script type="text/javascript">
+//		<!-- 绑定三个主菜单事件 -->
+					document.getElementById("openhospital").addEventListener('touchend',function () {
+						//设备盘点
+            openHospital ();
+					});
+					document.getElementById("openpayment").addEventListener('touchend',function () {
+						//设备盘点
+						equipmentInventory ();
+					});
+					document.getElementById("openDiseas").addEventListener('touchend',function () {
+						//设备盘点
+            openDiseas ();
+					});
+
+
+		var page = '';
+//localStorage.setItem("url","http://10.131.103.128:8080/hemsApp");
+localStorage.setItem("url","http://172.30.3.198:8080/hemsApp");//http://36.110.189.171:81/hemsApp
+localStorage.setItem("updateVersion","http://36.110.189.171:81/hemsApp");
+//版本更新
+		if(window.plus){
+				
+					}else{// 兼容老版本的plusready事件
+				document.addEventListener('plusready',function () {	
+					//var url = "http://36.110.189.171:81/hpms/frame/login/loginService.do";
+					//localStorage.setItem("url","http://10.131.103.128:8080/hemsApp");
+//					localStorage.setItem("url","http://36.110.189.171:81/hemsApp");//http://36.110.189.171:81/hemsApp
+					updateVersion();
+					//获取字典表
+					getEnquirmentType("REPAIR_TYPE");
+					getEnquirmentType("LEVELS");
+					getEnquirmentType("REPAIR_SOURCE");
+					getEnquirmentType("REPAIR_METHOD");
+					getEnquirmentType("DD_EQCHECK_TYPE");
+					getEnquirmentType("DD_QUESTION_TYPE");
+					getEnquirmentTypeR ();
+					requestCunfangDate ();
+					requestKeShiDate();
+//					var openpayment = document.getElementById("openpayment");
+//					openpayment.addEventListener('click',function () {
+//						//设备盘点
+//						equipmentInventory ();
+//					});
+				});
+		}
+				document.addEventListener('refreshindex',function(){  
+  					getEnquirmentType("REPAIR_TYPE");
+					getEnquirmentType("LEVELS");
+					getEnquirmentType("REPAIR_SOURCE");
+					getEnquirmentType("REPAIR_METHOD");
+					getEnquirmentType("DD_EQCHECK_TYPE");
+					getEnquirmentType("DD_QUESTION_TYPE");
+					getEnquirmentTypeR ();
+					requestCunfangDate ();
+					requestKeShiDate();
+				});
+		
+		function openHospital () {
+			equipmentRepair ();
+			//mui.toast("正在开发中……")
+				/*mui.openWindow({
+					url : "../hospitalinfo/hospital.html",
+					id : "../hospitalinfo/hospital.html" ,
+					createNew : true
+				})*/
+			}
+		//设备浏览
+		function openDiseas () {			
+			equipmentList ();
+				
+			}
+		function openHealthNews () {
+			//mui.toast("正在开发中……")
+			/*mui.openWindow({
+				url : "newslistheader.html",
+				id : "newslistheader.html"
+			});*/
+		}
+		function qrcode () {
+			//console.log("checkLogin()------>>>>>> "+checkLogin());
+			if (checkLogin()) {
+				mui.openWindow({
+					url : "barcode_scan.html",
+					id : "barcode_scan.html",
+					extras : {}
+				});
+			} else{
+				mui.openWindow({
+							url : "login.html",
+							id : "login.html",
+							extras : {
+								
+							}
+						});
+			}
+			
+		}
+		// 创建Webview窗口监听侧滑返回事件
+		/*function createWebview(){
+			// 打开新窗口
+			nw=plus.webview.create('http://m.weibo.cn/u/3196963860/', '', {top:'100px',bottom:'0px'});
+			nw.addEventListener('titleUpdate', function(e){
+				console.log('Update title: '+e.title);
+			}, false);
+			plus.webview.currentWebview().append(nw);
+		}*/
+		var qr;
+		function scaned(t, r, f){
+					qr = r;
+					mui.openWindow({
+					url : "scaned.html",
+					id : "scaned",
+					styles:{
+		      			 titleNView: { // 窗口的标题栏控件
+		      			 //homeButton:true,
+		      			  autoBackButton:true,
+					      titleText:"设备信息",              // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+					      titleColor:"#ffffff",             // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+					      titleSize:"17px",                 // 字体大小,默认17px
+					      backgroundColor:"#6D97FF",// 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					      buttons:[{text:'报修',fontSize:'17px',onclick:equipmentMaintenance}],
+					      progress:{                        // 标题栏控件的进度条样式
+					        color:"#999999",                // 进度条颜色,默认值为"#00FF00"  
+					        height:"2px"                    // 进度条高度,默认值为"2px"         
+					      },
+					      splitLine:{                       // 标题栏控件的底部分割线，类似borderBottom
+					        color:"#CCCCCC",                // 分割线颜色,默认值为"#CCCCCC"  
+					        height:"0px"                    // 分割线高度,默认值为"2px"
+					      }
+					    }
+					  
+		      	},
+					extras : {
+						result0:r
+					}
+				});
+			}
+		// 点击自定义按钮回调函数
+		function clickButton(){
+			//var btnArray = [{title:"报修"},{title:"盘点"}];
+			var btnArray = [{title:"报修"}];
+			plus.nativeUI.actionSheet( {
+				//title:"操作",
+				cancel:"取消",
+				buttons:btnArray
+			}, function(e){
+				var index = e.index;
+				switch (index){
+					case 0:
+						//mui.toast(index);
+						break;
+					case 1:
+						equipmentMaintenance();//设备维修				
+						break;
+					case 2:
+						equipmentInventorySSS();//设备盘点	
+						break;
+				}
+				
+			} );
+		}
+		// 点击自定义按钮回调函数
+		function repairclickButton(){
+			var btnArray = [{title:"扫一扫"},{title:"手动报修"}];
+			plus.nativeUI.actionSheet( {
+				//title:"操作",
+				cancel:"取消",
+				buttons:btnArray
+			}, function(e){
+				var index = e.index;
+				switch (index){
+					case 0:
+						mui.toast(index);
+						break;
+					case 1:
+					if (checkLogin()) {
+						mui.openWindow({
+							url : "barcode_scan.html",
+							id : "barcode_scan.html",
+							extras : {}
+						});
+					} else{
+						mui.openWindow({
+									url : "login.html",
+									id : "login.html",
+									extras : {
+										
+									}
+								});
+					}
+						//equipmentMaintenance();	//设备维修				
+						break;
+					case 2:
+					mui.openWindow({
+					url : "enquirmentmaintentance.html",
+					id : "enquirmentmaintentance.html",
+					styles:{
+		      			 titleNView: { // 窗口的标题栏控件
+		      			 //homeButton:true,
+		      			  autoBackButton:true,
+					      titleText:"设备列表",              // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+					      titleColor:"#ffffff",             // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+					      titleSize:"17px",                 // 字体大小,默认17px
+					      backgroundColor:"#6D97FF", 		// 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					     
+					      progress:{                        // 标题栏控件的进度条样式
+					        color:"#999999",                // 进度条颜色,默认值为"#00FF00"  
+					        height:"2px"                    // 进度条高度,默认值为"2px"         
+					      },
+					      splitLine:{                       // 标题栏控件的底部分割线，类似borderBottom
+					        color:"#CCCCCC",                // 分割线颜色,默认值为"#CCCCCC"  
+					        height:"0px"                    // 分割线高度,默认值为"2px"
+					      }
+					    }
+					  
+		      	},
+					extras : {
+						resulteqtype : eqtype,//var eqtype,eqlevels,eqrepairsource,eqpepairmethod;
+						resulteqlevels : eqlevels,
+						resulteqsource : eqrepairsource,
+						resulteqmethod : eqpepairmethod,
+						eqkeshizidian : keshizidian,
+						equestype000 : equestype
+					}
+				});
+						break;
+				}
+				
+			} );
+			
+			
+			//alert("click");
+			/*var btnArray = [{title:"报修"},{title:"盘点"}];
+			plus.nativeUI.actionSheet( {
+				//title:"操作",
+				cancel:"取消",
+				buttons:btnArray
+			}, function(e){
+				var index = e.index;
+				switch (index){
+					case 0:
+						mui.toast(index);
+						break;
+					case 1:
+						equipmentMaintenance();	//设备维修				
+						break;
+					case 2:
+					mui.toast(index);
+						break;
+				}
+				
+			} );*/
+		}
+		function inventoryclickButton(){
+			var btnArray = [{title:"盘点"}];
+			plus.nativeUI.actionSheet( {
+				//title:"操作",
+				cancel:"取消",
+				buttons:btnArray
+			}, function(e){
+				var index = e.index;
+				switch (index){
+					case 0:
+						mui.toast(index);
+						break;
+					case 1:
+					/*if (checkLogin()) {
+						mui.openWindow({
+							url : "barcode_scan.html",
+							id : "barcode_scan.html",
+							extras : {}
+						});
+					} else{
+						mui.openWindow({
+									url : "login.html",
+									id : "login.html",
+									extras : {
+										
+									}
+								});
+					}*/
+						equipmentInventorySSS();//设备盘点				
+						break;
+					case 2:
+						
+						break;
+				}
+				
+			} );
+		}
+		//添加newId自定义事件监听
+		window.addEventListener('qrcode',function(event){
+		　　//获得事件参数
+			var r = event.detail.qrcode;
+			
+		　	 
+		});
+		function equipmentInventorySSS () {
+			mui.openWindow({
+					url : "inventorykeshilist.html",
+					id :  "inventorykeshilist.html",
+					styles:{
+		      			 titleNView: { // 窗口的标题栏控件
+		      			 //homeButton:true,
+		      			  autoBackButton:true,
+					      titleText:"设备盘点",              // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+					      titleColor:"#ffffff",             // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+					      titleSize:"17px",                 // 字体大小,默认17px
+					      backgroundColor:"#6D97FF", 		// 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					     
+					      progress:{                        // 标题栏控件的进度条样式
+					        color:"#999999",                // 进度条颜色,默认值为"#00FF00"  
+					        height:"2px"                    // 进度条高度,默认值为"2px"         
+					      },
+					      splitLine:{                       // 标题栏控件的底部分割线，类似borderBottom
+					        color:"#CCCCCC",                // 分割线颜色,默认值为"#CCCCCC"  
+					        height:"0px"                    // 分割线高度,默认值为"2px"
+					      } 
+					    }
+					  
+		      	},
+					extras : {
+						/*result1 : qr,
+						resulteqtype : eqtype,//var eqtype,eqlevels,eqrepairsource,eqpepairmethod;
+						resulteqlevels : eqlevels,
+						resulteqsource : eqrepairsource,
+						resulteqmethod : eqmethod,
+						eqkeshizidian : eqkeshizidian,
+						eqinventorySSS : eqinventorysss,
+						eqcufangzidian :eqcufangzidian,
+						equestype000 : equestype*/
+						result1 : qr,
+						resulteqtype : eqtype,//var eqtype,eqlevels,eqrepairsource,eqpepairmethod;
+						resulteqlevels : eqlevels,
+						resulteqsource : eqrepairsource,
+						resulteqmethod : eqpepairmethod,
+						eqkeshizidian : keshizidian,
+						eqinventorySSS : eqinventory,
+						eqcufangzidian :cufangzidian,
+						equestype000 : equestype
+						 
+						
+						
+						
+					}
+				});
+		}
+		/*function equipmentInventorySSS () {
+			if (checkLogin()) {
+			mui.openWindow({
+					url : "enquirmentInventory.html",
+					id : "enquirmentInventory.html",
+					styles:{
+		      			 titleNView: { // 窗口的标题栏控件
+		      			 //homeButton:true,
+		      			  autoBackButton:true,
+					      titleText:"设备盘点",              // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+					      titleColor:"#ffffff",             // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+					      titleSize:"17px",                 // 字体大小,默认17px
+					      backgroundColor:"#6D97FF", 		// 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					     
+					      progress:{                        // 标题栏控件的进度条样式
+					        color:"#999999",                // 进度条颜色,默认值为"#00FF00"  
+					        height:"2px"                    // 进度条高度,默认值为"2px"         
+					      },
+					      splitLine:{                       // 标题栏控件的底部分割线，类似borderBottom
+					        color:"#CCCCCC",                // 分割线颜色,默认值为"#CCCCCC"  
+					        height:"0px"                    // 分割线高度,默认值为"2px"
+					      }
+					    }
+					  
+		      	},
+					extras : {
+						result1 : qr,
+						resulteqtype : eqtype,//var eqtype,eqlevels,eqrepairsource,eqpepairmethod;
+						resulteqlevels : eqlevels,
+						resulteqsource : eqrepairsource,
+						resulteqmethod : eqpepairmethod,
+						eqkeshizidian : keshizidian,
+						eqinventorySSS : eqinventory,
+						eqcufangzidian :cufangzidian,
+						equestype000 : equestype
+						
+						
+					}
+				});
+			}
+		}*/
+		function equipmentMaintenance () {
+			if (checkLogin()) {
+			console.log("openMantence---->>>> "+keshizidian);
+			mui.openWindow({
+					url : "enquirmentmaintentance.html",
+					id : "enquirmentmaintentance.html",
+					styles:{
+		      			 titleNView: { // 窗口的标题栏控件
+		      			 //homeButton:true,
+		      			  autoBackButton:true,
+					      titleText:"设备报修",                // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+					      titleColor:"#ffffff",             // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+					      titleSize:"17px",                 // 字体大小,默认17px
+					      backgroundColor:"#6D97FF", 		// 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					     
+					      progress:{                        // 标题栏控件的进度条样式
+					        color:"#999999",                // 进度条颜色,默认值为"#00FF00"  
+					        height:"2px"                    // 进度条高度,默认值为"2px"         
+					      },
+					      splitLine:{                       // 标题栏控件的底部分割线，类似borderBottom
+					        color:"#CCCCCC",                // 分割线颜色,默认值为"#CCCCCC"  
+					        height:"0px"                    // 分割线高度,默认值为"2px"
+					      }
+					    }
+					  
+		      	},
+					extras : {
+						result1 : qr,
+						resulteqtype : eqtype,//var eqtype,eqlevels,eqrepairsource,eqpepairmethod;
+						resulteqlevels : eqlevels,
+						resulteqsource : eqrepairsource,
+						resulteqmethod : eqpepairmethod,
+						eqkeshizidian : keshizidian,
+						equestype000 : equestype
+					}
+				});
+			}
+		}
+		function equipmentRepair () {
+				if (checkLogin()) {
+				mui.openWindow({
+					url : "repairmentrepair.html",
+					id : "repairmentrepair.html",
+					styles:{
+		      			 titleNView: { // 窗口的标题栏控件
+		      			 //homeButton:true,
+		      			  autoBackButton:true,
+					      titleText:"报修记录",                // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+					      titleColor:"#ffffff",             // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+					      titleSize:"17px",                 // 字体大小,默认17px
+					      backgroundColor:"#6D97FF", 		// 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					      buttons:[{text:'报修',float:'right',fontSize:'16px',onclick:repairclickButton}],
+					      progress:{                        // 标题栏控件的进度条样式
+					        color:"#999999",                // 进度条颜色,默认值为"#00FF00"  
+					        height:"2px"                    // 进度条高度,默认值为"2px"         
+					      },
+					      splitLine:{                       // 标题栏控件的底部分割线，类似borderBottom
+					        color:"#CCCCCC",                // 分割线颜色,默认值为"#CCCCCC"  
+					        height:"0px"                    // 分割线高度,默认值为"2px"
+					      }
+					    }
+					  
+		      	},
+					extras : {
+						resulteqtype : eqtype,//var eqtype,eqlevels,eqrepairsource,eqpepairmethod;
+						resulteqlevels : eqlevels,
+						resulteqsource : eqrepairsource,
+						resulteqmethod : eqpepairmethod,
+						eqkeshizidian : keshizidian,
+						equestype000 : equestype
+						
+					}
+				});
+				}
+		}
+		//设备盘点
+		function equipmentInventory () {
+			//mui.toast("正在开发中……");
+			if (checkLogin()) {
+				mui.openWindow({
+					url : "inventorymentmain.html",
+					id : "inventorymentmain.html",
+					styles:{
+		      			 titleNView: { // 窗口的标题栏控件
+		      			 //homeButton:true,
+		      			  autoBackButton:true,
+					      titleText:"盘点记录",                // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+					      titleColor:"#ffffff",             // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+					      titleSize:"17px",                 // 字体大小,默认17px
+					      backgroundColor:"#6D97FF",
+                   paddingRight:'10px',// 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					      buttons:[{text:'盘点  ',float:'right',fontSize:'17px',onclick:equipmentInventorySSS}],
+//					      buttons:[{text:'+',float:'right',fontSize:'22px',onclick:inventoryclickButton}],
+					      progress:{                        // 标题栏控件的进度条样式
+					        color:"#999999",                // 进度条颜色,默认值为"#00FF00"  
+					        height:"2px"                    // 进度条高度,默认值为"2px"         
+					      },
+					      splitLine:{                       // 标题栏控件的底部分割线，类似borderBottom
+					        color:"#CCCCCC",                // 分割线颜色,默认值为"#CCCCCC"  
+					        height:"0px"                    // 分割线高度,默认值为"2px"
+					      }
+					    }
+					  
+		      	},
+					extras : {
+						
+					}
+				});
+			}
+		}
+		function equipmentList () {
+			if (checkLogin()) {
+				mui.openWindow({
+					url : "repairmentsearchlist.html",
+					id : "repairmentsearchlist.html",
+					styles:{
+		      			 titleNView: { // 窗口的标题栏控件
+		      			 //homeButton:true,
+		      			  autoBackButton:true,
+					      titleText:"设备浏览",                // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+					      titleColor:"#ffffff",             // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+					      titleSize:"17px",                 // 字体大小,默认17px
+					      backgroundColor:"#6D97FF", 		// 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					      //buttons:[{text:'+',float:'right',fontSize:'22px',onclick:repairclickButton}],
+					      progress:{                        // 标题栏控件的进度条样式
+					        color:"#999999",                // 进度条颜色,默认值为"#00FF00"  
+					        height:"2px"                    // 进度条高度,默认值为"2px"         
+					      },
+					      splitLine:{                       // 标题栏控件的底部分割线，类似borderBottom
+					        color:"#CCCCCC",                // 分割线颜色,默认值为"#CCCCCC"  
+					        height:"0px"                    // 分割线高度,默认值为"2px"
+					      }
+					    }
+					  
+		      	},
+					extras : {
+						result1 : qr,
+						resulteqtype : eqtype,//var eqtype,eqlevels,eqrepairsource,eqpepairmethod;
+						resulteqlevels : eqlevels,
+						resulteqsource : eqrepairsource,
+						resulteqmethod : eqpepairmethod,
+						eqinventorySSS : eqinventory,
+						eqkeshizidian : keshizidian,
+						eqcufangzidian :cufangzidian,
+						equestype000 : equestype
+						
+					}
+				});
+			}
+		}
+		function checkLogin() {
+			var loginstatusinfo = localStorage.getItem("loginuserinfo");
+				if (loginstatusinfo==""||loginstatusinfo==undefined||loginstatusinfo==null||loginstatusinfo=="undefined"||loginstatusinfo=="88888888") {
+					mui.openWindow({
+							url : "login.html",
+							id : "login.html",
+							extras : {
+								closepage : "10011",
+								openSource : ""
+							}
+						});
+						return false;
+				}else{
+					return true;
+				}
+					
+		}
+		function getHealthNewsList () {
+				var nowtime = getNowFormatDate(); 
+				var mask = mui.createMask();//遮罩层//
+				var url = localStorage.getItem("url")+ "/noticeActionApp/getNoticeListApp.do";
+				console.log("getHealthNewsList---->>>> "+url);
+				mui.ajax(url,{
+				data:{
+					startTime:nowtime
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				console.log("getHealthNewsListIndex---->>>>>"+data);
+				var list = JSON.parse(data).result;
+				
+				showNewsList (list);
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						//plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+			}
+		function showNewsList (list) { 
+		
+			var url = localStorage.getItem('url');
+    		var newListItem = [];
+			for (var newsitemi = 0;newsitemi<2;newsitemi++) {
+				var pictureUrl = '';
+				if (list[newsitemi].pictureInfo) {
+				pictureUrl = url+list[newsitemi].pictureInfo[0].pictureUrl+'/'+list[newsitemi].pictureInfo[0].pictureName;
+				console.log("pictureUrl---->>>> "+pictureUrl);
+				}else{
+				pictureUrl = "../../images/01.png";
+				}
+			newListItem.push('<li onclick="openHealthNews()" class="item-box">');
+		 	newListItem.push('<a class="clearfix">');
+		 	newListItem.push('<div class="item-box-pic left">');
+		 	newListItem.push('<img src="'+pictureUrl+'" />');
+		 	newListItem.push('</div>');
+		 	newListItem.push('<div class="item-box-info left">');
+		 	newListItem.push(list[newsitemi].noticeTitle);
+		 	newListItem.push('</div></a></li>');
+		 
+		 	}
+		 	document.getElementById('healthNews').innerHTML = newListItem.join('');
+		 	
+		
+		}
+		function getNowFormatDate() {
+		    var date = new Date();
+		    var seperator1 = "-";
+		    var seperator2 = ":";
+		    var month = date.getMonth() + 1;
+		    var strDate = date.getDate();
+		    if (month >= 1 && month <= 9) {
+		        month = "0" + month;
+		    }
+		    if (strDate >= 0 && strDate <= 9) {
+		        strDate = "0" + strDate;
+		    }
+		    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+		            + " " + date.getHours() + seperator2 + date.getMinutes()
+		            + seperator2 + date.getSeconds();
+		    return currentdate;
+		}
+		function updateVersion () {
+			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+            var ver = inf.version;
+            //var url=localStorage.getItem("updateVersion")+"/app/qryAppVersion.do";//url
+            var url=localStorage.getItem("url")+"/app/qryAppVersion.do";
+            var client;
+            var ua = navigator.userAgent.toLowerCase();
+            if(/iphone|ipad|ipod/.test(ua)) {    //苹果手机            
+                $.ajax({
+                    type:"get",
+                    dataType:'json',
+                    url:"https://itunes.apple.com/lookup?id=111030274",//获取当前上架APPStore版本信息
+                    data:{            
+                        id:111030274 //APP唯一标识ID
+                    },
+                    contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+                    success:function(data){
+                        console.log("jsjsjsjs"+json2string(data));
+                        $.each(data, function(i,norms) {
+                            $.each(norms, function(key,value) {
+                                $.each(value, function(j, normItem) {
+                                    if(j=="version"){
+                                        if(normItem>ver){                        
+                                             alert("发现新版本:V"+normItem);
+                                               document.location.href='https://itunes.apple.com/cn/app/san-gu-hui/id111030274?mt=8'; //上新APPStore下载地址
+                                        }
+                                    }                            
+                                });                
+                            });
+                        });        
+                        return ;
+                    }
+                });    
+            }else if(/android/.test(ua)) { 
+            	
+                mui.ajax(url,{
+                data:{
+                    apkVersion: ver,
+                },
+                dataType:'json',
+                type:'POST',
+                timeout:10000,
+                success:function(data){  
+                    if(data.APP_VERSION!=ver){  
+                    	
+                        mui.toast("发现新版本:"+data.APP_VERSION);//获取远程数据库中上新andriod版本号                       
+                        var dtask = plus.downloader.createDownload("http://"+data.DOWNLOAD_URL, {}, function(d, status) {
+                            if (status == 200) {                                        
+                                plus.nativeUI.toast("正在准备环境，请稍后！");
+                                sleep(1000);
+                                var path = d.filename;//下载apk
+                                plus.runtime.install(path); // 自动安装apk文件
+                            }else {
+                                alert('版本更新失败:' + status);
+                            }
+                        });
+                        dtask.start(); 
+                    }else{
+            			console.log('当前版本号已是最新');
+                        return;
+                    }
+                },
+                error: function(xhr, type, errerThrown) {
+                    mui.toast('检查更新，网络异常,请稍候再试');
+                }
+            });
+        }
+    });
+    
+		}
+		//休眠方法
+		var ver;
+		function sleep(numberMillis) {
+		    var now = new Date();
+		    var exitTime = now.getTime() + numberMillis;
+		    while (true) {
+		        now = new Date();
+		        if (now.getTime() > exitTime)
+		            return;
+		    }
+		}
+	</script>
+	<script>
+		var eqtype,eqlevels,eqrepairsource,eqpepairmethod,eqinventory;
+		//设备报修信息字典表数据获取
+		function getEnquirmentType (typetype) {
+				//http://10.131.103.128:8080/hemsApp/frame/dd/qrydd.do?code=REPAIR_TYPE
+				var mask = mui.createMask();//遮罩层//http://10.131.103.128:8080/HEMS/app/qryRepairEqMsg.do?id=c86f1d75-c625-496b-a43d-90db536ced5b
+				var url = localStorage.getItem("url")+ "/frame/dd/qrydd.do";
+				console.log("getEnquirmentInfo---->>>> "+url);
+				mui.ajax(url,{
+				data:{
+					code:typetype
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					/* plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层*/				},
+				complete: function() {
+		        //plus.nativeUI.closeWaiting();
+		        //mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){  
+					
+				switch (typetype){
+					case "REPAIR_TYPE":
+						eqtype = JSON.stringify(JSON.parse(data).data);
+						console.log("REPAIR_TYPE---->>>>> "+data);
+						break;
+					case "LEVELS":
+						eqlevels = JSON.stringify(JSON.parse(data).data);
+						console.log("REPAIR_TYPE---->>>>> "+data);
+						break;
+					case "REPAIR_SOURCE":
+						console.log("REPAIR_SOURCE---->>>>> "+data);
+						eqrepairsource = JSON.stringify(JSON.parse(data).data);
+						break;
+					case "REPAIR_METHOD":
+						console.log("REPAIR_METHOD---->>>>> "+data);
+						eqpepairmethod = JSON.stringify(JSON.parse(data).data);
+						break;
+					case "DD_EQCHECK_TYPE1":
+						eqinventory = JSON.stringify(JSON.parse(data).data);
+						console.log("DD_EQCHECK_TYPE---->>>>> "+data);
+						break;	
+					case "DD_QUESTION_TYPE":
+						equestype = JSON.stringify(JSON.parse(data).data);
+						console.log("dd_eqhec---->>>> "+data);
+						break;
+					default:
+						break;
+				}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						//plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+		}
+		//
+		function getEnquirmentTypeR () {
+				//http://10.131.103.128:8080/hemsApp/frame/dd/qrydd.do?code=REPAIR_TYPE
+				var mask = mui.createMask();//遮罩层//http://10.131.103.128:8080/HEMS/app/qryRepairEqMsg.do?id=c86f1d75-c625-496b-a43d-90db536ced5b
+				var url = localStorage.getItem("url")+ "/app/qryEqCheckType.do";
+				console.log("getEnquirmentInfo---->>>> "+url);
+				mui.ajax(url,{
+				data:{
+					
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					/* plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层*/				},
+				complete: function() {
+		        //plus.nativeUI.closeWaiting();
+		        //mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){  
+					eqinventory = JSON.stringify(JSON.parse(data).data);
+					
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						//plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+		}
+	</script>
+	<script>
+		var eqtype,eqlevels,eqrepairsource,eqpepairmethod,eqinventory,equestype;
+		//设备报修信息字典表数据获取
+		function getKSInfo () {
+				var mask = mui.createMask();//遮罩层
+				var url = localStorage.getItem("url")+ "/app/qryKsSbPpXh.do";
+				console.log("getKSInfo---->>>> "+url);
+				mui.ajax(url,{
+				data:{
+					
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					/* plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层*/	
+				},
+				complete: function() {
+		        //plus.nativeUI.closeWaiting();
+		        //mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){  
+					console.log("getEnquirmentInfo---->>>>> "+data);
+				switch (typetype){
+					case "REPAIR_TYPE":
+						eqtype = JSON.stringify(JSON.parse(data).data);
+						break;
+					case "LEVELS":
+						eqlevels = JSON.stringify(JSON.parse(data).data);
+						break;
+					case "REPAIR_SOURCE":
+						eqrepairsource = JSON.stringify(JSON.parse(data).data);
+						break;
+					case "REPAIR_METHOD":
+						eqpepairmethod = JSON.stringify(JSON.parse(data).data);
+						break;
+					case "DD_EQCHECK_TYPE":
+						equestype = JSON.stringify(JSON.parse(data).data);
+						console.log("dd_eqhec---->>>> "+data);
+						break;
+					default:
+						break;
+				}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						//plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+		}
+	</script>
+	<script>
+		var keshizidian;
+		function requestKeShiDate () {
+				var jgid = JSON.parse(localStorage.getItem("loginuserinfo")).user_info.id_jg; 
+				var mask = mui.createMask();//遮罩层http://10.131.103.128:8080/hemsApp/app/qryKs.do
+				var url = localStorage.getItem("url")+ "/app/qryKs.do";
+				mui.ajax(url,{
+				data:{
+					value : jgid
+					
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒
+				beforeSend:function(){
+					// plus.nativeUI.showWaiting("加载中", {});
+					// mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+				keshizidian = data;
+				console.log("requestKeShiDate--->>> "+ keshizidian);
+					
+				
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						//plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+			}
+	</script>
+	<script>
+		//http://10.131.103.128:8080/hemsApp/frame/dd/qrydd.do?code=RDOBELONG
+		var cufangzidian;
+		function requestCunfangDate () {
+				var jgid = JSON.parse(localStorage.getItem("loginuserinfo")).user_info.id_jg; 
+				var mask = mui.createMask();//遮罩层http://10.131.103.128:8080/hemsApp/app/qryKs.do
+				var url = localStorage.getItem("url")+ "/frame/dd/qrydd.do";
+				mui.ajax(url,{
+				data:{
+					code : "RDOBELONG"
+					
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒
+				beforeSend:function(){
+					// plus.nativeUI.showWaiting("加载中", {});
+					// mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+				cufangzidian = JSON.parse(data).data;
+				console.log("requestKeShiDate--->>> "+ keshizidian);
+					
+				
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						//plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+			}
+	</script>
+</html>

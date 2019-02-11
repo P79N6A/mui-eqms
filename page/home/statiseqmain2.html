@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../../css/mui.css">
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.mui-bar~.mui-content .mui-fullscreen {
+				top: 44px;
+				height: auto;
+			}
+			
+			.mui-pull-top-tips {
+				position: absolute;
+				top: -20px;
+				left: 50%;
+				margin-left: -25px;
+				width: 40px;
+				height: 40px;
+				border-radius: 100%;
+				z-index: 1;
+			}
+			
+			.mui-bar~.mui-pull-top-tips {
+				top: 24px;
+			}
+			
+			.mui-pull-top-wrapper {
+				width: 42px;
+				height: 42px;
+				display: block;
+				text-align: center;
+				background-color: #ffffff;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+				box-shadow: 0 4px 10px #bbb;
+				overflow: hidden;
+			}
+			
+			.mui-pull-top-tips.mui-transitioning {
+				-webkit-transition-duration: 200ms;
+				transition-duration: 200ms;
+			}
+			
+			.mui-pull-top-tips .mui-pull-loading {
+				/*-webkit-backface-visibility: hidden;
+				-webkit-transition-duration: 400ms;
+				transition-duration: 400ms;*/
+				margin: 0;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon,
+			.mui-pull-top-wrapper .mui-spinner {
+				margin-top: 7px;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon.mui-reverse {
+				/*-webkit-transform: rotate(180deg) translateZ(0);*/
+			}
+			
+			.mui-pull-bottom-tips {
+				text-align: center;
+				background-color: #efeff4;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+			}
+			
+			.mui-pull-top-canvas {
+				overflow: hidden;
+				background-color: #fafafa;
+				border-radius: 40px;
+				box-shadow: 0 4px 10px #bbb;
+				width: 40px;
+				height: 40px;
+				margin: 0 auto;
+			}
+			
+			.mui-pull-top-canvas canvas {
+				width: 40px;
+			}
+			
+			.mui-slider-indicator.mui-segmented-control {
+				background-color: #ffffff;
+			}
+			.mui-segmented-control.mui-scroll-wrapper .mui-control-item{
+			    display: inline-block;
+			    width: auto;
+			    padding: 0 26px;
+			    border: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		
+		<div class="mui-content">
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl"  class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll">
+						<a class="mui-control-item mui-active" href="#item1mobile" data-wid="eqdetail12.html">
+							维修相关
+						</a>
+						<a class="mui-control-item" href="#item2mobile" data-wid="eqdetail2.html">
+							巡检相关
+						</a>
+						<a class="mui-control-item" href="#item3mobile" data-wid="eqdetail3.html">
+							保养相关
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/webview2Group.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			mui.init();
+			/*
+			 *  http://10.131.103.128:8080/hemsApp/appPage/statis/inspectionStatis.jsp 巡检
+				http://10.131.103.128:8080/hemsApp/appPage/statis/maintainStatis.jsp 保养
+				http://10.131.103.128:8080/hemsApp/appPage/statis/repairStatis.jsp 维修
+			*/
+			mui.plusReady(function() {
+				var _self = plus.webview.currentWebview();
+				//var r = _self.repairdetailr;
+				var urlstatus1 = localStorage.getItem("url")+'/appPage/statis/inspectionStatis.jsp';
+				var urlstatus2 = localStorage.getItem("url")+'/appPage/statis/maintainStatis.jsp';
+				var urlstatus3 = localStorage.getItem("url")+'/appPage/statis/repairStatis.jsp';
+				var group = new webviewGroup(_self.id, {
+					items: [{
+						id: "eqdetail12.html",
+						url : urlstatus1,
+						//url: "eqdetail12.html",
+						extras: {
+							repairdetailr : urlstatus1
+						}
+					}, {
+						id: "eqdetail2.html",
+						//url: "eqdetail2.html",
+						url : urlstatus2,
+						extras: {
+							repairdetailr : urlstatus2
+						}
+					}, {
+						id: "eqdetail3.html",
+						//url: "eqdetail3.html",
+						url : urlstatus3,
+						extras: {
+							repairdetailr : urlstatus3
+						}
+					}],
+					onChange: function(obj) {
+						var c = document.querySelector(".mui-control-item.mui-active");
+						if(c) {
+							c.classList.remove("mui-active");
+						}
+						var target = document.querySelector(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")");
+						target.classList.add("mui-active");
+						if(target.scrollIntoView) {
+							target.scrollIntoView();
+						}
+					}
+				});
+				mui(".mui-scroll").on("tap", ".mui-control-item", function(e) {
+					var wid = this.getAttribute("data-wid");
+					group.switchTab(wid);
+				});
+
+			});
+			mui.back = function() {
+				var _self = plus.webview.currentWebview();
+				//_self.close("auto");
+			}
+		</script>
+	</body>
+
+</html>

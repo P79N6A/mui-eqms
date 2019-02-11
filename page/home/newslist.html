@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<title>健康咨询</title>
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../bootstrap/fonts/font-awesome.css"/>
+		<link rel="stylesheet" href="../../css/base.css"/>
+		<link rel="stylesheet" href="../../css/mui.css">
+	
+	</head>
+	<body class="bg">
+			<div id="departmentlist" class="infor-box  contain-box">
+				<ul id="healthNewslist" class="infor-list">
+					<!--<img data-lazyload="../../images/01.png" alt=""/>-->
+						<!--<li onclick="openHealthNewsInfo()" class="item-box">
+							<a class="clearfix">
+								<div class="item-box-pic left">
+									<img src="../../images/01.png" alt=""/>
+								</div>
+								<div class="item-box-info left">
+									关与就诊医疗的最新动态信息关与就诊医疗的最新动态信息关与就诊医疗的最新动态信息
+									医疗的最新动态信息关与就诊医疗的最新动态信息医疗的最新动态信息关与就诊医疗的最新动态信息
+								</div>
+							</a>
+						</li>
+						<li onclick="openHealthNewsInfo()" class="item-box">
+							<a class="clearfix">
+								<div class="item-box-pic left">
+									<img src="../../images/01.png" alt=""/>
+								</div>
+								<div class="item-box-info left">
+									关与就诊医疗的最新动态信息关与就诊医疗的最新动态信息关与就诊医疗的最新动态信息
+									医疗的最新动态信息关与就诊医疗的最新动态信息医疗的最新动态信息关与就诊医疗的最新动态信息
+								</div>
+							</a>
+						</li>-->
+					</ul>
+				
+			</div>
+		
+	</body>
+	<script src="../../js/mui.min.js" ></script>
+	<script type="text/javascript">
+		mui.plusReady(function () {
+			});
+		mui.init({
+		  pullRefresh : {
+		    container:"#departmentlist",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+		    down : {
+		    height:50,//可选,默认50.触发下拉刷新拖动距离,
+		    auto: true,//可选,默认false.首次加载自动下拉刷新一次
+		    contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+		    contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+		    contentrefresh : "正在刷新",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+		    callback :pullfreshDown //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		    },
+		    up : {
+		    height:25,//可选.默认50.触发上拉加载拖动距离
+		    auto:false,//可选,默认false.自动上拉加载一次
+		    contentrefresh : "正在加载",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+		    contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+		    callback :pullfreshUp //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		    }
+		  }
+		});
+		mui.plusReady(function () {
+			//自定义事件
+			window.addEventListener("getDisilnessdata",function (event) {
+				getHealthNewsList();
+			});
+			});
+			//上拉加载更多
+		function pullfreshUp () {
+			setTimeout(function () {	
+			getHealthNewsList(listlasttime);
+			mui('#departmentlist').pullRefresh().endPullupToRefresh(false); //参数为true代表没有更多数据了。
+			},500);
+			
+			
+		}
+		//下拉刷新
+		function pullfreshDown () {
+			var  nowtime = getNowFormatDate();
+			getHealthNewsList(nowtime);
+			setTimeout(function () {
+			mui('#departmentlist').pullRefresh().endPulldownToRefresh(); //refresh completed
+			},500);
+
+		}		
+	</script>
+	<script type="text/javascript">
+			var commithealthlist = new Array(); 
+			var listlasttime = getNowFormatDate();
+			var healthnewinfodata = "";
+			function getHealthNewsList (healthlisttime) {
+				var nowtime1 = getNowFormatDate();
+				var mask = mui.createMask();//遮罩层//
+				var url = localStorage.getItem("url")+ "/noticeActionApp/getNoticeListApp.do";
+				console.log(url);
+				mui.ajax(url,{ 
+				data:{
+					startTime : healthlisttime 
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				healthnewinfodata = data;
+				console.log("getHealthNewsList---->>>>>"+data);
+				var result = JSON.parse(data);
+				var code = result.code;
+				var list = result.result;
+				if (list.length>0) {
+					var lasttimess = getLocalTime(list[list.length-1].createTime);
+					listlasttime = lasttimess;
+					if (code=="0") {
+						if (nowtime1==healthlisttime) {
+							commithealthlist = list
+							showNewsList(commithealthlist);
+						}else{
+							commithealthlist = commithealthlist.concat(list);
+							showNewsList(commithealthlist);
+						}
+						
+					}
+				}else{
+					mui.toast("没有更多数据！");
+				}
+				
+				
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+			}	
+		function showNewsList (list) {		//http://10.131.102.101:8080/dch/upload/picture/15099314770111352f46f.jpg
+			var url = localStorage.getItem("url");
+    		var newListItem = [];
+			for (var newsitemi = 0;newsitemi<list.length;newsitemi++) {
+				var pictureUrl = '';
+				if (list[newsitemi].pictureInfo) {
+				pictureUrl = url+list[newsitemi].pictureInfo[0].pictureUrl+'/'+list[newsitemi].pictureInfo[0].pictureName;
+				}else{
+				pictureUrl = "../../images/01.png";
+				}
+			newListItem.push('<ul class="infor-list"><li onclick="openHealthNewsInfo(\''+list[newsitemi].id+'\')" class="item-box"><a class="clearfix">');
+		 	newListItem.push('<div class="item-box-pic left"><img src="'+pictureUrl+'" /></div>');
+		 	
+		 	newListItem.push('<div class="item-box-info left">');
+		 	newListItem.push(list[newsitemi].noticeTitle);
+		 	newListItem.push('</div></a></li></ul>');
+		 
+		 	}
+		 	document.getElementById('departmentlist').innerHTML = newListItem.join('');
+		 	/*$(".news").on('click',function () {
+		 		openDoctorList ();
+		 	});*/
+		}
+		function openHealthNewsInfo (id) {
+				mui.openWindow({
+						url : "newsInfo.html",
+						id : "newsInfo.html",
+						extras : {
+							newsinfoid : id,
+							healthnewsInfodata:healthnewinfodata
+						}
+					
+					});
+		}
+		function getLocalTime(nS) {
+				var time = new Date(nS);
+				var y = time.getFullYear();//年
+				var m = time.getMonth() + 1;//月
+				var d = time.getDate();//日
+				var h = time.getHours();//时
+				var mm = time.getMinutes();//分
+				var s = time.getSeconds();//秒
+				m<10?m="0"+m:m;
+				d<10?d="0"+d:d;
+				h<10?h="0"+h:h;
+				mm<10?mm="0"+mm:mm;
+				s<10?s="0"+s:s;
+				return y+"-"+m+"-"+d+" "+h+":"+mm+":"+s; 
+			}
+		function getNowFormatDate() {
+		    var date = new Date();
+		    var seperator1 = "-";
+		    var seperator2 = ":";
+		    var month = date.getMonth() + 1;
+		    var strDate = date.getDate();
+		    if (month >= 1 && month <= 9) {
+		        month = "0" + month;
+		    }
+		    if (strDate >= 0 && strDate <= 9) {
+		        strDate = "0" + strDate;
+		    }
+		    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+		            + " " + date.getHours() + seperator2 + date.getMinutes()
+		            + seperator2 + date.getSeconds();
+		    return currentdate;
+		}
+	</script>
+</html>

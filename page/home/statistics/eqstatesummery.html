@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+ 
+	<head>
+		<meta charset="utf-8">
+		<title>ECahrt 示例</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<!-- <link rel="stylesheet" type="text/css" href="../css/app.css" /> -->
+		<style>
+			.chart {
+				height: 200px;
+				margin: 0px;
+				padding: 0px;
+			}
+			h5 {
+				margin-top: 30px;
+				font-weight: bold;
+			}
+			h5:first-child {
+				margin-top: 15px;
+			}
+		</style>
+		<script src="../js/mui.min.js"></script>
+	</head>
+ 
+	<body>
+		
+		<div class="mui-content">
+			<div class="mui-content-padded">
+		        <h5>科室：</h5>
+				<select name="cboDept" id="cboDept"
+					class="form-control input-sm select2-container js-example-basic-single">
+				</select>
+				<button name="btnview" id="btnview">查询</button>
+			</div>
+			<div class="mui-content-padded">
+				<h5>设备状态汇总</h5>
+				<div class="chart" id="barChart"></div>
+				
+				<h5>各种设备状态占比</h5>
+				<div class="chart" id="pieChart"></div>
+			</div>
+		</div>
+		
+		<script src="../../../libs/echarts-all.js"></script>
+		<script>
+			
+			var byId = function(id) {
+				return document.getElementById(id);
+			};
+			var barChart = echarts.init(byId('barChart'));
+//			barChart.setOption(getOption('bar'));
+			
+			var pieChart = echarts.init(byId('pieChart'));
+//			pieChart.setOption(getOption('pie'));
+//			byId("echarts").addEventListener('tap',function(){
+//				var url = this.getAttribute('data-url');
+//				plus.runtime.openURL(url);
+//			},false);
+			
+			mui.init();
+			mui.plusReady(function(){
+//				alert('1');
+//				getDeptsToFillSelector();
+				queryDept();
+			});
+			
+			var btnQuery = byId('btnview')
+			btnQuery.addEventListener('click', function () {
+				var cboDept = byId('cboDept')
+				var deptid = cboDept.val;
+				console.log("deptID："+ deptid);
+				queryEqStateSummery(deptid)
+			});
+			
+			function getDeptsToFillSelector() {
+				var sessionId = JSON.parse(localStorage.getItem("loginuserinfo")).sessionId;
+				var url = localStorage.getItem("url")+"/statistics/qryKSBasedOnUser.do";
+				mui.ajax(url,{
+					data:{
+						sessionid : sessionId
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:15000,//超时时间设置为10秒；
+					beforeSend:function(){
+						
+					},
+					complete: function() {
+		        		
+		   		 	},              
+					success:function(data){
+						console.log(JSON.stringify(data));
+					},
+					error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			}
+			/**
+			 * 后台获取设备状态柱状图
+			 * @param {Object} accountusername
+			 * @param {Object} accountpassword
+			 */
+			function getEqStatusCountZhutu (accountusername,accountpassword) {
+				var sessionId = JSON.parse(localStorage.getItem("loginuserinfo")).sessionId; 
+				var mask = mui.createMask();//遮罩层
+				//var url = "http://36.110.189.171:81/hpms/frame/login/loginService.do";
+				var url = localStorage.getItem("url")+"/statistics/qryEQStateSummeryBar.do";
+				mui.ajax(url,{
+					data:{
+						sessionid : sessionId,
+						id : rtype,
+						next : rpage
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:15000,//超时时间设置为10秒；
+					beforeSend:function(){
+						plus.nativeUI.showWaiting("加载中", {});
+						mask.show();//显示遮罩层
+					},
+					complete: function() {
+		        		plus.nativeUI.closeWaiting();
+		        		mask.close();//关闭遮罩层
+		   		 	},              
+					success:function(data){
+						plus.nativeUI.closeWaiting();
+		        		mask.close();//关闭遮罩层
+		        		
+						console.log(JSON.stringify(data));
+					},
+					error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			}
+			
+		</script>
+		<script>
+			var keshizidian;
+			function queryDept() {
+				var jgid = JSON.parse(localStorage.getItem("loginuserinfo")).user_info.id_jg; 
+				var url = localStorage.getItem("url")+ "/app/qryKs.do";
+				mui.ajax(url,{
+					data:{
+						value : jgid
+					},
+					dataType:'JSON',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:15000,//超时时间设置为10秒
+					beforeSend:function(){
+						
+					},
+					complete: function() {
+			   		},              
+					success:function(data){
+						keshizidian = JSON.parse(data);
+						localStorage.setItem("deptdict", keshizidian)
+						var sel = document.getElementById('cboDept');
+						var op = '';
+						for(var i = 0; i < keshizidian.length; i++){
+//							console.log(data[i]);
+							op += '<option value="'+keshizidian[i].value+'">'+keshizidian[i].text+'</option>';
+						}
+						sel.innerHTML = op;
+						console.log("queryDept--->>> "+ keshizidian);
+					},
+					error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+					}
+				});
+			}
+			
+			function queryEqStateSummery(deptid) {
+//				var jgid = JSON.parse(localStorage.getItem("loginuserinfo")).user_info.id_jg; 
+				var sessionId = JSON.parse(localStorage.getItem("loginuserinfo")).sessionId; 
+				var mask = mui.createMask();//遮罩层
+				//var url = "http://36.110.189.171:81/hpms/frame/login/loginService.do";
+				var url = localStorage.getItem("url")+"/statistics/qryEQStateSummeryBar.do";
+				mui.ajax(url,{
+					data:{
+						sessionid : sessionId,
+						ID_CUSTOM_KS : deptid
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:15000,//超时时间设置为10秒；
+					beforeSend:function(){
+						plus.nativeUI.showWaiting("加载中", {});
+						mask.show();//显示遮罩层
+					},
+					complete: function() {
+		        		plus.nativeUI.closeWaiting();
+		        		mask.close();//关闭遮罩层
+		   		 	},              
+					success:function(data){
+						plus.nativeUI.closeWaiting();
+		        		mask.close();//关闭遮罩层
+		        		if (data == null) return;
+		        		console.log(JSON.stringify(data));
+		        		var optionBar = data.bar;
+		        		console.log(JSON.stringify(optionBar));
+		        		var barChart = echarts.init(byId('barChart'));
+						barChart.setOption(optionBar);
+						var optionPie = data.pie;
+						var pieChart = echarts.init(byId('pieChart'));
+						pieChart.setOption(optionPie);
+					},
+					error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			}
+		</script>
+		<!--<script type="text/javascript">
+		var qryIdJg = $("#qryIdJg").select3({
+			code: 'DD_JG',  //请求路径
+			placeholder:"--请选择--",   
+			readType:"dba",	//直接从数据库中查询
+			bSearch: true, //搜索框开关
+			onchange:function(e){
+				cboDept.reload(e.id);
+			}
+		});		
+		//科室
+		var cboDept = $('#cboDept').select3({
+			code : 'BM_ID', //请求路径
+			placeholder : "--请选择--",
+			bSearch : true, //搜索框开关
+			readType : "dba", //直接从数据库中查询
+			selType: 'sTree', //selType为sTree时下拉数据是树结构
+			onchange : function(e) {
+				getBar();
+			}
+		});
+		cboDept.reload($("#qryIdJg option:selected").val());
+		
+		
+	</script>-->
+	</body>
+ 
+</html>

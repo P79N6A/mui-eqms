@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="../../bootstrap/fonts/font-awesome.css"/>
+		<!--<link rel="stylesheet" href="../../css/base.css"/>-->
+		
+		<style type="text/css">
+			.mui-content>.mui-table-view:first-child {
+				margin-top: -1px;
+			}
+			.right{
+				float:right;
+			}
+			.mui-table-view{
+				background: #F4F4F4;
+				padding: 8px;
+				
+			}
+			.repairlistitem{
+				background: #ffffff !important;
+				margin-bottom: 5px;
+				border-radius: 5px;
+			}
+			.repairlistitem p{
+				color: #333 !important;
+				line-height: 25px;
+				font-size: 14px;
+				
+			}
+			.item-title{
+				font-size: 16px;
+				font-weight: bold;
+			}
+			.repair-tag-status-green{
+				color: #42bf0d;
+			}
+			.repair-tag-status-red{
+				color: #FF0000;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content">
+			<!--数据列表-->
+			<ul class="mui-table-view mui-table-view-chevron">
+				<!--<li>123</li>-->
+			</ul>
+		</div>
+		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var count = 1;
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						style:'circle',
+						callback: pulldownRefresh
+					},
+					up: {
+						auto:true,
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			
+			
+			function pullupRefresh() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().endPullup(); //参数为true代表没有更多数据了。
+					console.log("count--->>> "+ count);
+					requestDownMoreDate(0,count);
+				}, 100);
+			}
+
+			function addData() {
+				count = 1;
+				requestDownMoreDate(0,1);
+			
+			}
+			
+			function showData (list) {
+				var table = document.body.querySelector('.mui-table-view');
+				var cells = document.body.querySelectorAll('.mui-table-view-cell');
+				var listlength = list.length;
+				table.innerHTML = '';
+				for(var i = 0, len = listlength ; i < len; i++) {
+					var li = document.createElement('li');
+					li.className = 'mui-table-view-cell repairlistitem';
+					li.innerHTML = '<p class="item-title">设备名称：<a hidden="hidden">'+list[i].EQCHECK_DETAIL_ID+'</a><span>' + list[i].EQ_NAME + '</span>'
+									+'<span hidden = "hidden" class="right repair-tag-status-red"><i class="fa"></i>'+list[i].STATUS+'</span></p>'
+									+'<p>科室：<span>'+list[i].KS +'</span></p>'
+									+'<p>设备序列号：<span>'+list[i].EQ_ORDER +'</span></p>'
+									+'<p>设备资产号：<span>'+list[i].EQ_ASSET_CODE +'</span></p>'
+									+'<p>报修时间：<span>'+list[i].TM_CT +'</span></p>'
+									//+'<p>'+list[i].EQ_REPAIR_ID +'</p>'
+									+'<p>盘点人：<span>'+list[i].EMP_NAME +'</span></p>';
+					table.appendChild(li);
+					
+				}
+				var as = document.getElementsByTagName('a');
+				var oli = document.getElementsByTagName("li");
+			    for(var i=0; i<oli.length; i++){
+			        (function(j){
+			            oli[j].onclick = function () {
+			            requestDetail (as[j].innerHTML);
+			        };
+			        })(i)
+				}
+			   
+			}
+			
+			function showDataUp (list) {
+				var table = document.body.querySelector('.mui-table-view');
+				var cells = document.body.querySelectorAll('.mui-table-view-cell');
+				var listlength = list.length;
+				for(var i = 0, len = listlength ; i < len; i++) {
+					var li = document.createElement('li');
+					li.className = 'mui-table-view-cell repairlistitem';
+					li.innerHTML = '<p class="item-title" >设备名称：<a hidden = "hidden" >'+list[i].EQCHECK_DETAIL_ID+'</a><span>' + list[i].EQ_NAME + '</span>'
+									+'<span hidden = "hidden" class="right repair-tag-status-red"><i class="fa"></i>'+list[i].STATUS+'</span></p>'
+									+'<p>科室：<span>'+list[i].KS +'</span></p>'
+									+'<p>设备序列号：<span>'+list[i].EQ_ORDER +'</span></p>'
+									+'<p>设备资产号：<span>'+list[i].EQ_ASSET_CODE +'</span></p>'
+									+'<p>报修时间：<span>'+list[i].TM_CT +'</span></p>'
+									+'<p>盘点人：<span>'+list[i].EMP_NAME +'</span></p>';
+					
+					table.appendChild(li);
+					
+				}
+				 var as = document.getElementsByTagName('a');
+				var oli = document.getElementsByTagName("li");
+			    for(var i=0; i<oli.length; i++){
+			        (function(j){
+			            oli[j].onclick = function () {
+			            requestDetail (as[j].innerHTML);
+			        };
+			        })(i)
+				}
+			    var table = document.body.querySelectorAll("right");
+			    for (var i = 0; i < table.length; i++) {
+			    	
+			    }
+			}
+			function requestDetail (repairid) {
+				var rooturl = localStorage.getItem("url");
+				//var urls = rooturl+"/app/viewRepairData.do?id="+repairid;
+				var urls = rooturl+"/app/qryEqCheckMsgDetail.do?id="+repairid;
+				mui.openWindow({
+					url : "repairdetail.html",//repairdetail
+					id : "repairdetail.html",
+					styles:{
+		      			 titleNView: { // 窗口的标题栏控件
+		      			 //homeButton:true,
+		      			  autoBackButton:true,
+					      titleText:"设备详情",              // 标题栏文字,当不设置此属性时，默认加载当前页面的标题，并自动更新页面的标题
+					      titleColor:"#ffffff",             // 字体颜色,颜色值格式为"#RRGGBB",默认值为"#000000"
+					      titleSize:"17px",                 // 字体大小,默认17px
+					      backgroundColor:"#6D97FF", 		// 控件背景颜色,颜色值格式为"#RRGGBB",默认值为"#F7F7F7"
+					     
+					      progress:{                        // 标题栏控件的进度条样式
+					        color:"#999999",                // 进度条颜色,默认值为"#00FF00"  
+					        height:"2px"                    // 进度条高度,默认值为"2px"         
+					      },
+					      splitLine:{                       // 标题栏控件的底部分割线，类似borderBottom
+					        color:"#CCCCCC",                // 分割线颜色,默认值为"#CCCCCC"  
+					        height:"0px"                    // 分割线高度,默认值为"2px"
+					      }
+					    }
+					  
+		      	},
+					extras : {
+						repairdetailr: urls
+					}
+				});
+			}
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					addData();
+					mui('#pullrefresh').pullRefresh().endPulldown();
+				}, 1500);
+			}
+			function requestDownMoreDate (rtype,rpage) {
+				var sessionId = JSON.parse(localStorage.getItem("loginuserinfo")).sessionId; 
+				var mask = mui.createMask();//遮罩层//http://10.131.103.128:8080/hemsApp/app/qryEqCheckList.do?type=0存放科室,1所属科室&next=页数
+				var url = localStorage.getItem("url")+ "/app/qryEqCheckList.do";
+				mui.ajax(url,{
+				data:{
+					sessionid : sessionId,
+					type : rtype,
+					next : rpage
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				console.log("repairmentrepair--->>> "+ data);
+				var resultdatalist = JSON.parse(data);
+				if (rpage==1) {
+					count += 1;
+					showData (resultdatalist);
+				} else{
+					if (resultdatalist.length <=0) {
+						count = rpage;
+						mui.toast("没有更多数据");
+					}else{
+						count += 1;
+						showDataUp(resultdatalist);
+					}
+					
+				}
+				
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+			}
+		</script>
+	</body>
+
+</html>

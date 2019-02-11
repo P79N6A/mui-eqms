@@ -1,0 +1,835 @@
+{
+  "page/index.html": {
+    "resources": [
+      "bootstrap/fonts/font-awesome.css",
+      "css/base.css",
+      "images/jzzn-icon32.png",
+      "bootstrap/css/bootstrap.min.css",
+      "plugins/ScrollBar/style.min.css",
+      "images/yydh-icon32.png",
+      "plugins/layui/css/layui.css",
+      "images/yy-icon32.png",
+      "plugins/ScrollBar/scrollbar.min.js",
+      "js/jquery-2.2.3.min.js",
+      "plugins/owlcarousel/owl.theme.css",
+      "plugins/layui/layui.js",
+      "images/gh-icon.png",
+      "images/03.png",
+      "plugins/owlcarousel/owl.carousel.js",
+      "images/01.png",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "images/jf-icon32.png",
+      "images/jzjl-icon32.png",
+      "images/02.png",
+      "plugins/layui/lay/modules/layer.js",
+      "plugins/owlcarousel/owl.carousel.css",
+      "plugins/ScrollBar/mousewheel.min.js",
+      "plugins/layui/css/modules/layer/default/layer.css",
+      "page/news.html",
+      "page/pay.html",
+      "plugins/layui/css/modules/layer/default/icon.png",
+      "page/personal-center.html"
+    ],
+    "refer": [
+      "page/news.html",
+      "page/pay.html",
+      "page/personal-center.html"
+    ]
+  },
+  "page/news.html": {
+    "resources": [
+      "page/personal-center.html",
+      "page/index.html"
+    ],
+    "refer": [
+      "page/personal-center.html",
+      "page/index.html"
+    ]
+  },
+  "page/personal-center.html": {
+    "resources": [
+      "page/news.html",
+      "images/phone-icon.png",
+      "images/about-icon.png",
+      "images/help-icon.png",
+      "images/advice-icon.png",
+      "images/pwd-icon.png",
+      "images/user-icon.png",
+      "page/index.html",
+      "bootstrap/fonts/font-awesome.css",
+      "css/base.css",
+      "bootstrap/css/bootstrap.min.css",
+      "plugins/ScrollBar/style.min.css",
+      "plugins/layui/css/layui.css",
+      "plugins/ScrollBar/scrollbar.min.js",
+      "js/jquery-2.2.3.min.js",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/ScrollBar/mousewheel.min.js",
+      "js/common.js",
+      "js/immersed.js"
+    ],
+    "refer": [
+      "page/news.html",
+      "page/index.html"
+    ]
+  },
+  "page/pay.html": {
+    "resources": [
+      "page/index.html",
+      "images/wx-icon.png",
+      "images/qt-icon.png",
+      "images/yhk-icon.png",
+      "images/zfb-icon.png",
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "bootstrap/css/bootstrap.min.css",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css",
+      "plugins/layui/lay/modules/layer.js",
+      "js/jquery-2.2.3.min.js",
+      "plugins/layui/css/modules/layer/default/layer.css",
+      "plugins/layui/layui.js",
+      "js/mui.js",
+      "plugins/layui/css/modules/layer/default/icon.png",
+      "plugins/ScrollBar/style.min.css",
+      "plugins/ScrollBar/scrollbar.min.js",
+      "plugins/ScrollBar/mousewheel.min.js"
+    ],
+    "refer": [
+      "page/index.html",
+      "page/payment.html",
+      "page/pay-way.html",
+      "page/payway.html"
+    ]
+  },
+  "page/payment.html": {
+    "resources": [
+      "css/common.css",
+      "js/common.js",
+      "js/mui.min.js",
+      "js/immersed.js"
+    ],
+    "refer": []
+  },
+  "page/login.html": {
+    "resources": [
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "bootstrap/css/bootstrap.min.css",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css",
+      "page/index.html",
+      "js/mui.js",
+      "js/app.js",
+      "js/mui.min.js"
+    ],
+    "refer": [
+      "page/index.html"
+    ]
+  },
+  "page/pay-way.html": {
+    "resources": [
+      "plugins/iCheck/minimal/_all.css",
+      "plugins/iCheck/line/_all.css",
+      "plugins/iCheck/flat/_all.css",
+      "images/zfb-icon30.png",
+      "plugins/iCheck/minimal/blue@2x.png",
+      "plugins/iCheck/polaris/polaris.css",
+      "plugins/iCheck/futurico/futurico.css",
+      "plugins/iCheck/square/_all.css",
+      "images/wx-icon30.png",
+      "plugins/iCheck/all.css",
+      "page/index.html"
+    ],
+    "refer": [
+      "page/index.html"
+    ]
+  },
+  "page/payway.html": {
+    "resources": [
+      "bootstrap/fonts/font-awesome.css",
+      "css/base.css",
+      "bootstrap/css/bootstrap.min.css",
+      "plugins/iCheck/minimal/_all.css",
+      "plugins/iCheck/flat/_all.css",
+      "images/zfb-icon30.png",
+      "plugins/iCheck/minimal/blue@2x.png",
+      "plugins/layui/css/layui.css",
+      "js/jquery-2.2.3.min.js",
+      "js/immersed.js",
+      "js/common.js",
+      "css/common.css",
+      "js/mui.min.js",
+      "plugins/iCheck/line/_all.css",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/iCheck/polaris/polaris.css",
+      "plugins/iCheck/futurico/futurico.css",
+      "plugins/iCheck/square/_all.css",
+      "images/wx-icon30.png",
+      "plugins/iCheck/all.css",
+      "page/index.html"
+    ],
+    "refer": [
+      "page/index.html"
+    ]
+  },
+  "page/404.html": {
+    "resources": [
+      "images/404.png",
+      "bootstrap/fonts/fontawesome-webfont.ttf",
+      "css/welcome.css"
+    ],
+    "refer": []
+  },
+  "page/home/login.html": {
+    "resources": [
+      "js/app.js",
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "bootstrap/css/bootstrap.min.css",
+      "js/mui.min.js",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css"
+    ],
+    "refer": [
+      "page/home/register.html",
+      "page/home/index.html",
+      "page/home/main.html",
+      "page/home/forgetpassword.html"
+    ]
+  },
+  "page/home/register.html": {
+    "refer": [
+      "page/home/login.html"
+    ],
+    "resources": [
+      "js/app.js",
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "bootstrap/css/bootstrap.min.css",
+      "js/mui.min.js",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css"
+    ]
+  },
+  "page/home/index.html": {
+    "resources": [
+      "bootstrap/fonts/font-awesome.css",
+      "css/base.css",
+      "images/jzzn-icon32.png",
+      "bootstrap/css/bootstrap.min.css",
+      "plugins/ScrollBar/style.min.css",
+      "images/yydh-icon32.png",
+      "plugins/layui/css/layui.css",
+      "images/yy-icon32.png",
+      "plugins/ScrollBar/scrollbar.min.js",
+      "js/jquery-2.2.3.min.js",
+      "plugins/owlcarousel/owl.theme.css",
+      "plugins/layui/layui.js",
+      "images/gh-icon.png",
+      "images/03.png",
+      "plugins/owlcarousel/owl.carousel.js",
+      "images/01.png",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "images/jf-icon32.png",
+      "images/jzjl-icon32.png",
+      "images/02.png",
+      "plugins/layui/lay/modules/layer.js",
+      "plugins/owlcarousel/owl.carousel.css",
+      "plugins/ScrollBar/mousewheel.min.js",
+      "plugins/layui/css/modules/layer/default/layer.css",
+      "page/home/personal-center.html",
+      "page/news/news.html",
+      "page/home/pay.html",
+      "js/mui.min.js",
+      "images/healthitempng/103102.jpg",
+      "images/healthitempng/103101.png",
+      "images/ý{.png"
+    ],
+    "refer": [
+      "page/home/pay.html",
+      "page/hospitalinfo/hospital.html",
+      "page/home/newsInfo.html",
+      "page/home/disilness.html",
+      "page/home/newslist.html",
+      "page/home/lazyload-image.html",
+      "page/home/disilnessheader.html",
+      "page/home/newslistheader.html",
+      "page/home/barcode_scan.html",
+      "page/home/scaned.html",
+      "page/home/enquirmentmaintentance.html",
+      "page/home/login.html",
+      "page/home/enquirmentrepair.html",
+      "page/home/pullrefresh.html",
+      "page/home/repairmentrepair.html",
+      "page/home/enquirmentInventory.html",
+      "page/home/repairmentsearchlist.html",
+      "page/home/inventorymentmain.html",
+      "page/home/inventorykeshilist.html"
+    ]
+  },
+  "page/home/personal-center.html": {
+    "resources": [
+      "images/phone-icon.png",
+      "js/common.js",
+      "images/about-icon.png",
+      "images/help-icon.png",
+      "images/advice-icon.png",
+      "images/pwd-icon.png",
+      "js/immersed.js",
+      "images/user-icon.png",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "bootstrap/fonts/font-awesome.css",
+      "css/base.css",
+      "bootstrap/css/bootstrap.min.css",
+      "plugins/ScrollBar/style.min.css",
+      "plugins/layui/css/layui.css",
+      "plugins/ScrollBar/scrollbar.min.js",
+      "js/jquery-2.2.3.min.js",
+      "plugins/ScrollBar/mousewheel.min.js",
+      "js/mui.min.js",
+      "bootstrap/fonts/fontawesome-webfont.ttf",
+      "bootstrap/fonts/fontawesome-webfont.svg",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "page/home/login.html",
+      "page/home/changepassword.html",
+      "page/home/changephone.html",
+      "page/home/addnewIdcard.html"
+    ]
+  },
+  "page/news/news.html": {
+    "resources": [
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "plugins/ScrollBar/style.min.css",
+      "bootstrap/css/bootstrap.min.css",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css",
+      "plugins/ScrollBar/scrollbar.min.js",
+      "js/jquery-2.2.3.min.js",
+      "plugins/ScrollBar/mousewheel.min.js"
+    ],
+    "refer": []
+  },
+  "page/home/main.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "page/home/index.html",
+      "page/home/pay.html",
+      "css/mui.css",
+      "css/mui-icons-extra.css",
+      "page/home/tab-webview-subpage-about.html"
+    ],
+    "refer": [
+      "page/home/personal-center.html",
+      "page/home/index.html",
+      "page/home/login.html",
+      "page/home/pay.html",
+      "page/pay/pay.html",
+      "page/home/personalcenter.html",
+      "page/home/tab-webview-subpage-contact.html",
+      "page/home/tab-webview-subpage-chat.html",
+      "page/home/tab-webview-subpage-about.html",
+      "page/home/statiseqmain.html",
+      "page/home/statiseqmaint.html"
+    ]
+  },
+  "page/home/pay.html": {
+    "resources": [
+      "js/mui.js",
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "plugins/ScrollBar/style.min.css",
+      "bootstrap/css/bootstrap.min.css",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css",
+      "plugins/layui/lay/modules/layer.js",
+      "plugins/ScrollBar/scrollbar.min.js",
+      "js/jquery-2.2.3.min.js",
+      "plugins/ScrollBar/mousewheel.min.js",
+      "plugins/layui/css/modules/layer/default/layer.css",
+      "plugins/layui/layui.js"
+    ],
+    "refer": [
+      "page/pay/payway.html",
+      "page/home/login.html",
+      "page/pay/payment.html"
+    ]
+  },
+  "page/hospitalinfo/hospital.html": {
+    "resources": [
+      "images/ys-icon18.png",
+      "images/ks-icon18.png",
+      "images/yy-icon18.png",
+      "page/hospitalinfo/hospital-introduction.html",
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "bootstrap/css/bootstrap.min.css",
+      "js/mui.min.js",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css",
+      "images/yy-js.jpg"
+    ],
+    "refer": [
+      "page/hospitalinfo/hospital-introduction.html",
+      "page/hospitalinfo/department.html",
+      "page/hospitalinfo/doctor.html"
+    ]
+  },
+  "page/hospitalinfo/hospital-introduction.html": {
+    "resources": [
+      "images/yy-js.jpg",
+      "page/hospitalinfo/hospital.html"
+    ],
+    "refer": [
+      "page/hospitalinfo/hospital.html"
+    ]
+  },
+  "page/hospitalinfo/department.html": {
+    "resources": [
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "bootstrap/css/bootstrap.min.css",
+      "plugins/ScrollBar/style.min.css",
+      "js/mui.min.js",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css",
+      "plugins/ScrollBar/scrollbar.min.js",
+      "js/jquery-2.2.3.min.js",
+      "plugins/ScrollBar/mousewheel.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "page/hospitalinfo/doctor.html"
+    ]
+  },
+  "page/hospitalinfo/doctor.html": {
+    "resources": [
+      "images/yspic2.png",
+      "plugins/owlcarousel/owl.theme.css",
+      "plugins/owlcarousel/owl.carousel.css",
+      "images/yspic.png",
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "bootstrap/css/bootstrap.min.css",
+      "js/mui.min.js",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css",
+      "js/jquery-2.2.3.min.js",
+      "plugins/ScrollBar/scrollbar.min.js",
+      "plugins/ScrollBar/mousewheel.min.js",
+      "plugins/ScrollBar/style.min.css",
+      "js/mui.js",
+      "bootstrap/fonts/fontawesome-webfont.ttf",
+      "images/doctor/8.jpg",
+      "images/doctor/7.jpg",
+      "images/doctor/1.jpg",
+      "images/doctor/3.jpg",
+      "images/doctor/2.jpg",
+      "images/doctor/4.jpg",
+      "images/doctor/10.jpg",
+      "images/doctor/9.jpg",
+      "images/doctor/5.jpg",
+      "images/doctor/6.jpg"
+    ],
+    "refer": [
+      "page/hospitalinfo/doctor-information.html"
+    ]
+  },
+  "page/home/newsInfo.html": {
+    "resources": [
+      "images/ys-icon18.png",
+      "images/yy-js.jpg",
+      "images/ks-icon18.png",
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "bootstrap/css/bootstrap.min.css",
+      "js/mui.min.js",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css",
+      "images/healthitempng/103102.jpg",
+      "images/healthitempng/103101.png",
+      "images/healthitempng/103103.jpg",
+      "images/healthitempng/103104.jpg",
+      "images/healthitempng/103100.gif",
+      "images/healthitempng/103105.jpg"
+    ],
+    "refer": []
+  },
+  "page/pay/payway.html": {
+    "resources": [
+      "bootstrap/fonts/font-awesome.css",
+      "css/base.css",
+      "bootstrap/css/bootstrap.min.css",
+      "plugins/iCheck/minimal/_all.css",
+      "plugins/iCheck/flat/_all.css",
+      "images/zfb-icon30.png",
+      "plugins/iCheck/minimal/blue@2x.png",
+      "plugins/layui/css/layui.css",
+      "js/jquery-2.2.3.min.js",
+      "js/immersed.js",
+      "js/common.js",
+      "css/common.css",
+      "js/mui.min.js",
+      "plugins/iCheck/line/_all.css",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/iCheck/polaris/polaris.css",
+      "plugins/iCheck/futurico/futurico.css",
+      "plugins/iCheck/square/_all.css",
+      "images/wx-icon30.png",
+      "plugins/iCheck/all.css"
+    ],
+    "refer": []
+  },
+  "page/hospitalinfo/doctor-information.html": {
+    "resources": [
+      "images/phone-icon.png",
+      "js/common.js",
+      "images/advice-icon.png",
+      "images/pwd-icon.png",
+      "js/immersed.js",
+      "images/user-icon.png",
+      "bootstrap/fonts/font-awesome.css",
+      "css/base.css",
+      "bootstrap/css/bootstrap.min.css",
+      "plugins/ScrollBar/style.min.css",
+      "plugins/layui/css/layui.css",
+      "js/jquery-2.2.3.min.js",
+      "plugins/ScrollBar/scrollbar.min.js",
+      "js/mui.min.js",
+      "plugins/ScrollBar/mousewheel.min.js",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "images/doctor/9.jpg",
+      "images/doctor/5.jpg",
+      "images/doctor/8.jpg",
+      "images/doctor/2.jpg",
+      "images/doctor/4.jpg",
+      "images/doctor/3.jpg",
+      "images/doctor/10.jpg",
+      "images/doctor/7.jpg",
+      "images/doctor/6.jpg"
+    ],
+    "refer": []
+  },
+  "page/home/disilness.html": {
+    "resources": [
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "plugins/ScrollBar/style.min.css",
+      "bootstrap/css/bootstrap.min.css",
+      "js/mui.min.js",
+      "plugins/layui/css/layui.css",
+      "plugins/ScrollBar/scrollbar.min.js",
+      "js/jquery-2.2.3.min.js",
+      "plugins/ScrollBar/mousewheel.min.js",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "bootstrap/fonts/fontawesome-webfont.ttf",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "js/mui.js"
+    ],
+    "refer": [
+      "page/home/disilnessInfo.html"
+    ]
+  },
+  "page/home/disilnessInfo.html": {
+    "resources": [
+      "images/yy-js.jpg",
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "bootstrap/css/bootstrap.min.css",
+      "js/mui.min.js",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css",
+      "bootstrap/fonts/fontawesome-webfont.ttf",
+      "images/disilness/gm.png",
+      "images/disilness/by.png",
+      "images/disilness/cwb.png",
+      "images/disilness/fx.jpg",
+      "images/disilness/fy.jpg",
+      "images/healthitempng/103100.gif"
+    ],
+    "refer": []
+  },
+  "page/home/newslist.html": {
+    "resources": [
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "images/01.png",
+      "plugins/ScrollBar/style.min.css",
+      "bootstrap/css/bootstrap.min.css",
+      "js/mui.min.js",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css",
+      "plugins/ScrollBar/scrollbar.min.js",
+      "js/jquery-2.2.3.min.js",
+      "plugins/ScrollBar/mousewheel.min.js",
+      "images/healthitempng/103101.png/",
+      "images/healthitempng/103101.png",
+      "images/healthitempng/103102.jpg",
+      "images/healthitempng/103105.jpg",
+      "images/healthitempng/103104.jpg",
+      "images/healthitempng/103103.jpg",
+      "bootstrap/fonts/fontawesome-webfont.ttf",
+      "js/mui.lazyload.js",
+      "js/mui.lazyload.img.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "css/mui.css"
+    ],
+    "refer": [
+      "page/home/newsInfo.html"
+    ]
+  },
+  "page/home/changepassword.html": {
+    "resources": [
+      "js/app.js",
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "bootstrap/css/bootstrap.min.css",
+      "js/mui.min.js",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css"
+    ],
+    "refer": [
+      "page/home/login.html"
+    ]
+  },
+  "page/home/changephone.html": {
+    "resources": [
+      "js/app.js",
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "bootstrap/css/bootstrap.min.css",
+      "js/mui.min.js",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css"
+    ],
+    "refer": [
+      "page/home/login.html"
+    ]
+  },
+  "page/home/addnewIdcard.html": {
+    "resources": [
+      "js/app.js",
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "bootstrap/css/bootstrap.min.css",
+      "js/mui.min.js",
+      "plugins/layui/css/layui.css",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "page/home/addnewIdcard.html"
+    ],
+    "refer": [
+      "page/home/addnewIdcard.html"
+    ]
+  },
+  "page/home/forgetpassword.html": {
+    "resources": [
+      "js/app.js",
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "bootstrap/css/bootstrap.min.css",
+      "js/mui.min.js",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css"
+    ],
+    "refer": []
+  },
+  "page/home/lazyload-image.html": {
+    "resources": [
+      "js/mui.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "css/app.css",
+      "js/mui.lazyload.js",
+      "js/mui.lazyload.img.js"
+    ]
+  },
+  "page/home/disilnessheader.html": {
+    "resources": [
+      "page/home/disilness.html",
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "plugins/ScrollBar/style.min.css",
+      "bootstrap/css/bootstrap.min.css",
+      "js/mui.min.js",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css",
+      "plugins/ScrollBar/scrollbar.min.js",
+      "js/jquery-2.2.3.min.js",
+      "plugins/ScrollBar/mousewheel.min.js",
+      "bootstrap/fonts/fontawesome-webfont.ttf"
+    ],
+    "refer": [
+      "page/home/disilness.html"
+    ]
+  },
+  "page/pay/payment.html": {
+    "resources": [
+      "js/common.js",
+      "js/mui.min.js",
+      "css/common.css",
+      "js/immersed.js"
+    ]
+  },
+  "page/home/newslistheader.html": {
+    "resources": [
+      "css/base.css",
+      "bootstrap/fonts/font-awesome.css",
+      "plugins/ScrollBar/style.min.css",
+      "bootstrap/css/bootstrap.min.css",
+      "bootstrap/fonts/fontawesome-webfont.woff",
+      "plugins/layui/css/layui.css",
+      "page/home/newslist.html",
+      "js/mui.min.js",
+      "css/mui.css",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "page/home/newslist.html"
+    ]
+  },
+  "page/home/enquirmentmaintentance.html": {
+    "refer": [
+      "page/home/enquirmentmaintentance.html"
+    ]
+  },
+  "page/home/repairmentrepair.html": {
+    "refer": [
+      "page/home/enquirmentmaintentance.html",
+      "page/home/repairdetail.html",
+      "page/home/login.html"
+    ]
+  },
+  "page/home/repairmentsearchlist.html": {
+    "refer": [
+      "page/home/enquirmentmaintentance.html",
+      "page/home/repairdetail.html",
+      "page/home/eqdetail.html",
+      "page/home/eqmentmain.html",
+      "page/home/enquirmentInventory.html",
+      "page/home/eqdetail4.html",
+      "page/home/login.html",
+      "page/home/inventorykeshilist.html"
+    ]
+  },
+  "page/home/inventorymentmain.html": {
+    "resources": [
+      "page/home/inventorymentrepair.html",
+      "page/home/inventorymentrepair1.html"
+    ],
+    "refer": [
+      "page/home/inventorymentrepair.html",
+      "page/home/inventorymentrepair1.html"
+    ]
+  },
+  "page/home/inventorymentrepair.html": {
+    "refer": [
+      "page/home/repairdetail.html",
+      "page/home/login.html"
+    ]
+  },
+  "page/home/inventorymentrepair1.html": {
+    "refer": [
+      "page/home/repairdetail.html"
+    ]
+  },
+  "page/home/eqmentmain.html": {
+    "resources": [
+      "page/home/eqdetail.html",
+      "page/home/eqdetailrepair.html",
+      "page/home/eqmentmainrepair.html"
+    ],
+    "refer": [
+      "page/home/eqdetail.html",
+      "page/home/eqmentrepair.html",
+      "page/home/eqmentrepair1.html",
+      "page/home/eqinventory.html",
+      "page/home/eqdetailrepair.html",
+      "page/home/eqmentmainrepair.html",
+      "page/home/eqmentmainrepair1.html",
+      "page/home/eqmentmainrepairxiangqing.html",
+      "page/home/eqmentmaininventoryxiangqing.html"
+    ]
+  },
+  "page/home/eqmentrepair1.html": {
+    "refer": [
+      "page/home/repairdetail.html"
+    ]
+  },
+  "page/home/eqmentrepair.html": {
+    "refer": [
+      "page/home/repairdetail.html"
+    ]
+  },
+  "page/home/tab-webview-main.html": {
+    "resources": [
+      "page/home/pay.html"
+    ],
+    "refer": [
+      "page/home/pay.html",
+      "page/home/personal-center.html",
+      "page/home/index.html"
+    ]
+  },
+  "page/home/statiseqmain.html": {
+    "resources": [
+      "page/home/eqdetail.html",
+      "page/home/eqdetail2.html",
+      "page/home/eqdetail12.html"
+    ],
+    "refer": [
+      "page/home/eqdetail.html",
+      "page/home/eqdetail2.html",
+      "page/home/eqdetail3.html",
+      "page/home/enquirmentInventory.html",
+      "page/home/eqdetail12.html"
+    ]
+  },
+  "page/home/statiseqmaint.html": {
+    "resources": [
+      "page/home/eqdetailrepair.html",
+      "page/home/eqdetail.html"
+    ],
+    "refer": [
+      "page/home/eqdetailrepair.html",
+      "page/home/eqinventory.html",
+      "page/home/eqdetail.html"
+    ]
+  },
+  "page/home/eqmentmainrepair1.html": {
+    "refer": [
+      "page/home/repairdetail.html"
+    ]
+  },
+  "page/home/eqmentmainrepairxiangqing.html": {
+    "refer": [
+      "page/home/login.html",
+      "page/home/repairdetail.html"
+    ]
+  },
+  "page/home/eqmentmaininventoryxiangqing.html": {
+    "refer": [
+      "page/home/repairdetail.html"
+    ]
+  },
+  "page/home/inventorykeshilist.html": {
+    "refer": [
+      "page/home/barcode_scan.html",
+      "page/home/scaned.html",
+      "page/home/enquirmentInventory.html",
+      "page/home/inventorystart.html"
+    ]
+  },
+  "page/home/inventorystart.html": {
+    "refer": [
+      "page/home/barcode_scan.html",
+      "page/home/enquirmentInventory.html"
+    ]
+  }
+}

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>科室</title>
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../bootstrap/fonts/font-awesome.css"/>
+		<link rel="stylesheet" href="../../plugins/layui/css/layui.css" />
+		<link rel="stylesheet" href="../../css/base.css"/>
+		<link rel="stylesheet" href="../../plugins/ScrollBar/style.min.css"/>
+		
+	</head>
+	<body class="bg">
+		<div class="header clearfix">
+			<i id="back" class=" fa fa-angle-left left" ></i>
+			<span class="left title-infor">科室</span>
+		</div>
+			<div id="departmentlist" class="container-fluid contain-box">
+			
+				<!--<ul class="bg-white news">
+					<div class="clearfix news-header">
+						<a href="#" class="left"> <i class="fa fa-volume-down margin-r-1 text-blue"></i>内分泌科</a>
+						<i class="right fa fa-angle-right text-black-light"></i>
+					</div>
+					<ul class="news-box">
+						<li>眼科眼科眼科眼科眼科眼科眼科眼</li>
+					</ul>
+				</ul>
+				<ul class="bg-white news">
+					<div class="clearfix news-header">
+						<a href="#" class="left"> <i class="fa fa-volume-down margin-r-1 text-blue"></i>内分泌科</a>
+						<i class="right fa fa-angle-right text-black-light"></i>
+					</div>
+					<ul class="news-box">
+						<li>眼科眼科眼科眼科眼科眼科眼科眼</li>
+					</ul>
+				</ul>
+				<ul class="bg-white news">
+					<div class="clearfix news-header">
+						<a href="#" class="left"> <i class="fa fa-volume-down margin-r-1 text-blue"></i>内分泌科</a>
+						<i class="right fa fa-angle-right text-black-light"></i>
+					</div>
+					<ul class="news-box">
+						<li>眼科眼科眼科眼科眼科眼科眼科眼</li>
+					</ul>
+				</ul>
+				<ul class="bg-white news">
+					<div class="clearfix news-header">
+						<a href="#" class="left"> <i class="fa fa-volume-down margin-r-1 text-blue"></i>内分泌科</a>
+						<i class="right fa fa-angle-right text-black-light"></i>
+					</div>
+					<ul class="news-box">
+						<li>眼科眼科眼科眼科眼科眼科眼科眼</li>
+					</ul>
+				</ul>
+				<ul class="bg-white news">
+					<div class="clearfix news-header">
+						<a href="#" class="left"> <i class="fa fa-volume-down margin-r-1 text-blue"></i>内分泌科</a>
+						<i class="right fa fa-angle-right text-black-light"></i>
+					</div>
+					<ul class="news-box">
+						<li>眼科眼科眼科眼科眼科眼科眼科眼</li>
+					</ul>
+				</ul>
+				<ul class="bg-white news">
+					<div class="clearfix news-header">
+						<a href="#" class="left"> <i class="fa fa-volume-down margin-r-1 text-blue"></i>内分泌科</a>
+						<i class="right fa fa-angle-right text-black-light"></i>
+					</div>
+					<ul class="news-box">
+						<li>眼科眼科眼科眼科眼科眼科眼科眼</li>
+					</ul>
+				</ul>
+				<ul class="bg-white news">
+					<div class="clearfix news-header">
+						<a href="#" class="left"> <i class="fa fa-volume-down margin-r-1 text-blue"></i>内分泌科</a>
+						<i class="right fa fa-angle-right text-black-light"></i>
+					</div>
+					<ul class="news-box">
+						<li>眼科眼科眼科眼科眼科眼科眼科眼</li>
+					</ul>
+				</ul>
+				<ul class="bg-white news">
+					<div class="clearfix news-header">
+						<a href="#" class="left"> <i class="fa fa-volume-down margin-r-1 text-blue"></i>内分泌科</a>
+						<i class="right fa fa-angle-right text-black-light"></i>
+					</div>
+					<ul class="news-box">
+						<li>眼科眼科眼科眼科眼科眼科眼科眼</li>
+					</ul>
+				</ul>
+				<ul class="bg-white news">
+					<div class="clearfix news-header">
+						<a href="#" class="left"> <i class="fa fa-volume-down margin-r-1 text-blue"></i>内分泌科</a>
+						<i class="right fa fa-angle-right text-black-light"></i>
+					</div>
+					<ul class="news-box">
+						<li>眼科眼科眼科眼科眼科眼科眼科眼</li>
+					</ul>
+				</ul>
+				<ul class="bg-white news">
+					<div class="clearfix news-header">
+						<a href="#" class="left"> <i class="fa fa-volume-down margin-r-1 text-blue"></i>内分泌科</a>
+						<i class="right fa fa-angle-right text-black-light"></i>
+					</div>
+					<ul class="news-box">
+						<li>眼科眼科眼科眼科眼科眼科眼科眼33333</li>
+					</ul>
+				</ul>-->
+			</div>
+		
+	</body>
+	<script src="../../js/jquery-2.2.3.min.js"></script>
+	<!--滚动条隐藏-->
+	<script src="../../plugins/ScrollBar/mousewheel.min.js"></script>
+	<script src="../../plugins/ScrollBar/scrollbar.min.js"></script>
+	<script type="text/javascript" src="../../js/mui.min.js" ></script>
+	<script type="text/javascript">
+		var H = $(window).height()-40;
+		$(".contain-box").css("height",H);
+		$('.contain-box').perfectScrollbar();
+	</script>
+	<script type="text/javascript">
+		mui.plusReady(function () {
+			getDepartmentInfo();
+			var hospitalback = document.getElementById("back");
+			hospitalback.addEventListener('click',function () {
+				var ws = plus.webview.currentWebview();
+				plus.webview.close(ws);
+			});
+			
+			
+			});
+			
+	</script>
+	<script type="text/javascript">
+			function getDepartmentInfo () {
+				var mask = mui.createMask();//遮罩层
+				var url = localStorage.getItem("url")+"/hospitalActionApp/departInfoApp.do";
+				mui.ajax(url,{
+				data:{},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				console.log("getDepartmentInfo---->>>> "+data);
+				var loginresult = JSON.parse(data);
+				var code = loginresult.code;
+				if ( code == "0") {
+					//mui.toast(loginresult.msg);
+					var list = loginresult.result;
+					showDepartmentList(list);
+				}
+				if (code != 0) {
+					mui.toast(loginresult.msg);
+				}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			}
+		function showDepartmentList (list) {
+    		var newListItem = [];
+			for (var depaermenti = 0;depaermenti<list.length;depaermenti++) {
+		 	newListItem.push('<ul onclick="openDoctorList(\''+list[depaermenti].id+'\')" class="bg-white news"><div class="clearfix news-header"><a href="#" class="left"> <i class="fa fa-volume-down margin-r-1 text-blue"></i>');
+		 	newListItem.push(list[depaermenti].departName);
+		 	newListItem.push('</a><i class="right fa fa-angle-right text-black-light"></i></div></ul>');
+		 	
+		 	}
+		 	document.getElementById('departmentlist').innerHTML = newListItem.join('');
+		 
+		}
+		function openDoctorList (id) {
+			//alert(id);
+				mui.openWindow({
+						url : "doctor.html",
+						id : "doctor.html",
+						extras : {
+							doctorid : id
+						}
+					});
+		}
+	</script>
+</html>

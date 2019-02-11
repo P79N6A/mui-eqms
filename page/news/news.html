@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>消息</title>
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../bootstrap/fonts/font-awesome.css"/>
+		<link rel="stylesheet" href="../../plugins/layui/css/layui.css" />
+		<link rel="stylesheet" href="../../css/base.css"/>
+		<link rel="stylesheet" href="../../plugins/ScrollBar/style.min.css"/>
+	</head>
+	<body class="bg">
+		<div class="header text-left">
+			消息
+		</div>
+		<div class="container-fluid contain-box">
+			<div class="row">
+				<div class="bg-white news active">
+					<div class="clearfix news-header">
+						<a href="#" class="left"> <i class="fa fa-volume-down margin-r-1 text-blue"></i>挂号成功</a>
+						<i class="right fa fa-angle-down text-black-light"></i>
+					</div>
+					<ul class="news-box">
+						<li>科室：眼科</li>
+						<li>挂号日期：2017.4.30</li>
+						<li>就诊日期：2017.5.2</li>
+					</ul>
+				</div>
+				<ul class="bg-white news">
+					<div class="clearfix news-header">
+						<a href="#" class="left"> <i class="fa fa-volume-down margin-r-1 text-blue"></i>付款成功</a>
+						<i class="right fa fa-angle-right text-black-light"></i>
+					</div>
+					<ul class="news-box">
+						<li>付款金额：100元</li>
+						<li>付款日期：2017.4.30</li>
+					</ul>
+				</ul>
+			</div>
+		</div>
+		<div class="footer clearfix">
+			<a href="index.html">
+				<dl>
+					<dt><i class="fa fa-home"></i></dt>
+					<dd>主页</dd>
+				</dl>
+			</a>
+			<a href="pay.html">
+				<dl  class="active">
+					<dt><i class="fa fa-comments-o"></i></dt>
+					<dd>消息</dd>
+				</dl>
+			</a>
+			<a href="personal-center.html">
+				<dl>
+					<dt><i class="fa fa-user"></i></dt>
+					<dd>个人中心</dd>
+				</dl>
+			</a>
+		</div>
+	</body>
+	<script src="../../js/jquery-2.2.3.min.js"></script>
+	<!--滚动条隐藏-->
+	<script src="../../plugins/ScrollBar/mousewheel.min.js"></script>
+	<script src="../../plugins/ScrollBar/scrollbar.min.js"></script>
+	<script type="text/javascript">
+		var H = $(window).height()-84;
+		$(".contain-box").css("height",H);
+		$('.contain-box').perfectScrollbar();
+	</script>
+	<!--底部菜单切换-->
+	<script type="text/javascript">
+		$('.footer a').on('click',function(){
+			$(this).find('dl').addClass('active');
+			$(this).siblings().find('dl').removeClass('active')
+		})
+		$('.news-header').on('click',function(){
+			$(this).parent().addClass('active').siblings().removeClass('active');
+			$(this).parent().siblings().children().find('i.fa-angle-down').removeClass('fa-angle-down').addClass('fa-angle-right');
+			$(this).find('i.fa-angle-right').removeClass('fa-angle-right').addClass('fa-angle-down');
+		})
+	</script>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>修改手机号</title>
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../bootstrap/fonts/font-awesome.css"/>
+		<link rel="stylesheet" href="../../plugins/layui/css/layui.css" />
+		<link rel="stylesheet" href="../../css/base.css"/>
+	</head>
+	<body class="bg">
+		<div class="header clearfix">
+			<i id="back" class=" fa fa-angle-left left"></i>
+			<span class="left title-infor">更换手机号码</span>
+		</div>
+		<div class="container-fluid">
+			<div class="row bg-white">
+				<div class="col-sm-12">
+					<form class="form-horizontal user-login-infor">
+						<div class="form-group username">
+							<input id = "account" type="text" class="layui-input no-border border-bottom" placeholder="请输入新手机号码"/>
+							<input id="getverificationcode" type="button" class="form-control layui-btn bg-light-blue username-txt" value="获取验证" />
+						</div>
+						<div class="form-group">
+							<input id = "verificationcode" type="text" class="layui-input no-border border-bottom" placeholder="验证码" />
+						</div>
+						<!--<div class="form-group">
+							<input id = "oldpassword" type="password" class="layui-input no-border border-bottom" placeholder="旧密码" />
+						</div>
+						<div class="form-group">
+							<input id = "password" type="password" class="layui-input no-border border-bottom" placeholder="新密码" />
+						</div>
+						<div class="form-group">
+							<input id = "passwordsure" type="password" class="layui-input no-border border-bottom" placeholder="确认密码" />
+						</div>-->
+					</form>
+				</div>
+			</div>
+			<div class="margin-t-1 margin-b-1">
+<!--			<input id="login" type="button" class="form-control layui-btn bg-light-blue layui-btn-big" value="登录" onclick="window.open('index.html')" />
+-->			</div>
+				<input id="sure" type="button" class="form-control layui-btn bg-light-blue layui-btn-big input-bt-login" value="确定"/>
+					
+		</div>
+		<div>
+			
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/app.js"></script>
+		<script type="text/javascript">
+			var inputverificationcode = "";
+			var data = localStorage.getItem("loginuserinfo");
+			var oldphonenumber = JSON.parse(data).result.phone;
+			//document.getElementById("account").value = phonenumber;
+			if(window.plus){
+				
+					}else{// 兼容老版本的plusready事件
+				document.addEventListener('plusready',function () {			
+				
+				var bt_back = document.getElementById("back");
+				bt_back.addEventListener("tap",function () {
+					var ws = plus.webview.currentWebview();
+					plus.webview.close(ws);
+				});
+				
+			
+				var bt_sure = document.getElementById("sure");
+				bt_sure.addEventListener("tap",function () {
+					var account = document.getElementById("account").value;
+					var verificationcode = document.getElementById("verificationcode").value;
+					changePhone (account,verificationcode,inputverificationcode);
+					
+					
+				});
+				var bt_getverificationcode = document.getElementById("getverificationcode");
+				var phonenumber = '';
+				bt_getverificationcode.addEventListener("tap",function () {
+					var account = document.getElementById("account").value;
+					getPhoneVerificationcode(account);
+				});
+				
+				});
+		}
+		//获取验证码
+		function getPhoneVerificationcode (phonenumber) {
+				var mask = mui.createMask();//遮罩层
+				var url = localStorage.getItem("url")+"/registerActionApp/getValidateCodeApp.do";
+				mui.ajax(url,{
+				data:{
+					phoneNum : phonenumber
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+				console.log("getPhoneVerificationcode---->>>>>"+data);
+				var loginresult = JSON.parse(data);
+				var code = loginresult.code;
+				if ( code == "0") {
+					//mui.toast(loginresult.msg);
+					var randomcode = loginresult.result.randomCode;
+					//document.getElementById("verificationcode").value = randomcode;
+					inputverificationcode = randomcode;
+					
+				}
+				if (code != 0) {
+					mui.toast(loginresult.msg);
+				}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+					plus.nativeUI.closeWaiting();
+		        	mask.close();//关闭遮罩层
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						//plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+		}			
+		
+		//修改手机号newPhone、verificationCode、randomCode
+		function changePhone (phonenumber,verificationCode,randomCode) {
+				var mask = mui.createMask();//遮罩层
+				var url = localStorage.getItem("url")+"/appSysActionApp/updatePhoneNumberApp.do";
+				mui.ajax(url,{
+				data:{
+					oldPhone : oldphonenumber,
+					newPhone : phonenumber,
+					verificationCode : verificationCode,
+					randomCode :randomCode
+					
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+				console.log("changepassword---->>>>>"+data);
+				var loginresult = JSON.parse(data);
+				var code = loginresult.code;
+				if ( code == "0") {
+					mui.toast(loginresult.msg);
+					mui.openWindow({
+							url : "login.html",
+							id : "login.html",
+							extras : {
+								closepage : "10010"
+							}
+						});		
+					
+				}
+				if (code != "0") {
+					mui.toast(loginresult.msg);
+				}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+					plus.nativeUI.closeWaiting();
+		        	mask.close();//关闭遮罩层
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						//plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+		}			
+		</script>
+	</body>
+</html>
