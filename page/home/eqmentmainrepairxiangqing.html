@@ -55,7 +55,7 @@
 				<!--<li>123</li>-->
 			</ul>
 		</div>
-		<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			var r ;
 			mui.plusReady(function () {
@@ -199,6 +199,7 @@
 				setTimeout(function() {
 					addData();
 					mui('#pullrefresh').pullRefresh().endPulldown();
+					mui('#pullrefresh').pullRefresh().refresh(true)
 				}, 1500);
 			}
 			function requestDownMoreDate (rtype,rpage) {
@@ -241,6 +242,7 @@
 					if (resultdatalist.length <=0) {
 						count = rpage;
 						mui.toast("没有更多数据");
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
 					}else{
 						count += 1;
 						showDataUp(resultdatalist);

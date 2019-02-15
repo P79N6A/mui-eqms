@@ -148,8 +148,8 @@
 
 
 		var page = '';
-//localStorage.setItem("url","http://10.131.103.128:8080/hemsApp");
-localStorage.setItem("url","http://172.30.3.198:8080/hemsApp");//http://36.110.189.171:81/hemsApp
+localStorage.setItem("url","http://36.110.189.171:81/hemsApp");
+//localStorage.setItem("url","http://172.30.3.198:8080/hemsApp");//
 localStorage.setItem("updateVersion","http://36.110.189.171:81/hemsApp");
 //版本更新
 		if(window.plus){
@@ -240,6 +240,7 @@ localStorage.setItem("updateVersion","http://36.110.189.171:81/hemsApp");
 		}*/
 		var qr;
 		function scaned(t, r, f){
+		  console.log('r----'+r)
 					qr = r;
 					mui.openWindow({
 					url : "scaned.html",

@@ -51,6 +51,9 @@
 			 //创建子页面，首个选项卡页面显示，其它均隐藏；
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
+				if(self.closeLogin) {
+          localStorage.removeItem("loginuserinfo")
+				}
 				for (var i = 0; i < 3; i++) {
 					var temp = {};
 					var sub;
