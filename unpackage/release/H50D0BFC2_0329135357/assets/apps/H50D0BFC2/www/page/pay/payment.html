@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta name="HandheldFriendly" content="true"/>
+		<!--<meta name="MobileOptimized" content="320"/>-->
+		<title>Hello H5+</title>
+		<link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8"/>
+		<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/immersed.js" ></script>
+		<script type="text/javascript">
+		var self=null;
+		var targetId=0;
+		var oriMoney=0;
+		mui.plusReady(function () {
+		   self = plus.webview.currentWebview();
+		   targetId = self.targetId;
+		   oriMoney = self.oriMoney;
+   		   mui.toast("ID:"+self.targetId+"金额："+self.oriMoney);
+   		   var tvalue = document.getElementById("total");
+   		   tvalue.value  = oriMoney;
+   		   
+		});
+			
+		var w=null;
+		//var PAYSERVER='http://hh.ngrok.4kb.cn/dch/appPay/appPayAction.do?type=';
+		//var PAYSERVER='http://192.168.253.1:8080/dch/appPay/appPayAction.do?type=';
+			var PAYSERVER='http://10.131.102.101:8080/dch/appPay/appPayAction.do?type=';
+		// 支付
+		function pay(id){
+			if(w){return;}//检查是否请求订单中
+			outSet('----- 请求支付 -----');
+			var url=PAYSERVER;
+			if(id=='alipay'||id=='wxpay'){
+				url+=id;
+			}else{
+				plus.nativeUI.alert('当前环境不支持此支付通道！', null, '捐赠');
+				return;
+			}
+			var appid=plus.runtime.appid;
+			if(navigator.userAgent.indexOf('StreamApp')>=0){
+				appid='Stream';
+			}
+			//console.log(url);
+			w=plus.nativeUI.showWaiting();
+			// 请求支付订单
+			var amount = document.getElementById('total').value;
+			var xhr=new XMLHttpRequest();
+			xhr.onreadystatechange=function(){
+				switch(xhr.readyState){
+					case 4:
+					w.close();w=null;
+					if(xhr.status==200){
+						outLine('----- 请求订单成功 -----');
+						outLine(xhr.responseText);
+						var order=xhr.responseText;
+						getChannel(JSON.parse(order).result, id );
+					}else{
+						outLine('----- 请求订单失败 -----');
+						outLine( xhr.status );
+						plus.nativeUI.alert('获取订单信息失败！', null, '捐赠');
+					}
+					break;
+					default:
+					break;
+				}
+			}
+			xhr.open('POST',url+"&payMoney="+oriMoney+"&id="+targetId);
+			outLine('请求支付订单：'+url+"&payMoney="+oriMoney+"&id="+targetId);
+			mui.toast('请求支付订单：'+url+"&payMoney="+oriMoney+"&id="+targetId);
+			console.log('请求支付订单：'+url+"&payMoney="+oriMoney+"&id="+targetId);
+			xhr.send();
+		}
+// 获取支付通道
+function getChannel(returnMsg,payType){
+	plus.payment.getChannels(function(channels){
+				for(var i=0;i<channels.length;i++){
+    				if(payType=="wxpay"&& channels[i].id == "wxpay"){
+    					channel = channels[i];
+    				}else if(payType=="alipay" && channels[i].id == "alipay"){
+						channel = channels[i];
+					}
+				}
+	    checkServices(channel,returnMsg);
+		},function(e){
+			plus.nativeUI.closeWaiting();
+			mui.toast("获取支付通道失败");
+		});
+}
+// 检测是否安装支付服务
+function checkServices(pc,returnMsg){
+	if(!pc.serviceReady){
+		var txt=null;
+		switch(pc.id){
+			case "alipay":
+				txt="检测到系统未安装“支付宝快捷支付服务”，无法完成支付操作，是否立即安装？";
+				break;
+			default:
+				txt="系统未安装“"+pc.description+"”服务，无法完成支付，是否立即安装？";
+				break;
+		}
+		plus.nativeUI.confirm(txt,function(e){
+			if(e.index==0){
+				pc.installService();
+			}
+		},pc.description);
+	}
+	plus.payment.request(pc,returnMsg,function(result){
+	},function(e){
+		//支付失败业务逻辑处理
+		
+	});
+}
+		</script>
+		<link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8"/>
+		<style type="text/css">
+#total{
+	-webkit-user-select:text;
+	text-align:right;
+	padding:0 1em;
+	border: 0px;
+	border-bottom:1px solid #ECB100;
+	border-radius: 0;
+	font-size:16px;
+	width:30%;
+	outline:none;
+}
+		</style>
+	</head>
+	<body>
+		<header id="header">
+			<div class="nvbt iback" onclick="back()"></div>
+			<div class="nvtt">支付demo</div>
+			<!--<div class="nvbt idoc" onclick="openDoc('Payment Document','/doc/payment.html')"></div>-->
+		</header>
+		<div id="dcontent" class="dcontent">
+			<br/>
+			<p id="info" style="padding: 0 1em;text-align:left;">支付通道信息：
+			</p>
+			<div style="padding: 0.5em 1em;"><hr color="#EEE"/></div>
+			<br/>
+			<div style="padding: 0 1em;text-align:left">
+				支付金额：<input id="total" type="number" value="0.01"/> 元
+			</div>
+			<div class="button" onclick="pay('alipay');">支付宝支付
+			</div>
+			<div class="button" onclick="pay('wxpay');">微信支付
+			</div>
+			<br/>
+		</div>
+		<div id="output">
+		</div>
+	</body>
+	
+</html>

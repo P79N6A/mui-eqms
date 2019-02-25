@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>支付方式</title>
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../bootstrap/fonts/font-awesome.css"/>
+		<link rel="stylesheet" href="../../plugins/layui/css/layui.css" />
+		<link rel="stylesheet" href="../../css/base.css"/>
+		<link rel="stylesheet" href="../../plugins/iCheck/all.css">
+		
+		<link rel="stylesheet" href="../../css/common.css" type="text/css" charset="utf-8"/>
+		<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/immersed.js" ></script>
+	</head>
+	<body class="bg">
+		<div class="header clearfix">
+			<i id="back" class=" fa fa-angle-left left"></i>
+			<span class="left title-infor">支付信息</span>
+		</div>
+		<div class="container-fluid">
+			<div class="row login-infor-menu">
+				<ul class="bg-white" style="margin-top:0px !important;">
+					<li class="text-right">
+						支付金额：<span id="total"  style="color: #CB2027;font-size: 16px;">66.8</span>元
+					</li>
+				</ul>
+				<ul class="bg-white">
+					<li class="clearfix" onclick="pay('wxpay')">
+						<a id = "wxpay" href="" class="left" ><img src="../../images/wx-icon30.png" />微信支付</a>
+		                <span class="right"><input type="radio" class="minimal" name="payway" /></span>
+					</li>
+				</ul>
+				<ul class="bg-white">
+					<li class="clearfix" onclick="pay('alipay');">
+						<a id = "alipay" href="" class="left" ><img src="../../images/zfb-icon30.png" />支付宝支付</a>
+						<span class="right"><input type="radio" class="minimal" name="payway"/></span>
+					</li>
+					
+				</ul>
+			</div>
+			
+		</div>
+	<script src="../../js/jquery-2.2.3.min.js"></script>
+	<!--单选按钮-->
+	<script src="../../plugins/icheck/icheck.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+			   checkboxClass: 'icheckbox_minimal-blue',
+			   radioClass: 'iradio_minimal-blue'
+			});
+		})
+	</script>
+	<script type="text/javascript">
+		var self="";
+		var targetId=0;
+		var oriMoney=0;
+		mui.plusReady(function () {
+		   self = plus.webview.currentWebview();
+		   targetId = self.payitemid;
+		   oriMoney = self.paymoney;
+   		   var tvalue = document.getElementById("total");
+   		   tvalue.innerHTML  = oriMoney;
+   		   var a_back = document.getElementById("back");
+   		   a_back.addEventListener('click',function () {
+   		   	var ws = plus.webview.currentWebview();
+   		   	plus.webview.close(ws);
+   		   });
+   		   
+		});
+	</script>
+	<script type="text/javascript">
+		var w=null;
+		//var PAYSERVER='http://hh.ngrok.4kb.cn/dch/appPay/appPayAction.do?type=';
+		//var PAYSERVER='http://192.168.253.1:8080/dch/appPay/appPayAction.do?type=';
+		var PAYSERVER=localStorage.getItem("url")+'/appPay/appPayAction.do?type=';
+		// 支付
+		function pay(id){
+			if(w){return;}//检查是否请求订单中
+			//outSet('----- 请求支付 -----');
+			var url=PAYSERVER;
+			if(id=='alipay'||id=='wxpay'){
+				url+=id;
+			}else{
+				plus.nativeUI.alert('当前环境不支持此支付通道！', null, '');
+				return;
+			}
+			var appid=plus.runtime.appid;
+			if(navigator.userAgent.indexOf('StreamApp')>=0){
+				appid='Stream';
+			}
+			w=plus.nativeUI.showWaiting();
+			// 请求支付订单
+			var amount = document.getElementById('total').value;
+			var xhr=new XMLHttpRequest();
+			xhr.onreadystatechange=function(){
+				switch(xhr.readyState){
+					case 4:
+					w.close();w=null;
+					if(xhr.status==200){
+						var order=xhr.responseText;
+						getChannel(JSON.parse(order).result, id );
+					}else{
+						plus.nativeUI.alert('获取订单信息失败！', null, '支付');
+					}
+					break;
+					default:
+					break;
+				}
+			}
+			xhr.open('POST',url+"&payMoney="+"0.01"+"&id="+targetId);
+			console.log('请求支付订单：'+url+"&payMoney="+oriMoney+"&id="+targetId);
+			xhr.send();
+		}
+		// 获取支付通道
+		function getChannel(returnMsg,payType){
+			plus.payment.getChannels(function(channels){
+						for(var i=0;i<channels.length;i++){
+		    				if(payType=="wxpay"&& channels[i].id == "wxpay"){
+		    					channel = channels[i];
+		    				}else if(payType=="alipay" && channels[i].id == "alipay"){
+								channel = channels[i];
+							}
+						}
+			    checkServices(channel,returnMsg);
+				},function(e){
+					plus.nativeUI.closeWaiting();
+					mui.toast("获取支付通道失败");
+				});
+		}
+		// 检测是否安装支付服务
+		function checkServices(pc,returnMsg){
+			if(!pc.serviceReady){
+				var txt=null;
+				switch(pc.id){
+					case "alipay":
+						txt="检测到系统未安装“支付宝快捷支付服务”，无法完成支付操作，是否立即安装？";
+						break;
+					default:
+						txt="系统未安装“"+pc.description+"”服务，无法完成支付，是否立即安装？";
+						break;
+				}
+				plus.nativeUI.confirm(txt,function(e){
+					if(e.index==0){
+						pc.installService();
+					}
+				},pc.description);
+			}
+			plus.payment.request(pc,returnMsg,function(result){
+			},function(e){
+				//支付失败业务逻辑处理
+				
+			});
+		}
+		
+	</script>
+	</body>
+</html>

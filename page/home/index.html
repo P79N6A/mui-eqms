@@ -152,13 +152,13 @@ localStorage.setItem("url","http://36.110.189.171:81/hemsApp");
 //localStorage.setItem("url","http://172.30.3.198:8080/hemsApp");//
 localStorage.setItem("updateVersion","http://36.110.189.171:81/hemsApp");
 //版本更新
-		if(window.plus){
-				
-					}else{// 兼容老版本的plusready事件
+		// 兼容老版本的plusready事件
 				document.addEventListener('plusready',function () {	
 					//var url = "http://36.110.189.171:81/hpms/frame/login/loginService.do";
 					//localStorage.setItem("url","http://10.131.103.128:8080/hemsApp");
 //					localStorage.setItem("url","http://36.110.189.171:81/hemsApp");//http://36.110.189.171:81/hemsApp
+
+
 					updateVersion();
 					//获取字典表
 					getEnquirmentType("REPAIR_TYPE");
@@ -176,8 +176,7 @@ localStorage.setItem("updateVersion","http://36.110.189.171:81/hemsApp");
 //						equipmentInventory ();
 //					});
 				});
-		}
-				document.addEventListener('refreshindex',function(){  
+				document.addEventListener('refreshindex',function(){
   					getEnquirmentType("REPAIR_TYPE");
 					getEnquirmentType("LEVELS");
 					getEnquirmentType("REPAIR_SOURCE");

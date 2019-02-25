@@ -1,6 +1,6 @@
 {
     "@platforms" : [ "android", "iPhone", "iPad" ],
-    "id" : "H5E009548", /*应用的标识，创建应用时自动生成，勿手动修改*/
+    "id" : "H5CC6E259", /*应用的标识，创建应用时自动生成，勿手动修改*/
     "name" : "设备资产", /*应用名称，程序桌面图标名称*/
     "version" : {
         "name" : "v1.1.1", /*应用版本名称*/
@@ -102,8 +102,8 @@
             "description" : "原生对象"
         },
         "OAuth" : {},
-        "Payment" : {},
-        "iBeacon" : {}
+        "iBeacon" : {},
+        "Push" : {}
     },
     "plus" : {
         "splashscreen" : {
@@ -119,18 +119,16 @@
         "signature" : "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==", /*可选，保���给应用签名，暂不使用*/
         "distribute" : {
             "plugins" : {
-                "payment" : {
-                    "weixin" : {
-                        "description" : "微信支付",
-                        "appid" : "H50D0BFC2"
-                    },
-                    "alipay" : {
-                        "description" : "阿里支付",
-                        "scheme" : ""
-                    }
-                },
+                "payment" : {},
                 "speech" : {
                     "ifly" : {}
+                },
+                "push" : {
+                    "igexin" : {
+                        "appid" : "kUuEFQv0zT85t2mKpddwg7",
+                        "appkey" : "GyJQ3iCxSf9XHJ01BjkFw5",
+                        "appsecret" : "MA4woFs53z92i1U9eTN1Z7"
+                    }
                 }
             },
             "apple" : {
@@ -169,10 +167,13 @@
                     "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\"/>",
                     "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
                     "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>",
                     "<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
+                    "<uses-permission android:name=\"android.permission.SYSTEM_ALERT_WINDOW\"/>",
                     "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
                     "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>",
                     "<uses-permission android:name=\"android.permission.BLUETOOTH\"/>",
                     "<uses-permission android:name=\"android.permission.BLUETOOTH_ADMIN\"/>"

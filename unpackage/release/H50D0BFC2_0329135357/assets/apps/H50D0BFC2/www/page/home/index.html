@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>主页面</title>
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../bootstrap/fonts/font-awesome.css"/>
+		<link rel="stylesheet" href="../../plugins/layui/css/layui.css" />
+		<link rel="stylesheet" href="../../css/base.css"/>
+		<link rel="stylesheet" href="../../plugins/owlcarousel/owl.carousel.css"/>
+		<link rel="stylesheet" href="../../plugins/owlcarousel/owl.theme.css" />
+		<link rel="stylesheet" href="../../plugins/ScrollBar/style.min.css"/>
+	</head>
+	<body class="bg">
+		
+		<div class="container-fluid contain-box">
+			<div class="row">
+				<div class="owl-carousel">
+					<div class="article">
+						<img src="../../images/02.png" alt=""/>
+					</div>
+					<div class="article">
+						<img src="../../images/01.png" alt=""/>
+					</div>
+					<div class="article">
+						<img src="../../images/03.png" alt=""/>
+					</div>
+				</div>
+				
+				<div class="menu clearfix">
+					<a id="openhospital" onclick="openHospital()" >
+						<dl>
+							<dt><img src="../../images/repair1.png" /></dt>
+							<dd>设备报修</dd>
+						</dl>
+					</a>
+					<a id="openpayment" >
+						<dl>
+							<dt><img src="../../images/Inventory.png" /></dt>
+							<dd>设备盘点</dd>
+						</dl>
+					</a>
+					
+					<a onclick="openDiseas()">
+						<dl>
+							<dt><img src="../../images/broser.png" /></dt>
+							<dd>设备浏览</dd>
+						</dl>
+					</a>
+				
+				</div>
+				<div class="infor-box">
+					<div class="CodeScanner-box">
+						<img id="qrcode1" src="../../images/sm02.png"  alt="扫码图片" onclick="qrcode()"/>
+					</div>
+				</div>
+				<div class="infor-box" hidden="hidden">
+					<div class="infor-header">
+						<h4>消息</h4>
+					</div>
+					<ul id="healthNews" class="infor-list">
+						<!--<li onclick="openHealthNews()" class="item-box">
+							<a class="clearfix">
+								<div class="item-box-pic left">
+									<img src="../../images/healthitempng/103101.png" />
+								</div>
+								<div class="item-box-info left">
+									<h5>肺炎球菌，你不可不知的真相！</h5>
+									提到肺炎球菌，大家的第一反应一定会想到肺炎。的确，肺炎球菌是肺炎的元凶，但这并不意味着肺炎球菌仅仅能引起肺炎，也不能说明没有患上肺炎的人体内没有这种细菌存在。它的身上究竟有多少秘密？今天，我们就带大家全面了解肺炎球菌的真面目。
+								</div>
+							</a>
+						</li>
+						<li onclick="openHealthNews()" class="item-box">
+							<a class="clearfix">
+								<div class="item-box-pic left">
+									<img src="../../images/healthitempng/103102.jpg"/>
+								</div>
+								<div class="item-box-info left">
+									<h5>口臭？站立时头晕？小症状预示心脏病</h5>
+									大家都知道，血压、血脂、血糖、体重等能预测心血管病的风险。但其实，一些小的症状也与心脏健康息息相关。近期，美国《预防》杂志网站近日总结了可用来预测心脏病发作风险的3个信号。
+								</div>
+							</a>
+						</li>-->
+					</ul>
+				</div>
+				
+			</div>
+		</div>
+	</body>
+	<script src="../../js/jquery-2.2.3.min.js"></script>
+	<script type="text/javascript" src="../../js/mui.min.js" ></script>
+	<script type="text/javascript" src="../../js/common.js" ></script>
+	<!--滚动条隐藏-->
+	<script src="../../plugins/ScrollBar/mousewheel.min.js"></script>
+	<script src="../../plugins/ScrollBar/scrollbar.min.js"></script>
+	<script type="text/javascript">
+		var H = $(window).height();
+		$(".contain-box").css("height",H);
+		$('.contain-box').perfectScrollbar();
+	</script>
+	<script src="../../plugins/owlcarousel/owl.carousel.js"></script>
+	<script type="text/javascript">
+		$('.owl-carousel').owlCarousel({
+			loop:true,
+			margin:0,
+			/*merge:true,*/
+			/*nav:true,*/
+			responsive:{
+				0:{
+					items:1
+				},
+				678:{
+					items:1
+				},
+				1000:{
+					items:1
+				}
+			}
+		});
+	</script>
+	<script src="../../plugins/layui/layui.js"></script>
+	<script type="text/javascript">
+		
+	</script>
+	<script type="text/javascript">
+		var page = '';
+		if(window.plus){
+				
+					}else{// 兼容老版本的plusready事件
+				document.addEventListener('plusready',function () {	
+					//getHealthNewsList () ;
+					var openpayment = document.getElementById("openpayment");
+					openpayment.addEventListener('click',function () {
+						/*var page = plus.webview.getWebviewById(plus.runtime.appid);
+						mui.fire(page,"openPayment",{});
+						var paypage = plus.webview.getWebviewById("pay.html");
+						mui.fire(paypage,"showPaylist",{});*/
+						mui.toast("正在开发中……");
+					});
+				});
+		}
+		function openHospital () {
+			mui.toast("正在开发中……")
+				/*mui.openWindow({
+					url : "../hospitalinfo/hospital.html",
+					id : "../hospitalinfo/hospital.html" ,
+					createNew : true
+				})*/
+			}
+		
+		function openDiseas () {
+			mui.toast("正在开发中……");
+				/*mui.openWindow({
+					url : "disilnessheader.html",
+					id : "disilnessheader.html" 
+				});*/
+				
+			}
+		function openHealthNews () {
+			mui.toast("正在开发中……")
+			/*mui.openWindow({
+				url : "newslistheader.html",
+				id : "newslistheader.html"
+			});*/
+		}
+		function qrcode () {
+			mui.openWindow({
+					url : "barcode_scan.html",
+					id : "barcode_scan.html",
+					extras : {
+						
+					}
+				});
+		}
+		function scaned(t, r, f){
+					mui.openWindow({
+					url : "scaned.html",
+					id : "scaned",
+					extras : {
+						
+					}
+				});
+			}
+		//添加newId自定义事件监听
+		window.addEventListener('qrcode',function(event){
+		　　//获得事件参数
+			var r = event.detail.qrcode;
+		
+		　	
+		});
+		function getHealthNewsList () {
+				var nowtime = getNowFormatDate(); 
+				var mask = mui.createMask();//遮罩层//
+				var url = localStorage.getItem("url")+ "/noticeActionApp/getNoticeListApp.do";
+				console.log("getHealthNewsList---->>>> "+url);
+				mui.ajax(url,{
+				data:{
+					startTime:nowtime
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				console.log("getHealthNewsListIndex---->>>>>"+data);
+				var list = JSON.parse(data).result;
+				
+				showNewsList (list);
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+			}
+		function showNewsList (list) { 
+		
+			var url = localStorage.getItem('url');
+    		var newListItem = [];
+			for (var newsitemi = 0;newsitemi<2;newsitemi++) {
+				var pictureUrl = '';
+				if (list[newsitemi].pictureInfo) {
+				pictureUrl = url+list[newsitemi].pictureInfo[0].pictureUrl+'/'+list[newsitemi].pictureInfo[0].pictureName;
+				console.log("pictureUrl---->>>> "+pictureUrl);
+				}else{
+				pictureUrl = "../../images/01.png";
+				}
+			newListItem.push('<li onclick="openHealthNews()" class="item-box">');
+		 	newListItem.push('<a class="clearfix">');
+		 	newListItem.push('<div class="item-box-pic left">');
+		 	newListItem.push('<img src="'+pictureUrl+'" />');
+		 	newListItem.push('</div>');
+		 	newListItem.push('<div class="item-box-info left">');
+		 	newListItem.push(list[newsitemi].noticeTitle);
+		 	newListItem.push('</div></a></li>');
+		 
+		 	}
+		 	document.getElementById('healthNews').innerHTML = newListItem.join('');
+		 	
+		
+		}
+		function getNowFormatDate() {
+		    var date = new Date();
+		    var seperator1 = "-";
+		    var seperator2 = ":";
+		    var month = date.getMonth() + 1;
+		    var strDate = date.getDate();
+		    if (month >= 1 && month <= 9) {
+		        month = "0" + month;
+		    }
+		    if (strDate >= 0 && strDate <= 9) {
+		        strDate = "0" + strDate;
+		    }
+		    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+		            + " " + date.getHours() + seperator2 + date.getMinutes()
+		            + seperator2 + date.getSeconds();
+		    return currentdate;
+		}
+	</script>
+	
+</html>

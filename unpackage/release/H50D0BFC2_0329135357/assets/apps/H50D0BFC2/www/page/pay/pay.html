@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>缴费信息预览</title>
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../bootstrap/fonts/font-awesome.css"/>
+		<link rel="stylesheet" href="../../plugins/layui/css/layui.css" />
+		<link rel="stylesheet" href="../../css/base.css"/>
+		<link rel="stylesheet" href="../../plugins/ScrollBar/style.min.css"/>
+	</head>
+	<body class="bg">
+		<div class="header clearfix">
+			<i class=" fa fa-angle-left left" onClick= "window.location.href=('index.html')"></i>
+			<span class="left title-infor">缴费信息预览</span>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<ul class="clearfix pay-infor">
+					<li class="active">全部</li>
+					<li class="">待支付</li>
+					<li class="">已支付</li>
+				</ul>
+				<div class="pay-item" >
+					<div class="active" id='allList' >
+						<ul  class="pay-item-list">
+							<li class="clearfix title"><span class="left title">支付信息</span><span class="right"><i class="fa fa-check text-green state-icon"></i>已付款</span></li>
+							<li>姓名：<span>李明</span></li>
+							<li>证件号码：<span>111111111111111111</span></li>
+							<li>检查项目：<span>化验</span></li>
+							<li>发起时间：<span>2014-08-02:09:07</span></li>
+							<li>应缴费用：<span>人民币 100 元</span></li>
+							<li class="footer-btn"><button class="layui-btn layui-btn-primary layui-btn-radius layui-btn-small" value="">删除记录</button></li>
+						</ul>
+					</div>
+					<div id='waitList'>
+						<ul id="" class="pay-item-list">
+							<li class="clearfix"><span class="left">支付信息</span><span class="right"><i class="fa fa-clock-o text-orange state-icon"></i>待支付</span></li>
+							<li>姓名：<span>李明</span></li>
+							<li>证件号码：<span>111111111111111111</span></li>
+							<li>检查项目：<span>化验</span></li>
+							<li>发起时间：<span>2014-08-02:09:07</span></li>
+							<li>应缴费用：<span>人民币 100 元</span></li>
+							<li class="footer-btn">
+								<button class="layui-btn layui-btn-primary layui-btn-radius layui-btn-small">删除记录</button>
+								<button class="layui-btn layui-btn-primary layui-btn-radius layui-btn-small" onclick="layuis()">立即支付</button>
+							</li>
+						</ul>
+					</div>
+					<div id='alreadyList'>
+						<ul class="pay-item-list">
+							<li class="clearfix title"><span class="left title">支付信息</span><span class="right"><i class="fa fa-check text-green state-icon"></i>已付款</span></li>
+							<li>姓名：<span>李明</span></li>
+							<li>证件号码：<span>111111111111111111</span></li>
+							<li>检查项目：<span>化验</span></li>
+							<li>发起时间：<span>2014-08-02:09:07</span></li>
+							<li>应缴费用：<span>人民币 100 元</span></li>
+							<li class="footer-btn"><button class="layui-btn layui-btn-primary layui-btn-radius layui-btn-small" value="">删除记录</button></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+	<script src="../../js/mui.js"></script>
+	<script src="../../js/jquery-2.2.3.min.js"></script>
+	<script src="../../plugins/layui/layui.js"></script>
+	<script type="text/javascript">
+		layui.use('layer', function(){
+		 
+		});
+		function layuis(id,money){
+			
+			var baseUrl = "payway.html";
+			var targetId = id;
+			var oriMoney =money;
+			var money;
+			var url =mui.os.plus?baseUrl:baseUrl+'?targetId=' + targetId+'?oriMoney=' + oriMoney;
+			mui.openWindow({
+				url:url,
+				extras:{
+					targetId:targetId,
+					oriMoney:oriMoney
+				}
+			});
+			
+			
+		}
+	</script>
+	<!--底部菜单切换-->
+	<script type="text/javascript">
+		$('.footer a').on('click',function(){
+			$(this).find('dl').addClass('active');
+			$(this).siblings().find('dl').removeClass('active')
+		})
+	</script>
+	<script type="text/javascript">
+		$('.pay-infor li').on('click',function(){
+			var $index=$(this).index()
+			$(this).addClass('active').siblings().removeClass('active');
+			$('.pay-item div').eq($index).addClass('active').siblings().removeClass('active')
+		})
+	</script>
+	<script type="text/javascript">
+		mui.init();
+		console.log("---");
+		mui.ajax({//	
+				  //http://10.131.101.135:8080/dch/payAction/payDetailPage.do?payState=all',
+				url:'http://192.168.1.101:8080/dch/payAction/payDetailPage.do?payState=all',
+				dataType:'json',
+				type:'get',
+				success:function(data){
+					console.log(data);
+					console.log("---success---");
+					console.log("dataJson:"+JSON.stringify(data))
+					var list = data.payList;
+					var html="";
+					var newListUlHtml = [];
+					var alreadyListHtml = [];
+					var waitListHtml = [];
+					for(var i=0;i<list.length;i++){
+						console.log("id:"+list[i].id);
+						console.log("flag:"+list[i].flag);
+						console.log("sort:"+list[i].sort);
+						console.log("createTime:"+list[i].createTime);
+						console.log("payName:"+list[i].payName);
+						console.log("-------我是分割线-----------");
+						
+					}
+					for(var i=0;i<list.length;i++){
+						if (list[i].payState=="paySuccess") {
+						newListUlHtml.push("<ul class='pay-item-list'><li class='clearfix title'><span class='left title'>"+"支付信息"+"</span><span class='right'><i class='fa fa-check text-green state-icon'></i>已付款</span></li>");
+	
+						//已支付
+						alreadyListHtml.push("<ul class='pay-item-list'><li class='clearfix title'><span class='left title'>"+"支付信息"+"</span><span class='right'><i class='fa fa-check text-green state-icon'></i>已付款</span></li>");
+						alreadyListHtml.push("<li>"+"检查项目：<span>"+list[i].payName+"<span>"+"</li>");
+						newListUlHtml.push("<li>"+"应收金额："+"<span>"+list[i].oriMoney+"<span>"+"</li>");
+						alreadyListHtml.push("<li>"+"实收金额："+"<span>"+list[i].payMoney+"<span>"+"</li>");
+						alreadyListHtml.push("<li>"+"产生时间："+"<span>"+list[i].chargeTime+"<span>"+"</li>");
+						alreadyListHtml.push("<li>"+"费用说明："+"<span>"+list[i].payExplain+"<span>"+"</li>");
+						alreadyListHtml.push("<li class='footer-btn'><button class='layui-btn layui-btn-primary layui-btn-radius layui-btn-small'>删除记录</button></li></ul></div>");
+											
+						
+						} else{
+						newListUlHtml.push("<ul class='pay-item-list'><li class='clearfix title'><span class='left title'>"+"支付信息"+"</span><span class='right'><i class='fa fa-clock-o text-orange state-icon'></i>待付款</span></li>");
+						//待支付
+					    waitListHtml.push("<ul class='pay-item-list'><li class='clearfix title'><span class='left title'>"+"支付信息"+"</span><span class='right'><i class='fa fa-clock-o text-orange state-icon'></i>待付款</span></li>");
+						waitListHtml.push("<li>"+"检查项目：<span>"+list[i].payName+"<span>"+"</li>");newListUlHtml.push("<li>"+"应收金额："+"<span>"+list[i].oriMoney+"<span>"+"</li>");
+						waitListHtml.push("<li>"+"实收金额："+"<span>"+list[i].payMoney+"<span>"+"</li>");
+						waitListHtml.push("<li>"+"产生时间："+"<span>"+list[i].chargeTime+"<span>"+"</li>");
+						waitListHtml.push("<li>"+"费用说明："+"<span>"+list[i].payExplain+"<span>"+"</li>");
+						waitListHtml.push("<li class='footer-btn'><button class='layui-btn layui-btn-primary layui-btn-radius layui-btn-small'>删除记录</button><button class='layui-btn layui-btn-primary layui-btn-radius layui-btn-small' onclick='layuis("+list[i].id+","+list[i].payMoney+")'>立即支付</button></li></ul></div>");
+								
+						}
+						newListUlHtml.push("<li>"+"检查项目：<span>"+list[i].payName+"<span>"+"</li>");
+						newListUlHtml.push("<li>"+"应收金额："+"<span>"+list[i].oriMoney+"<span>"+"</li>");
+						newListUlHtml.push("<li>"+"实收金额："+"<span>"+list[i].payMoney+"<span>"+"</li>");
+						newListUlHtml.push("<li>"+"产生时间："+"<span>"+list[i].chargeTime+"<span>"+"</li>");
+						newListUlHtml.push("<li>"+"费用说明："+"<span>"+list[i].payExplain+"<span>"+"</li>");
+						newListUlHtml.push("<li class='footer-btn'><button class='layui-btn layui-btn-primary layui-btn-radius layui-btn-small'>删除记录</button><button class='layui-btn layui-btn-primary layui-btn-radius layui-btn-small' onclick='layuis("+list[i].id+","+list[i].payMoney+")'>立即支付</button></li></ul></div>");
+						
+					}
+					allList.innerHTML = newListUlHtml.join('');
+					waitList
+					//for(var i=0;i<list.length;i++){ 
+						console.log();
+						var json_ ={"payList":[{"id":"77777777","flag":"1","sort":1,"createTime":1495701024000,"payName":"放射费","payExplain":"请支付：放射费","payState":"waitPay","payType":null,"payCode":null,"payMethod":"Alipay","oriMoney":123456789.5600,"payMoney":123456000.0000,"chargeTime":1495614609000,"payTime":1495701016000,"serialNo":null,"yibaoIn":null,"yibaoOut":null,"payUser":null,"detailId":null},{"id":"33333333","flag":"1","sort":2,"createTime":1495616176000,"payName":"手术费","payExplain":"请支付：手术费","payState":"waitPay","payType":null,"payCode":null,"payMethod":"UnionPay","oriMoney":5800.0000,"payMoney":4600.0000,"chargeTime":1495009475000,"payTime":1495615973000,"serialNo":null,"yibaoIn":null,"yibaoOut":null,"payUser":null,"detailId":null},{"id":"44444444","flag":"1","sort":3,"createTime":1495616178000,"payName":"床位费","payExplain":"请支付：床位费","payState":"waitPay","payType":null,"payCode":null,"payMethod":"Alipay","oriMoney":40.0000,"payMoney":40.0000,"chargeTime":1494923078000,"payTime":1495615975000,"serialNo":null,"yibaoIn":null,"yibaoOut":null,"payUser":null,"detailId":null},{"id":"22222222","flag":"1","sort":4,"createTime":1495616174000,"payName":"医药费","payExplain":"请支付：医药费","payState":"waitPay","payType":null,"payCode":null,"payMethod":"WeChat","oriMoney":498.0000,"payMoney":398.0000,"chargeTime":1495009472000,"payTime":1495615971000,"serialNo":null,"yibaoIn":null,"yibaoOut":null,"payUser":null,"detailId":null},{"id":"11111111","flag":"1","sort":5,"createTime":1495616172000,"payName":"化验费","payExplain":"请支付：化验费","payState":"waitPay","payType":null,"payCode":null,"payMethod":"WeChat","oriMoney":236.0000,"payMoney":236.0000,"chargeTime":1495009467000,"payTime":1495615969000,"serialNo":null,"yibaoIn":null,"yibaoOut":null,"payUser":null,"detailId":null},{"id":"55555555","flag":"1","sort":6,"createTime":1495616180000,"payName":"器材费","payExplain":"请支付：器材费","payState":"paySuccess","payType":null,"payCode":null,"payMethod":"Alipay","oriMoney":28.0000,"payMoney":28.0000,"chargeTime":1494923082000,"payTime":1495615981000,"serialNo":null,"yibaoIn":null,"yibaoOut":null,"payUser":null,"detailId":null},{"id":"66666666","flag":"1","sort":7,"createTime":1495616181000,"payName":"挂号费","payExplain":"请支付：挂号费","payState":"paySuccess","payType":null,"payCode":null,"payMethod":"WeChat","oriMoney":10.0000,"payMoney":10.0000,"chargeTime":1494836685000,"payTime":1495615983000,"serialNo":null,"yibaoIn":null,"yibaoOut":null,"payUser":null,"detailId":null}],"itemIdx":null};
+						console.log(json_.payList.length);
+		
+					
+					allList.innerHTML = newListUlHtml.join('');
+					waitList.innerHTML = waitListHtml.join('');
+					alreadyList.innerHTML = alreadyListHtml.join('');
+					
+					//}
+					mui.toast("加载了"+list.length+"数据!");
+				},
+				error:function(){
+					mui.toast("---net error---")
+					console.log("---net error---");
+				}
+			});
+	</script>
+	<script src="../../plugins/ScrollBar/mousewheel.min.js"></script>
+	<script src="../../plugins/ScrollBar/scrollbar.min.js"></script>
+	<script type="text/javascript">
+		var H = $(window).height()-86;
+		$(".pay-item").css("height",H);
+		$(".pay-item").css("overflow","hidden");
+		$(".pay-item").perfectScrollbar();
+	</script>
+</html>

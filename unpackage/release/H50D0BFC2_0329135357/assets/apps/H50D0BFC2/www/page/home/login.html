@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>用户登录</title>
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../bootstrap/fonts/font-awesome.css"/>
+		<link rel="stylesheet" href="../../plugins/layui/css/layui.css" />
+		<link rel="stylesheet" href="../../css/base.css"/>
+	</head>
+	<body class="bg">
+		<div class="header clearfix">
+			<i id="back" class=" fa fa-angle-left left"></i>
+			<span class="left title-infor">登录</span>
+		</div>
+		<div class="container-fluid">
+			<div class="row bg-white">
+				<div class="col-sm-12">
+					<form class="form-horizontal user-login-infor">
+						<div class="form-group username">
+							<input id = "account" type="text" class="layui-input no-border border-bottom" placeholder="用户名"/>
+							<!--<input type="button" class="form-control layui-btn bg-light-blue username-txt" value="获取验证" style="" />-->
+						</div>
+						<div class="form-group">
+							<input id = "password" type="password" class="layui-input no-border border-bottom" placeholder="密码/验证码" />
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="margin-t-1 margin-b-1">
+<!--				<input id="login" type="button" class="form-control layui-btn bg-light-blue layui-btn-big" value="登录" onclick="window.open('index.html')" />
+-->			</div>
+					<input id="login" type="button" class="form-control layui-btn bg-light-blue layui-btn-big input-bt-login" value="登录"/>
+					
+		</div>
+		<div>
+			<label id="register" class="text-blue left label-register" hidden="hidden">注册</label>
+			<label id="forgetpass" class="text-blue right label-register" hidden="hidden">忘记密码？</label>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/app.js"></script>
+		<script type="text/javascript">
+			if(window.plus){
+				
+					}else{// 兼容老版本的plusready事件
+				document.addEventListener('plusready',function () {	
+				var	self = plus.webview.currentWebview();
+				var closepage = self.closepage;
+				var openSourcea = self.openSource;
+					//关闭除当前页面的其他页面
+				if (closepage=="10010") {
+					var curr = plus.webview.currentWebview();
+					/*setTimeout(function () {
+						var wvs = plus.webview.all();
+                    	for (var i = 0, len = wvs.length; i < len; i++) {    
+                        if (wvs[i].getURL() == curr.getURL())
+                        continue;
+                        plus.webview.close(wvs[i]);
+                        }
+					},500);*/
+                    
+				}
+				
+				
+				
+				var bt_register = document.getElementById("register");
+				bt_register.addEventListener("tap",function () {
+					mui.openWindow({
+						url : "register.html",
+						id : "register.html"
+					})
+				});
+				var a_back = document.getElementById("back");
+				a_back.addEventListener('click',function () {
+					var mainid = plus.runtime.appid;
+					mui.openWindow({
+						url : "main.html",
+						id : mainid,
+						extras : {
+							
+						}
+					});
+				});
+				var bt_forgetpass = document.getElementById("forgetpass");
+				bt_forgetpass.addEventListener("click",function () {
+					
+					mui.openWindow({
+						url : "forgetpassword.html",
+						id : "forgetpassword.html"
+					});
+				});
+				var bt_login = document.getElementById("login");
+				bt_login.addEventListener("click",function () {
+					var a_username = document.getElementById("account").value;
+					var a_password = document.getElementById("password").value;
+					/*if (a_username==""||a_password=="") {
+						alert("请输入用户名密码！");
+						return false;
+					}
+					if (a_username.length<4) {
+						alert("用户名长度不能低于4位！");
+						return false;
+					}
+					if (a_password.length<6) {
+						alert("密码长度不能低于6位！");
+						return false;
+					}*/
+
+//localStorage.setItem("loginsuccess","success");
+					/*var mainid = plus.runtime.appid;
+					mui.openWindow({
+						url : "main.html",
+						id : mainid,
+						extras :{
+							closeLogin : "10086"
+						}
+					});*/
+					var mainid = plus.runtime.appid;
+					mui.openWindow({
+						url : "main.html",
+						id : mainid,
+						extras :{
+							closeLogin : "10086"
+						}
+					});
+					
+				　　var detailPage = plus.webview.getWebviewById("personal-center.html");
+				　　
+				    mui.fire(detailPage,"closeback",{});
+					});
+				
+				});
+		}
+		</script>
+		<script type="text/javascript">
+			function checkUserandPassword () {
+				var a_username = document.getElementById("account").value;
+				var a_password = document.getElementById("password").value;
+				if (a_username==""||a_username==null||a_password==""||a_password==null) {
+					mui.alert("请输入用户名密码！");
+					return;
+				}
+				if (a_username.length<4) {
+					mui.alert("用户名长度不能低于4位！");
+					return ;
+				}
+				if (a_password.length<6) {
+					mui.alert("密码长度不能低于6位！");
+					return;
+				}
+				login(a_username,a_password);
+			}
+			function login (accountusername,accountpassword) {
+				var mask = mui.createMask();//遮罩层
+				var url = "http://10.131.102.237:8080/dch/appSysActionApp/loginApp.do";
+				mui.ajax(url,{
+				data:{
+					loginName:accountusername,
+					passWord:accountpassword
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				console.log(data);
+				localStorage.setItem("loginuserinfo",data);
+				var loginresult = JSON.parse(data);
+				var code = loginresult.code;
+				if ( code == "0") {
+					mui.toast(loginresult.msg);
+					var mainid = plus.runtime.appid;
+					mui.openWindow({
+						url : "main.html",
+						id : mainid,
+						extras :{
+							closeLogin : "10086"
+						}
+					});
+				}
+				if (code != 0) {
+					mui.toast(loginresult.msg);
+				}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+			}
+				
+		</script>
+	</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>个人中心</title>
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../bootstrap/fonts/font-awesome.css"/>
+		<link rel="stylesheet" href="../../plugins/layui/css/layui.css" />
+		<link rel="stylesheet" href="../../css/base.css"/>
+		<link rel="stylesheet" href="../../plugins/ScrollBar/style.min.css"/>
+	</head>
+	<body class="bg">
+		<div class="header clearfix">
+			<i id="back" class=" fa fa-angle-left left" ></i>
+			<span class="left title-infor">医生信息</span>
+		</div>
+		<div class="container-fluid contain-box">
+			<div class="row">
+				<a class="login-infor-box clearfix">
+					<div class="left user-icon">
+						<img id="doctorpicture" src="../../images/user-icon.png" />
+					</div>
+					<div class="left clearfix user-login user-doctor">
+						<dl class="left">
+							<dt id="doctorname"></dt>
+							<dd id="departname" style="color: #666;"></dd>
+						</dl>
+					
+					</div>
+				</a>
+			</div>
+			<div class="row login-infor-menu">
+				<ul class="bg-white">
+					<li><a id="goodcure"><img src="../../images/pwd-icon.png" />擅长疾病 ：</a></li>
+					<li><a id="worklist"><img src="../../images/phone-icon.png" />排班情况：</a></li>
+				</ul>
+				<ul class="bg-white">
+					<li><a><img src="../../images/advice-icon.png" />医生介绍</a></li>
+					<li><a id="doctorinfo"></a></li>
+
+				</ul>
+				
+			</div>
+		</div>
+	<script src="../../js/jquery-2.2.3.min.js"></script>
+	<!--滚动条隐藏-->
+	<script src="../../plugins/ScrollBar/mousewheel.min.js"></script>
+	<script src="../../plugins/ScrollBar/scrollbar.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/immersed.js" ></script>
+	<!--<script type="text/javascript">
+		var H = $(window).height()-84;
+		$(".contain-box").css("height",H);
+		$('.contain-box').perfectScrollbar();
+	</script>-->
+	<script type="text/javascript">
+		mui.plusReady(function () {
+			var self = plus.webview.currentWebview();
+			var doctorid = self.doctorid; 
+			var doctordata = self.doctordata;
+			var list = JSON.parse(doctordata).result;
+			showDoctorInformation(list,doctorid);
+			var back = document.getElementById("back");
+			back.addEventListener('click',function (e) {
+				var ws = plus.webview.currentWebview();
+				plus.webview.close(ws);
+			});
+			
+		});
+		function showDoctorInformation (list,id) {
+			
+		for (var i = 0; i < list.length; i++) {
+			if (list[i].doctor_id == id ) {
+			var pictureUrl = localStorage.getItem("url")+list[i].pictureInfo[0].pictureUrl+'/'+list[i].pictureInfo[0].pictureName;
+			document.getElementById("doctorpicture").src = pictureUrl;
+			document.getElementById("doctorname").innerText = list[i].doctor_name;
+			document.getElementById("departname").innerText = list[i].departName;
+			document.getElementById("goodcure").innerText = "擅长疾病："+list[i].doctor_good;
+			document.getElementById("worklist").innerText = "排班情况："+list[i].doctor_time;
+			document.getElementById("doctorinfo").innerText = list[i].doctor_js;
+			
+			}
+		}	
+		}
+	</script>
+	
+	</body>
+	
+	
+</html>

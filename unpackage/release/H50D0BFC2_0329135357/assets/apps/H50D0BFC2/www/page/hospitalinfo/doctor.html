@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>医生</title>
+		<link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../bootstrap/fonts/font-awesome.css"/>
+		<link rel="stylesheet" href="../../plugins/layui/css/layui.css" />
+		<link rel="stylesheet" href="../../css/base.css"/>
+		<link rel="stylesheet" href="../../plugins/ScrollBar/style.min.css"/>
+	</head>
+	<body class="bg">
+		<div class="header clearfix">
+			<i id="back" class=" fa fa-angle-left left" ></i>
+			<span class="left title-infor">医生</span>
+		</div>
+		<div class="container-fluid contain-box">
+			<div class="row">
+				<div id="doctorlist" class="doctor-box">
+						<!--<dl onclick="openDoctorInformation()" class="clearfix doctor-list">
+							<dt class="left"><img src="../../images/yspic.png"/></dt>
+							<dd class="right">
+								<p>姓名：李医生</p>
+								<p>职位：主治医生</p>
+								<p>出诊时间：周一、周二、</p>
+								<p>擅长:心内科心脏疾病</p>
+							</dd>
+						</dl>
+						<dl class="clearfix doctor-list">
+							<dt class="left"><img src="../../images/yspic2.png"/></dt>
+							<dd class="right">
+								<p>姓名：王医生</p>
+								<p>职位：主治医生</p>
+								<p>擅长：心内科心脏疾病</p>
+							</dd>
+						</dl>
+						<dl class="clearfix doctor-list">
+							<dt class="left"><img src="../../images/yspic.png"/></dt>
+							<dd class="right">
+								<p>姓名：李医生</p>
+								<p>职位：主治医生</p>
+								<p>擅长：心内科心脏疾病</p>
+							</dd>
+						</dl>
+						<dl class="clearfix doctor-list">
+							<dt class="left"><img src="../../images/yspic.png"/></dt>
+							<dd class="right">
+								<p>姓名：李医生</p>
+								<p>职位：主治医生</p>
+								<p>擅长：心内科心脏疾病</p>
+							</dd>
+						</dl>
+						
+						<dl class="clearfix doctor-list">
+							<dt class="left"><img src="../../images/yspic.png"/></dt>
+							<dd class="right">
+								<p>姓名：李医生</p>
+								<p>职位：主治医生</p>
+								<p>擅长：心内科心脏疾病</p>
+							</dd>
+						</dl>
+						<dl class="clearfix doctor-list">
+							<dt class="left"><img src="../../images/yspic.png"/></dt>
+							<dd class="right">
+								<p>姓名：李医生</p>
+								<p>职位：主治医生</p>
+								<p>擅长：心内科心脏疾病</p>
+							</dd>
+						</dl>
+						<dl class="clearfix doctor-list">
+							<dt class="left"><img src="../../images/yspic.png"/></dt>
+							<dd class="right">
+								<p>姓名：李医生</p>
+								<p>职位：主治医生</p>
+								<p>擅长：心内科心脏疾病</p>
+							</dd>
+						</dl>
+						<dl class="clearfix doctor-list">
+							<dt class="left"><img src="../../images/yspic.png"/></dt>
+							<dd class="right">
+								<p>姓名：李医生</p>
+								<p>职位：主治医生</p>
+								<p>擅长：心内科心脏疾病</p>
+							</dd>
+						</dl>
+						<dl class="clearfix doctor-list">
+							<dt class="left"><img src="../../images/yspic.png"/></dt>
+							<dd class="right">
+								<p>姓名：李医生</p>
+								<p>职位：主治医生</p>
+								<p>擅长：心内科心脏疾病</p>
+							</dd>
+						</dl>
+						<dl class="clearfix doctor-list">
+							<dt class="left"><img src="../../images/yspic.png"/></dt>
+							<dd class="right">
+								<p>姓名：李医生</p>
+								<p>职位：主治医生</p>
+								<p>擅长：心内科心脏疾病</p>
+							</dd>
+						</dl>
+						<dl class="clearfix doctor-list">
+							<dt class="left"><img src="../../images/yspic.png"/></dt>
+							<dd class="right">
+								<p>姓名：李医生</p>
+								<p>职位：主治医生</p>
+								<p>擅长：心内科心脏疾病</p>
+							</dd>
+						</dl>
+						
+						<dl class="clearfix doctor-list">
+							<dt class="left"><img src="../../images/yspic.png"/></dt>
+							<dd class="right">
+								<p>姓名：李医生</p>
+								<p>职位：主治医生</p>
+								<p>擅长：心内科心脏疾病</p>
+							</dd>
+						</dl>
+						<dl class="clearfix doctor-list">
+							<dt class="left"><img src="../../images/yspic.png"/></dt>
+							<dd class="right">
+								<p>姓名：李医生</p>
+								<p>职位：主治医生</p>
+								<p>擅长：心内科心脏疾病</p>
+							</dd>
+						</dl>
+						<dl class="clearfix doctor-list">
+							<dt class="left"><img src="../../images/yspic.png"/></dt>
+							<dd class="right">
+								<p>姓名：李医生</p>
+								<p>职位：主治医生</p>
+								<p>擅长：心内科心脏疾病</p>
+							</dd>
+						</dl>
+						<dl class="clearfix doctor-list">
+							<dt class="left"><img src="../../images/yspic.png"/></dt>
+							<dd class="right">
+								<p>姓名：李医生123</p>
+								<p>职位：主治医生</p>
+								<p>擅长：心内科心脏疾病</p>
+							</dd>
+						</dl>-->
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../../js/jquery-2.2.3.min.js"></script>
+	
+	<script type="text/javascript" src="../../js/mui.js" ></script>
+	<script src="../../plugins/ScrollBar/mousewheel.min.js"></script>
+	<script src="../../plugins/ScrollBar/scrollbar.min.js"></script>
+	<script type="text/javascript">
+		var H = $(window).height()-40;
+		$(".contain-box").css("height",H);
+		$('.contain-box').perfectScrollbar();
+	</script>
+	<script type="text/javascript">
+			mui.plusReady(function () {
+				var self = plus.webview.currentWebview();
+				var departid = self.doctorid;
+				getDoctorInfo(departid);
+				var hospitalback = document.getElementById("back");
+				hospitalback.addEventListener('click',function () {
+					var ws = plus.webview.currentWebview();
+					plus.webview.close(ws);
+				});
+				
+				
+			});
+	</script>
+	<script type="text/javascript">
+		var doctordata = '';
+		function getDoctorInfo (id) {
+				var mask = mui.createMask();//遮罩层
+				var url = localStorage.getItem("url")+"/hospitalActionApp/doctorInfoApp.do";
+				mui.ajax(url,{
+				data:{
+					ksId : id
+				},
+				dataType:'JSON',//服务器返回json格式数据
+				type:'post',//HTTP请求类型
+				timeout:15000,//超时时间设置为10秒；
+				beforeSend:function(){
+					 plus.nativeUI.showWaiting("加载中", {});
+					 mask.show();//显示遮罩层
+				},
+				complete: function() {
+		        plus.nativeUI.closeWaiting();
+		        mask.close();//关闭遮罩层
+		   		 },              
+				success:function(data){
+				console.log("getDoctorInfo ()---->>>> "+data);
+				doctordata = data;
+				var loginresult = JSON.parse(data);
+				var code = loginresult.code;
+				
+				if ( code == "0") {
+					//mui.toast(loginresult.msg);
+					var list = loginresult.result;
+					if (list.length>0) {
+						showDepartmentList(list);
+					}else{
+						mui.toast("没有更多数据！");
+					}
+					
+				}
+				if (code != 0) {
+					mui.toast(loginresult.msg);
+				}
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+						//异常处理；
+						console.log("requestNet error ："+XMLHttpRequest.status+"<-->"+XMLHttpRequest.readyState+"<-->"+textStatus);
+						plus.nativeUI.toast("网络访问失败!");
+					}
+				});
+			
+			}
+		
+		function showDepartmentList (list) {
+
+    		var newListItem = [];
+			for (var doctori = 0;doctori<list.length;doctori++) {
+			var pictureUrl = localStorage.getItem("url");
+			if (list[doctori].pictureInfo.length>0) {
+				pictureUrl += list[doctori].pictureInfo[0].pictureUrl+'/'+list[doctori].pictureInfo[0].pictureName;
+			}
+			console.log("doctor pictureUrl---->>>> "+pictureUrl);//\''+list[newsitemi].id+'\'
+			newListItem.push('<dl onclick="openDoctorInformation(\''+list[doctori].doctor_id+'\')" class="clearfix doctor-list">');
+		 	newListItem.push('<dt class="left"><img src="'+pictureUrl+'"/></dt><dd class="right">');
+		 	newListItem.push('<p>姓名：'+list[doctori].doctor_name+'</p>');
+		 	newListItem.push('<p>职位：'+list[doctori].doctor_position+'</p>');
+			newListItem.push('<p>出诊时间：'+list[doctori].doctor_time+'</p>');
+			newListItem.push('<p>擅长：'+list[doctori].doctor_good+'</p>');
+		 	newListItem.push('</dd></dl>');
+		 	
+		 	}
+		 	document.getElementById('doctorlist').innerHTML = newListItem.join('');
+		 	
+		
+		}
+		function openDoctorInformation (id) {
+			mui.openWindow({
+				url : "doctor-information.html",
+				id : "doctor-information.html",
+				extras : {
+					doctorid : id,
+					doctordata:doctordata
+				}
+			});
+		}
+	</script>
+</html>
